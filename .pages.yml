@@ -180,6 +180,11 @@
               "required": false
             }
           ]
+        },
+        {
+          "name": "facebook",
+          "label": "Facebook URL (optional)",
+          "type": "string"
         }
       ]
     },

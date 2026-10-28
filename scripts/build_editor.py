@@ -4,6 +4,7 @@ from html import escape
 from urllib.parse import urlsplit
 import json, shutil, re, hashlib
 from home_design import enhance
+from home_polish import polish
 from lxml import html
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs'
@@ -248,6 +249,7 @@ def build():
   markup=''.join(f'<button class="filter {"active" if i==0 else ""}" {filterattr}="{esc(c)}" aria-pressed="{str(i==0).lower()}">{esc("All" if i==0 else c)}</button>' for i,c in enumerate(['all']+sorted(set(cats))))
   set_html(one(pages[page],'//div[contains(@class,"filter-bar")]'),markup)
  moments=enhance(pages,profile,entries('gallery'),read('homepage.json'),esc=esc,url=url,rich=rich,image=image,set_html=set_html,one=one,select=select,story_body=story_body,root=ROOT)
+ polish(pages,profile,read('homepage.json'),entries('updates'),root=ROOT,esc=esc,url=url,rich=rich,one=one,select=select,set_html=set_html)
  # Remove previously generated post pages, so deleted/unpublished entries disappear.
  for pattern in ('posts-*.html','projects-*.html'):
   for p in OUT.glob(pattern):p.unlink()
@@ -275,6 +277,8 @@ def build():
   (OUT/(name+'.html')).write_text(html.tostring(d,encoding='unicode',doctype='<!doctype html>'))
  payload='window.PORTFOLIO_DETAILS='+json.dumps(details,ensure_ascii=False)+';\nwindow.PORTFOLIO_DOCUMENTS='+json.dumps(documents,ensure_ascii=False)+';\nwindow.PORTFOLIO_PROFILE='+json.dumps(profile,ensure_ascii=False)+';'
  (OUT/'content.js').write_text(payload+'\nwindow.PORTFOLIO_MOMENTS='+json.dumps([dict(m,body=visible_rich(m.get('body')),source_url=url(m.get('source_url'))) for m in moments],ensure_ascii=False)+';')
+ for extension in ('css','js'):
+  shutil.copyfile(ROOT/('scripts/home_polish.'+extension),OUT/('home-polish.'+extension))
  shutil.copyfile(ROOT/'scripts/home.css',OUT/'home.css')
  shutil.copyfile(ROOT/'scripts/home.js',OUT/'home.js')
  js=(ROOT/'dist/site.js').read_text().replace("const words=['CREATOR’S CURIOSITY','ENGINEER’S MIND','STORYTELLER’S EYE','LOVE FOR AI'];","const words=window.PORTFOLIO_PROFILE.rotating_words?.length ? window.PORTFOLIO_PROFILE.rotating_words : ['CURIOUS MIND'];")
