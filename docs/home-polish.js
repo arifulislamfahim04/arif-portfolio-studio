@@ -2,22 +2,27 @@
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],motion=matchMedia('(prefers-reduced-motion: reduce)'),clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
 const stage=$('.physical-stage'),card=$('.physical-stage .tag-carrier'),grip=$('.physical-stage .tag-grip');
 if(stage&&card&&grip){
- let x=0,y=0,vx=0,vy=0,angle=-2,vr=0,tx=0,ty=0,drag=null,keyboard=false,visible=false,raf=0,last=0,hoverX=0,hoverY=0;
- function bounds(px,py){const r=stage.getBoundingClientRect(),w=card.offsetWidth,pad=28+Math.abs(Math.sin(angle*Math.PI/180))*card.offsetHeight;return [clamp(px,pad-r.left,Math.max(pad-r.left,innerWidth-r.left-w-pad)),clamp(py,-28,Math.max(0,innerHeight-r.top-card.offsetHeight-95))]}
+ let x=0,y=0,vx=0,vy=0,angle=0,vr=0,tx=0,ty=0,drag=null,pending=null,suppressClick=false,keyboard=false,visible=false,raf=0,last=0,hoverX=0,hoverY=0;
+ function bounds(px,py){const r=stage.getBoundingClientRect(),w=card.offsetWidth,pad=16+Math.abs(Math.sin(angle*Math.PI/180))*card.offsetHeight;return [clamp(px,pad-r.left,Math.max(pad-r.left,innerWidth-r.left-w-pad)),clamp(py,-28,Math.max(0,innerHeight-r.top-70-card.offsetHeight-24))]}
  function paint(){const length=Math.hypot(x,65+y);stage.style.setProperty('--card-x',x.toFixed(2)+'px');stage.style.setProperty('--card-y',y.toFixed(2)+'px');stage.style.setProperty('--card-r',angle.toFixed(2)+'deg');stage.style.setProperty('--cord-angle',(-Math.atan2(x,65+y)*180/Math.PI).toFixed(2)+'deg');stage.style.setProperty('--cord-scale',(length/65).toFixed(3))}
  function frame(now){raf=0;if(!visible||document.hidden)return;const dt=Math.min((now-(last||now-16))/1000,.04);last=now;
   const idle=now/1000;const targetX=drag||keyboard?tx:hoverX+Math.sin(idle*.8)*2.2,targetY=drag||keyboard?ty:hoverY;
   if(motion.matches){x=drag||keyboard?tx:0;y=drag||keyboard?ty:0;angle=0;vx=vy=vr=0;paint();return}
   // Fixed substeps keep the normalized-mass spring stable after a slow frame.
   const n=Math.ceil(dt/.008),step=dt/n,k=drag?110:18,c=drag?23:5.4;
-  for(let i=0;i<n;i++){vx+=((targetX-x)*k-c*vx)*step;vy+=((targetY-y)*k-c*vy)*step;x+=vx*step;y+=vy*step;const targetAngle=clamp(-2-x*.028+vx*.035+Math.sin(idle*.8)*.65,-24,24);vr+=((targetAngle-angle)*22-vr*6)*step;angle+=vr*step}
+  for(let i=0;i<n;i++){vx+=((targetX-x)*k-c*vx)*step;vy+=((targetY-y)*k-c*vy)*step;x+=vx*step;y+=vy*step;const targetAngle=clamp(-x*.028+vx*.035+Math.sin(idle*.8)*.65,-24,24);vr+=((targetAngle-angle)*22-vr*6)*step;angle+=vr*step}
   const bounded=bounds(x,y);if(bounded[0]!==x){x=bounded[0];vx*=.2}if(bounded[1]!==y){y=bounded[1];vy*=.2}paint();raf=requestAnimationFrame(frame)
  }
  function start(){if(!raf&&visible&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
- function release(){drag=null;keyboard=false;tx=ty=0;card.classList.remove('dragging');start()}
- card.addEventListener('pointerdown',e=>{if(e.button!==0||(e.pointerType!=='mouse'&&!e.target.closest('.tag-grip')))return;drag={id:e.pointerId,cx:e.clientX,cy:e.clientY,x,y};keyboard=false;hoverX=hoverY=0;card.setPointerCapture(e.pointerId);card.classList.add('dragging');e.preventDefault();start()});
- card.addEventListener('pointermove',e=>{if(drag&&drag.id===e.pointerId){[tx,ty]=bounds(drag.x+e.clientX-drag.cx,drag.y+e.clientY-drag.cy);if(motion.matches){x=tx;y=ty;paint()}start()}else if(e.pointerType==='mouse'&&!motion.matches){const r=card.getBoundingClientRect(),dx=(e.clientX-r.left)/r.width-.5,dy=(e.clientY-r.top)/r.height-.5;hoverX=dx*9;hoverY=dy*3;stage.style.setProperty('--foil-x',dx*100+'px');stage.style.setProperty('--foil-y',dy*80+'px')}});
- card.addEventListener('pointerleave',()=>{hoverX=hoverY=0;stage.style.setProperty('--foil-x','0px');stage.style.setProperty('--foil-y','0px')});
+ function release(){if(drag){suppressClick=true;setTimeout(()=>{suppressClick=false},0)}pending=null;drag=null;keyboard=false;tx=ty=0;card.classList.remove('dragging');start()}
+ const control=e=>e.target.closest('a,input,select,textarea,button:not(.tag-grip)');
+ card.addEventListener('dragstart',e=>e.preventDefault());
+ card.addEventListener('click',e=>{if(suppressClick){e.preventDefault();e.stopImmediatePropagation();suppressClick=false}},true);
+ card.addEventListener('pointerdown',e=>{suppressClick=false;if(e.button!==0||control(e)||(e.pointerType!=='mouse'&&!e.target.closest('.tag-grip')))return;pending={id:e.pointerId,cx:e.clientX,cy:e.clientY,x,y};keyboard=false;hoverX=hoverY=0;});
+ card.addEventListener('pointermove',e=>{if(pending&&pending.id===e.pointerId&&!drag&&Math.hypot(e.clientX-pending.cx,e.clientY-pending.cy)>6){drag=pending;card.setPointerCapture(e.pointerId);card.classList.add('dragging');getSelection()?.removeAllRanges()}
+ if(drag&&drag.id===e.pointerId){e.preventDefault();[tx,ty]=bounds(drag.x+e.clientX-drag.cx,drag.y+e.clientY-drag.cy);if(motion.matches){x=tx;y=ty;paint()}start()}else if(e.pointerType==='mouse'&&!motion.matches){const r=card.getBoundingClientRect(),dx=(e.clientX-r.left)/r.width-.5,dy=(e.clientY-r.top)/r.height-.5;hoverX=dx*9;hoverY=dy*3;stage.style.setProperty('--foil-x',dx*100+'px');stage.style.setProperty('--foil-y',dy*80+'px')}});
+ addEventListener('pointerup',()=>{if(pending||drag)release()});
+ card.addEventListener('pointerleave',()=>{if(!drag)pending=null;hoverX=hoverY=0;stage.style.setProperty('--foil-x','0px');stage.style.setProperty('--foil-y','0px')});
  for(const event of ['pointerup','pointercancel','lostpointercapture'])card.addEventListener(event,release);
  grip.addEventListener('keydown',e=>{const d={ArrowLeft:[-40,0],ArrowRight:[40,0],ArrowUp:[0,-40],ArrowDown:[0,40]}[e.key];if(d){e.preventDefault();keyboard=true;[tx,ty]=bounds(tx+d[0],ty+d[1]);start()}else if(e.key==='Escape'||e.key==='Enter'){e.preventDefault();release()}});grip.addEventListener('blur',release);
  new IntersectionObserver(es=>{visible=es[0].isIntersecting;stage.classList.toggle('is-moving',visible&&!motion.matches);if(visible)start();else{cancelAnimationFrame(raf);raf=0;release()}},{threshold:0}).observe(stage);

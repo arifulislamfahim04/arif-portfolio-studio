@@ -2,7 +2,7 @@
   "media": [
     {
       "name": "uploads",
-      "label": "Pictures, résumé & certificates",
+      "label": "Pictures, r\u00e9sum\u00e9 & certificates",
       "input": "docs/assets",
       "output": "assets",
       "rename": "safe",
@@ -21,16 +21,17 @@
   "content": [
     {
       "name": "profile",
-      "label": "Profile, résumé & homepage",
+      "label": "Profile, r\u00e9sum\u00e9 & homepage",
       "type": "file",
       "path": "editor/profile.json",
       "format": "json",
       "fields": [
         {
           "name": "name",
-          "label": "Your full name",
+          "label": "Full name (also on ID card)",
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Your name appears on the ID card and across the site."
         },
         {
           "name": "role",
@@ -49,9 +50,10 @@
         },
         {
           "name": "email",
-          "label": "Email",
+          "label": "Email / ID card Mail button",
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Your real email address. The Mail icon opens a new email to this address."
         },
         {
           "name": "phone",
@@ -60,16 +62,18 @@
         },
         {
           "name": "linkedin",
-          "label": "LinkedIn URL",
-          "type": "string"
+          "label": "LinkedIn / ID card link",
+          "type": "string",
+          "description": "Paste your full LinkedIn profile URL. Opens in a new tab."
         },
         {
           "name": "photo",
-          "label": "Profile portrait (leave empty for original design)",
+          "label": "Portrait / ID card photo",
           "type": "image",
           "options": {
             "media": "uploads"
-          }
+          },
+          "description": "Upload or replace your portrait here. The ID card crops it to an upright portrait."
         },
         {
           "name": "photo_alt",
@@ -94,7 +98,7 @@
         },
         {
           "name": "resume",
-          "label": "Résumé PDF",
+          "label": "R\u00e9sum\u00e9 PDF",
           "type": "file",
           "options": {
             "media": "uploads",
@@ -183,8 +187,9 @@
         },
         {
           "name": "facebook",
-          "label": "Facebook URL (optional)",
-          "type": "string"
+          "label": "Facebook / ID card link (optional)",
+          "type": "string",
+          "description": "Paste your full Facebook profile URL. Leave empty to hide the Facebook icon."
         }
       ]
     },
@@ -227,13 +232,15 @@
         },
         {
           "name": "tagline",
-          "label": "Short line on portrait tag",
-          "type": "string"
+          "label": "ID card tagline",
+          "type": "string",
+          "description": "Short sentence below the small label. Leave empty to hide it."
         },
         {
           "name": "tag_label",
-          "label": "Identity tag label",
-          "type": "string"
+          "label": "ID card small label",
+          "type": "string",
+          "description": "Small text below your name. Example: TEXTILE ENGINEERING / PERSONAL PORTFOLIO"
         },
         {
           "name": "gallery_heading",
@@ -257,7 +264,7 @@
         },
         {
           "name": "gallery_limit",
-          "label": "Featured photos on homepage (1–20)",
+          "label": "Featured photos on homepage (1\u201320)",
           "type": "number"
         },
         {
@@ -326,6 +333,18 @@
           "name": "site_url",
           "label": "Canonical homepage URL (only change if you move the site)",
           "type": "string"
+        },
+        {
+          "name": "card_button_text",
+          "label": "ID card Connect button text",
+          "type": "string",
+          "description": "The words on the contact button. Example: Connect with me"
+        },
+        {
+          "name": "card_button_link",
+          "label": "ID card Connect button destination",
+          "type": "string",
+          "description": "Use contact.html for your existing Connect page. Leave empty to hide the button."
         }
       ],
       "operations": {
@@ -533,7 +552,7 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026–2028)",
+          "label": "Date / period (e.g. 2026\u20132028)",
           "type": "string"
         },
         {
@@ -1577,7 +1596,7 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026–2028)",
+          "label": "Date / period (e.g. 2026\u20132028)",
           "type": "string"
         },
         {
@@ -1803,7 +1822,7 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026–2028)",
+          "label": "Date / period (e.g. 2026\u20132028)",
           "type": "string"
         },
         {
@@ -2033,7 +2052,7 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026–2028)",
+          "label": "Date / period (e.g. 2026\u20132028)",
           "type": "string"
         },
         {
@@ -2230,7 +2249,7 @@
     },
     {
       "name": "gallery",
-      "label": "Gallery · moments & photo stories",
+      "label": "Gallery \u00b7 moments & photo stories",
       "type": "collection",
       "path": "editor/gallery",
       "format": "json",

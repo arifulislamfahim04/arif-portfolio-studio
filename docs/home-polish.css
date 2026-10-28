@@ -44,7 +44,7 @@ body[data-home-polish]{--home-width:1280px;--home-pad:32px;--primary:#a3a1ff;--f
 [data-home-polish] .identity-tag:after{inset:7px;border-radius:9px}
 [data-home-polish] .tag-grip{height:50px;min-height:48px;z-index:2;font-size:8px;letter-spacing:.08em;color:var(--muted);touch-action:none}
 [data-home-polish] .tag-slot{width:38px;height:9px;border:2px solid #a6adc0;background:#070a12;box-shadow:0 1px 2px #fff3}
-[data-home-polish] .identity-photo{position:relative;width:176px;aspect-ratio:4/5;margin:0 0 0 -30px;border:5px solid #f3f0e8;border-bottom-width:16px;border-radius:3px;box-shadow:6px 9px 20px #0004;transform:rotate(-4deg);overflow:hidden;isolation:isolate}
+[data-home-polish] .identity-photo{position:relative;width:164px;aspect-ratio:4/5;margin:-8px auto 0;border:4px solid #f3f0e8;border-bottom-width:12px;border-radius:3px;box-shadow:0 9px 20px #0004;transform:none;overflow:hidden;isolation:isolate}
 [data-home-polish] .identity-photo .identity-portrait{object-fit:cover;object-position:center;aspect-ratio:4/5;user-select:none}
 [data-home-polish] .photo-foil{position:absolute;inset:-50%;pointer-events:none;background:linear-gradient(115deg,transparent 25%,#b7f5fc25 38%,#d1b3fc38 45%,#fff5 50%,#dfff9c30 55%,transparent 68%);transform:translate3d(var(--foil-x,0px),var(--foil-y,0px),0);opacity:.45;mix-blend-mode:screen}
 [data-home-polish] .identity-caption{padding:21px 4px 2px}
@@ -175,3 +175,21 @@ body[data-home-polish]{--display:HomeDisplay,'Bricolage Grotesque',Arial,sans-se
 [data-theme=light] [data-home-polish] .rail-marker{background:var(--primary)}
 @media(max-width:900px){[data-home-polish] .update-photo{grid-column:2}}
 @media(max-width:350px){[data-home-polish] .site-rail .dock-item{width:44px}}
+
+/* Centered ID card contact area; all editable values come from Pages CMS. */
+[data-home-polish] .identity-tag{text-align:center}
+[data-home-polish] .identity-caption{padding-top:16px}
+[data-home-polish] .identity-caption h2{font-size:clamp(19px,1.7vw,23px);margin:0 0 8px;white-space:nowrap}
+[data-home-polish] .tag-label{margin-inline:auto}
+[data-home-polish] .card-contact{position:relative;z-index:3;margin-top:16px;cursor:auto}
+[data-home-polish] .card-socials{display:flex;justify-content:center;gap:12px;min-height:44px}
+[data-home-polish] .card-socials a{width:44px;height:44px;padding:11px;touch-action:pan-y}
+[data-home-polish] .card-socials .icon{width:22px;height:22px}
+[data-home-polish] .card-connect{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:10px;padding:10px 22px;border:1px solid var(--line);border-radius:10px;font:600 12px var(--sans);color:var(--fg);background:var(--surface-soft);cursor:pointer}
+[data-home-polish] .card-connect:hover{color:var(--primary);border-color:currentColor}
+[data-home-polish] .tag-bottom{position:relative;z-index:1}
+[data-home-polish] .physical-stage{z-index:8}
+[data-home-polish] .physical-stage:has(.dragging){z-index:30}
+[data-home-polish] .tag-carrier.dragging,[data-home-polish] .tag-carrier.dragging *{user-select:none;-webkit-user-select:none}
+[data-home-polish] .identity-tag img{-webkit-user-drag:none}
+@media(max-width:700px){[data-home-polish] .physical-stage{margin-left:0}[data-home-polish] .identity-photo{width:154px;margin-inline:auto}[data-home-polish] .identity-caption h2{font-size:21px}}

@@ -12,7 +12,9 @@ with tempfile.TemporaryDirectory() as temp:
  assert len(h.xpath('//h1'))==1
  assert h.xpath('//div[@class="hero-actions"]/a[1][@download]')
  assert not h.xpath('//div[@class="home-socials"]//a[starts-with(@href,"tel:")]')
- assert h.xpath('//div[@class="home-socials"]/a[1]/@href')==['contact.html']
+ assert not h.xpath('//div[@class="home-socials"]')
+ assert h.xpath('//a[@class="card-connect"]/@href')==['contact.html']
+ assert h.xpath('//div[@class="card-socials"]/a[1]/@href')==['mailto:arifulislamfahim04@gmail.com']
  assert not h.xpath('//footer/a|//*[contains(@class,"ghost-word")]')
  assert len(h.xpath('//div[@class="marquee-row"]'))==2
  assert len(h.xpath('//div[@class="slideshow-track"]/article'))==6
@@ -27,7 +29,12 @@ with tempfile.TemporaryDirectory() as temp:
  p=json.loads((base/'editor/profile.json').read_text());p['facebook']='https://www.facebook.com/example';save('editor/profile.json',p)
  s=json.loads((base/'editor/homepage.json').read_text());s.update(background_image='',background_image_small='',roles=[],seo_title='An editable search title');save('editor/homepage.json',s)
  for entry in (base/'editor/updates').glob('*.json'):entry.unlink()
- build();h=doc();assert h.xpath('//div[@class="home-socials"]/a[@aria-label="Facebook"]');assert not h.xpath('//div[@class="hero-backdrop"]|//div[@class="role-line"]');assert not h.xpath('//p[@class="updates-empty"]/@hidden');assert h.xpath('//title/text()')==['An editable search title']
+ build();h=doc();assert h.xpath('//div[@class="card-socials"]/a[@aria-label="Facebook"]');assert not h.xpath('//div[@class="hero-backdrop"]|//div[@class="role-line"]');assert not h.xpath('//p[@class="updates-empty"]/@hidden');assert h.xpath('//title/text()')==['An editable search title']
+ # Card fields update through the CMS source; blank optional controls disappear.
+ s.update(tag_label='A custom card label',tagline='A new card tagline',card_button_text='Say hello',card_button_link='about.html');save('editor/homepage.json',s)
+ p.update(name='Ariful Islam Fahim',email='hello@example.com',linkedin='https://www.linkedin.com/in/example/');save('editor/profile.json',p)
+ build();h=doc();assert h.xpath('//a[@class="card-connect"]/text()')==['Say hello'];assert h.xpath('//a[@class="card-connect"]/@href')==['about.html'];assert h.xpath('//div[@class="card-socials"]/a[1]/@href')==['mailto:hello@example.com'];assert h.xpath('//a[@aria-label="LinkedIn"]/@target')==['_blank'];assert h.xpath('//span[@class="tag-label"]/text()')==['A custom card label'];assert h.xpath('//div[@class="identity-caption"]/p/text()')==['A new card tagline']
+ p.update(facebook='',linkedin='javascript:alert(1)');save('editor/profile.json',p);s.update(tagline='',card_button_link='');save('editor/homepage.json',s);build();h=doc();assert not h.xpath('//div[@class="card-socials"]/a[@aria-label="Facebook" or @aria-label="LinkedIn"]|//a[@class="card-connect"]|//div[@class="identity-caption"]/p')
  # Drafts disappear; dates order newest first; image/link optional; hostile values stay text.
  for i in range(5):save(f'editor/updates/test-{i}.json',dict(title=f'Update {i}',date=f'2026-10-{20+i}',topic='Research',text='<script>unsafe</script>',image='assets/ariful-portrait.jpg' if i==4 else '',image_alt='Research photo',link='javascript:alert(1)',published=True,sample=False))
  save('editor/updates/draft.json',dict(title='Hidden draft',published=False))

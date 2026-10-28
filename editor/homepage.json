@@ -21,5 +21,7 @@
   ],
   "gallery_mode": "Marquee",
   "updates_heading": "A few threads in progress.",
-  "updates_intro": "Small steps, new questions, and what I’m learning along the way."
+  "updates_intro": "Small steps, new questions, and what I’m learning along the way.",
+  "card_button_text": "Connect with me",
+  "card_button_link": "contact.html"
 }
