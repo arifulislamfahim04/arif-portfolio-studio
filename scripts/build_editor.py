@@ -255,13 +255,16 @@ def build():
   for p in OUT.glob(pattern):p.unlink()
  for name,d in pages.items():
   # All pages use the same editable contact and resume values.
-  for e in select(d,'//script[@src="content.js" or @src="site.js"]'):e.set('src',e.get('src')+'?v='+version)
+  for e in select(d,'//script[@src="content.js" or @src="site.js" or @src="home-core.js" or @src="home-polish.js"]'):e.set('src',e.get('src')+'?v='+version)
+  for e in select(d,'//link[@href="home-base.css" or @href="home-polish.css"]'):e.set('href',e.get('href')+'?v='+version)
   for e in select(d,'//a[@href]'):
    old=e.get('href')
    if old=='assets/ariful-islam-fahim-cv.pdf':e.set('href',url(profile['resume']));e.attrib.pop('download',None)
    elif old.startswith('mailto:arifulislamfahim04@gmail.com'):e.set('href',old.replace('arifulislamfahim04@gmail.com',profile['email']))
    elif old=='tel:+8801968718018':e.set('href','tel:'+profile['phone'])
    elif 'linkedin.com/in/ariful-islam-fahim' in old:e.set('href',url(profile['linkedin']))
+  if name=='index' and not urlsplit(url(profile.get('resume'))).scheme:
+   for e in select(d,'//div[@class="hero-actions"]/a[1]'):e.set('download','')
   for e in select(d,'//body//*'):
    for key in ('text','tail'):
     value=getattr(e,key)
@@ -287,6 +290,14 @@ def build():
  js=js.replace("if(e.button!==0||","if(a.hasAttribute('data-project')||e.button!==0||")
  js=js.replace("hour:'2-digit',minute:'2-digit'","hour:'numeric',minute:'2-digit',hour12:true").replace("el.textContent=time+' BD'","el.textContent=time.toUpperCase()+' BD'")
  (OUT/'site.js').write_text(js)
+ # Homepage reuses the core behavior with its old canvas/cursor loop removed.
+ home_js=re.sub(r'// Only thin, transparent cursor layers.*?(?=let scrollQueued=false;)', 'function drawWeave(){}\n',js,flags=re.S)
+ home_js=home_js.replace('if(reduced.matches||!document.startViewTransition)', 'if(body.hasAttribute("data-home-polish")||reduced.matches||!document.startViewTransition)')
+ (OUT/'home-core.js').write_text(home_js)
+ base_css=(ROOT/'dist/site.css').read_text()
+ base_css=re.sub(r"@import url\([^;]+;",'',base_css,count=1)
+ (OUT/'home-base.css').write_text(base_css)
+
  (OUT/'editor.css').write_text('''.portrait-upload{object-fit:cover!important;filter:none!important}.story-page{max-width:900px}.story-page h1{font-size:clamp(2rem,5vw,4rem);line-height:1.15;margin:2rem 0}.story-body{font-size:1.1rem;line-height:1.85}.story-cover{width:100%;max-height:500px;object-fit:cover;border-radius:16px}.story-body img,#reader-body img,#document-body img{max-width:100%;height:auto;border-radius:12px}.story-body figure,#reader-body figure{margin:1.5rem 0}.story-body figcaption,#reader-body figcaption{font-size:.9rem;opacity:.75}.story-video,video{width:100%;aspect-ratio:16/9;border:0}.certificate-pdf{width:100%;height:65vh;border:0}.story-body table,#reader-body table{width:100%;border-collapse:collapse}.story-body td,.story-body th,#reader-body td,#reader-body th{padding:.5rem;border:1px solid #8886}.info-card dd{overflow-wrap:anywhere}.certificate-card .text-link{margin-top:1rem}.certificate-card img{max-width:100%}.entry-facts{margin:1rem 0}.entry-facts>div{display:grid;grid-template-columns:minmax(7rem,1fr) minmax(0,2fr);gap:.6rem;padding:.55rem 0;border-bottom:1px solid #8883}.entry-facts dt{font-size:.85rem;opacity:.75}.entry-facts dd{margin:0;overflow-wrap:anywhere}.entry-extra{margin-top:1.25rem;border-top:1px solid #8883;padding-top:1rem}.entry-extra summary{cursor:pointer;font-weight:600}.entry-extra-body{padding-top:1rem}.entry-extra img{max-width:100%;height:auto}.entry-detail-section{margin:1.4rem 0}.entry-detail-section h3{font-size:1.05rem!important;margin-bottom:.6rem}.entry-extra-body p,.entry-facts dd{overflow-wrap:anywhere}.entry-extra .button{white-space:normal}.profile-socials{flex-wrap:wrap}@media(max-width:540px){.entry-facts>div{grid-template-columns:1fr;gap:.2rem}.entry-extra .certificate-pdf{height:50vh}}''')
  (OUT/'.nojekyll').touch()
  print(f'Built {len(pages)} pages, {len(details)} stories, {len(documents)} documents')

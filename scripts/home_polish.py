@@ -2,11 +2,14 @@
 from lxml import html, etree
 import json
 from datetime import date
+from urllib.parse import urljoin
 from copy import deepcopy
 
 def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, select, set_html):
  h=pages['index'];body=one(h,'//body');body.set('data-home-polish','true')
- def add(parent,s):parent.append(html.fragment_fromstring(s))
+ def add(parent,s):
+  for child in html.fragments_fromstring(s):
+   if not isinstance(child,str):parent.append(child)
  def icon(name):return f'<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><use href="#i-{name}"></use></svg>'
  def erase(e):e.getparent().remove(e)
  # Keep layout and content decisions in the build, rather than brittle runtime replacements.
@@ -33,7 +36,7 @@ def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, sele
  roles=[str(v).strip() for v in settings.get('roles',[]) if str(v).strip()][:12]
  if roles:
   reserve=''.join('<span class="role-reserve" aria-hidden="true">'+esc(v)+'</span>' for v in roles)
-  title.addnext(html.fragment_fromstring('<div class="role-line" data-roles="'+esc(__import__('json').dumps(roles))+'"><span class="sr-only">Exploring '+esc(', '.join(roles))+'</span>'+reserve+'<span class="typed-live" data-type="roles" aria-hidden="true">'+esc(roles[0])+'</span></div>'))
+  title.addnext(html.fragment_fromstring('<div class="role-line" data-roles="'+esc(json.dumps(roles))+'"><span class="sr-only">Exploring '+esc(', '.join(roles))+'</span>'+reserve+'<span class="typed-live" data-type="roles" aria-hidden="true">'+esc(roles[0])+'</span></div>'))
  background=url(settings.get('background_image'))
  if background:
   small=url(settings.get('background_image_small'));sources=f' srcset="{esc(small)} 640w, {esc(background)} 1280w" sizes="100vw"' if small else ''
@@ -62,13 +65,21 @@ def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, sele
  chips=''.join(f'<button class="update-filter" data-update-filter="{esc(t)}" aria-pressed="{str(i==0).lower()}">{esc(t)}</button>' for i,t in enumerate(['All']+topics))
  cards=[]
  for i,u in enumerate(items):
-  raw=str(u.get('date') or '')[:10]
-  try:label=date.fromisoformat(raw).strftime('%d %b %Y').lstrip('0')
-  except ValueError:label=raw or 'Date to be announced'
+  raw=str(u.get('date') or '')[:10];valid_date=False
+  try:label=date.fromisoformat(raw).strftime('%d %b %Y').lstrip('0');valid_date=True
+  except ValueError:label=raw
   sample='<span class="update-sample">Sample update</span>' if u.get('sample') else ''
+  stamp=f'<time datetime="{esc(raw)}">{esc(label)}</time>' if valid_date else (f'<span>{esc(label)}</span>' if label else '')
+  date_block=f'<div class="update-date">{stamp}{sample}</div>' if stamp or sample else ''
   picture=f'<img class="update-photo" src="{esc(url(u["image"]))}" alt="{esc(u.get("image_alt") or u["title"])}" loading="lazy" width="320" height="200">' if url(u.get('image')) else ''
   link=f'<a class="text-link" href="{esc(url(u["link"]))}">Read more<span class="sr-only">: {esc(u["title"])}</span> {icon("arrow")}</a>' if url(u.get('link')) else ''
-  cards.append(f'<article class="update-entry" data-update-topic="{esc(u.get("topic") or topics[0])}"{(" hidden" if i>=3 else "")}><div class="update-date"><time datetime="{esc(raw)}">{esc(label)}</time>{sample}</div><div class="update-copy"><span class="update-topic">{esc(u.get("topic"))}</span><h3>{esc(u["title"])}</h3><p>On {esc(label)}, '+('this example illustrates how a new update will appear.' if u.get('sample') else esc(u.get('text')))+f'</p>{("<p>"+esc(u.get("text"))+"</p>" if u.get("sample") else "")}{link}</div>{picture}</article>')
+  prefix=('On '+esc(label)+', ') if label else ''
+  text=str(u.get('text') or '').strip()
+  narrative=('<p>'+prefix+'this example illustrates how a new update will appear.</p>' if u.get('sample') else '')
+  if text:narrative+='<p>'+('' if u.get('sample') else prefix)+esc(text)+'</p>'
+  hidden=' hidden' if i>=3 else ''
+  topic=esc(u.get('topic') or topics[0])
+  cards.append(f'<article class="update-entry" data-reveal data-update-topic="{topic}"{hidden}>{date_block}<div class="update-copy"><span class="update-topic">{topic}</span><h3>{esc(u["title"])}</h3>{narrative}{link}</div>{picture}</article>')
  markup='<section class="section updates-section" id="updates" aria-labelledby="updates-title"><header class="section-heading"><span class="section-label">THE LATEST THREADS</span><h2 id="updates-title">'+esc(settings.get('updates_heading') or 'A few threads in progress.')+'</h2><p>'+esc(settings.get('updates_intro'))+'</p></header><div class="update-filters" role="group" aria-label="Filter updates by topic">'+chips+'</div><div class="updates-feed">'+''.join(cards)+'</div><p class="updates-empty"'+(' hidden' if cards else '')+'>No updates here yet. There will be more to share soon.</p><p class="updates-count" role="status">'+str(min(3,len(cards)))+' latest updates</p></section>'
  old=one(h,'//main//section[contains(@class,"section") and not(contains(@class,"cta-section")) and not(contains(@class,"moments"))]');old.getparent().replace(old,html.fragment_fromstring(markup))
  for e in select(h,'//div[@class="skills-marquee"]'):erase(e)
@@ -90,7 +101,23 @@ def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, sele
  for u in select(h,'//*[@id="back-top"]//use'):u.set('href','#i-up')
  add(nav,'<span class="rail-marker" aria-hidden="true"></span>')
  one(h,'//div[@class="home-stage"]').set('id','home-top')
- for a in select(nav,'./a'):a.set('title',a.get('aria-label',''))
+ # Finishing copy and social metadata all come from editable profile/homepage values.
+ footer=one(h,'//footer');set_html(footer,'<span>© <span data-year>2026</span> '+esc(profile['name'])+'. · Made with curiosity. Woven with care.</span>')
+ for e in select(h,'//*[@class="ghost-word"]'):erase(e)
+ for e in select(h,'//canvas[@id="woven-canvas"]|//*[contains(@class,"cursor-dot") or contains(@class,"cursor-ring") or contains(@class,"cursor-label")]'):e.set('hidden','')
+ for e in select(h,'//section[@class="section cta-section"]'):e.set('id','connect')
+ head=one(h,'//head');title=settings.get('seo_title') or profile['name']+' — Textile Engineering & Curious Making';one(h,'//title').text=title
+ description=settings.get('seo_description') or html.fragment_fromstring('<div>'+rich(settings.get('description'))+'</div>').text_content().strip()
+ one(h,'//meta[@name="description"]').set('content',description)
+ site=url(settings.get('site_url')) or 'https://arifulislamfahim04.github.io/arif-portfolio-studio/'
+ for prop,value in [('og:type','website'),('og:title',title),('og:description',description),('og:url',site),('twitter:card','summary_large_image')]:
+  add(head,'<meta '+('name' if prop.startswith('twitter:') else 'property')+'="'+prop+'" content="'+esc(value)+'">')
+ social_image=url(settings.get('social_image') or profile.get('photo'))
+ if social_image:add(head,'<meta property="og:image" content="'+esc(urljoin(site,social_image))+'"><meta property="og:image:alt" content="'+esc(profile.get('photo_alt') or profile['name'])+'">')
+ add(head,'<link rel="canonical" href="'+esc(site)+'"><link rel="icon" type="image/svg+xml" href="assets/home-favicon.svg">')
+ for e in select(h,'//link[@href="site.css"]'):e.set('href','home-base.css')
+ for e in select(h,'//script[@src="site.js"]'):e.set('src','home-core.js')
+ for family in ('display','text'):add(head,f'<link rel="preload" as="font" type="font/woff" href="assets/fonts/{family}.woff" crossorigin="anonymous">')
  # These assets are only loaded on index: other pages retain their existing design.
  add(one(h,'//head'),'<link rel="stylesheet" href="home-polish.css">')
  add(body,'<script src="home-polish.js" defer></script>')

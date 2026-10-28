@@ -306,6 +306,26 @@
           "name": "updates_intro",
           "label": "Updates introduction",
           "type": "text"
+        },
+        {
+          "name": "seo_title",
+          "label": "Search / sharing title (optional)",
+          "type": "string"
+        },
+        {
+          "name": "seo_description",
+          "label": "Search / sharing description (optional)",
+          "type": "text"
+        },
+        {
+          "name": "social_image",
+          "label": "Social sharing image (optional; portrait is the fallback)",
+          "type": "image"
+        },
+        {
+          "name": "site_url",
+          "label": "Canonical homepage URL (only change if you move the site)",
+          "type": "string"
         }
       ],
       "operations": {
@@ -2361,8 +2381,7 @@
         {
           "name": "date",
           "label": "Date",
-          "type": "date",
-          "required": true
+          "type": "date"
         },
         {
           "name": "topic",

@@ -10,7 +10,7 @@ with tempfile.TemporaryDirectory() as t:
  def save(path,data):(base/path).write_text(json.dumps(data))
  build();home=doc('index.html');g=doc('gallery.html')
  assert home.xpath('//img[contains(@class,"identity-portrait")]/@src')==['assets/ariful-portrait.jpg']
- assert home.xpath('//h1[@id="home-title"]//em/text()')==['ARIFUL.']
+ assert home.xpath('//h1[@id="home-title"]//span[@data-type="name"]/text()')==['ARIFUL.']
  assert not home.xpath('//article[@class="stat"]//*[@data-count]')
  assert not home.xpath('//div[@class="profile-location"]')
  for path in (base/'docs').glob('*.html'):
@@ -21,9 +21,9 @@ with tempfile.TemporaryDirectory() as t:
   assert len(d.xpath('//aside[@class="site-rail"]'))==1
   assert len(d.xpath('//*[@id="moment-viewer"]'))==1
   assert len(d.xpath('//nav[@id="right-navigation"]//a[@aria-current="page"]'))==1
- assert len(g.xpath('//article[contains(@class,"gallery-item")]'))==4
- assert len(home.xpath('//article[contains(@class,"moment-slide")]'))==4
- assert len(g.xpath('//span[@class="sample-label"]'))==4
+ assert len(g.xpath('//article[contains(@class,"gallery-item")]'))==6
+ assert len(home.xpath('//div[@class="slideshow-track"]/article'))==6
+ assert len(g.xpath('//span[@class="sample-label"]'))==6
  # A new photo propagates to Gallery and homepage; hidden and unfeatured are distinct.
  item=dict(title='A real moment',image='assets/loom-spools.jpg',published=True,featured=True,order=0,body='<p>My story</p>',caption='A real caption',date='2026',location='Dhaka',category='Personal')
  save('editor/gallery/personal.json',item);build()

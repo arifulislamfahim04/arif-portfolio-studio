@@ -1,0 +1,24 @@
+name: Validate homepage review
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [homepage-polish-review]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python scripts/build_editor.py
+      - run: python scripts/check_site.py
+      - run: python scripts/test_editor.py
+      - run: python scripts/test_optional_fields.py
+      - run: python scripts/test_home_design.py
+      - run: python scripts/test_home_polish.py
+      - run: node --check docs/home-core.js && node --check scripts/home_polish.js
