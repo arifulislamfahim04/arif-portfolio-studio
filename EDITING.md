@@ -32,3 +32,25 @@ GitHub history keeps previous versions of saved files. The content is stored in 
 Run `python -m pip install -r requirements.txt`, `python scripts/build_editor.py`, then `python scripts/check_site.py`. The older `build_portfolio.py`, `content/` and `dist/` are retained for historical reference; do not use them for routine publication because they predate the editor.
 
 GitHub Settings → Pages must use **GitHub Actions** as the source. Never put a GitHub token in frontend HTML or JavaScript. Pages CMS performs authenticated edits through its GitHub App.
+
+## Optional information in every entry
+
+The extra fields are optional. Leave them blank when they do not apply. Empty fields, untouched rich-text boxes, blank gallery items and empty document/link rows do not produce public labels, gaps or buttons. Only the entry title is required; Show on website controls publication.
+
+- **Education:** qualification, department, specialization, location, separate start/end dates, currently studying, CGPA/GPA/classification and scale, thesis, supervisor and coursework.
+- **Experience:** employment type, location, separate dates, currently working, organization website, responsibilities, achievements and skills.
+- **Awards:** category, individual/team recognition, reason/criteria, related work and official verification link.
+- **Certificates:** issue/expiry dates, Does not expire, credential ID, verification link and skills.
+- **Projects:** status, dates, your role, collaborators, objectives, methods, results and report.
+- **Blogs/articles:** author, tags, last updated date and sources/references.
+- **Workshops:** duration, location/online, your role and learning outcomes.
+- **All entries:** Additional details, Other facts (your own labels and values), Pictures & captions, video link, Supporting documents and Related links.
+- **Profile:** additional social/professional links.
+
+Cards stay concise. Education, experience and workshop extras open under **More details**. Award and certificate extras open in **View details / certificate**. Blog/project details appear in their reading view and full article page.
+
+If you enter separate start/end dates, they replace the older Date / period display. Currently studying/working shows Present instead of an end date. A separate CGPA/result and scale replace the older Result / badge; that field remains available for existing entries. Does not expire takes precedence over an expiry date. The shorter card title remains independent from the optional qualification field.
+
+For pictures and documents, upload/select the file inside its field in Pages CMS, then save the entry. Uploading to media storage alone does not place the file on a page. Remove a picture selection or clear an optional field and save to remove it from the public display. This does not erase its file or GitHub history.
+
+There is no need to fill every form field. Add only the information you want visitors to see. Homepage statistics and the résumé PDF remain separately editable; adding education does not rewrite those automatically.

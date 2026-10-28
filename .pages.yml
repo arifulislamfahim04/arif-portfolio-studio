@@ -180,6 +180,27 @@
               "type": "string"
             }
           ]
+        },
+        {
+          "name": "social_links",
+          "label": "Other social / professional links (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Link text (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "label": "URL (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
         }
       ]
     },
@@ -388,18 +409,6 @@
           "type": "string"
         },
         {
-          "name": "published",
-          "label": "Show on website",
-          "type": "boolean",
-          "default": true
-        },
-        {
-          "name": "order",
-          "label": "Display order (smaller first)",
-          "type": "number",
-          "default": 10
-        },
-        {
           "name": "category",
           "label": "Category",
           "type": "string",
@@ -439,30 +448,160 @@
           }
         },
         {
-          "name": "gallery",
-          "label": "Extra pictures with captions",
+          "name": "author",
+          "label": "Author (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "tags",
+          "label": "Tags (optional)",
+          "type": "string",
+          "required": false,
+          "list": true
+        },
+        {
+          "name": "last_updated",
+          "label": "Last updated date (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "references",
+          "label": "Sources / references (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "additional_details",
+          "label": "Additional details (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "extra_fields",
+          "label": "Other facts (optional)",
           "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "value",
+              "label": "Value (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "gallery",
+          "label": "Pictures & captions (optional)",
+          "type": "object",
+          "required": false,
           "list": true,
           "fields": [
             {
               "name": "image",
-              "label": "Picture",
+              "label": "Picture (optional)",
               "type": "image",
+              "required": false,
               "options": {
                 "media": "uploads"
               }
             },
             {
               "name": "caption",
-              "label": "Caption",
-              "type": "string"
+              "label": "Caption (optional)",
+              "type": "string",
+              "required": false
             }
           ]
         },
         {
           "name": "video_url",
-          "label": "YouTube link or direct video URL",
-          "type": "string"
+          "label": "YouTube link or direct video URL (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "attachments",
+          "label": "Supporting documents (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Document name (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "file",
+              "label": "PDF or image (optional)",
+              "type": "file",
+              "required": false,
+              "options": {
+                "media": "uploads",
+                "extensions": [
+                  "pdf",
+                  "jpg",
+                  "jpeg",
+                  "png",
+                  "webp"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "related_links",
+          "label": "Related links (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Link text (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "label": "Link URL (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
         }
       ]
     },
@@ -494,20 +633,8 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026–2028)",
+          "label": "Date / period (or use start and end dates below)",
           "type": "string"
-        },
-        {
-          "name": "published",
-          "label": "Show on website",
-          "type": "boolean",
-          "default": true
-        },
-        {
-          "name": "order",
-          "label": "Display order (smaller first)",
-          "type": "number",
-          "default": 10
         },
         {
           "name": "category",
@@ -549,30 +676,210 @@
           }
         },
         {
-          "name": "gallery",
-          "label": "Extra pictures with captions",
+          "name": "status",
+          "label": "Project status (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "start_date",
+          "label": "Start date (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "end_date",
+          "label": "End date (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "role",
+          "label": "Your role (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "collaborators",
+          "label": "Collaborators (optional)",
+          "type": "string",
+          "required": false,
+          "list": true
+        },
+        {
+          "name": "objectives",
+          "label": "Objectives (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "methods",
+          "label": "Methods / tools (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "results",
+          "label": "Results / outcomes (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "report",
+          "label": "Project report (optional)",
+          "type": "file",
+          "required": false,
+          "options": {
+            "media": "uploads",
+            "extensions": [
+              "pdf",
+              "jpg",
+              "jpeg",
+              "png",
+              "webp"
+            ]
+          }
+        },
+        {
+          "name": "additional_details",
+          "label": "Additional details (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "extra_fields",
+          "label": "Other facts (optional)",
           "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "value",
+              "label": "Value (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "gallery",
+          "label": "Pictures & captions (optional)",
+          "type": "object",
+          "required": false,
           "list": true,
           "fields": [
             {
               "name": "image",
-              "label": "Picture",
+              "label": "Picture (optional)",
               "type": "image",
+              "required": false,
               "options": {
                 "media": "uploads"
               }
             },
             {
               "name": "caption",
-              "label": "Caption",
-              "type": "string"
+              "label": "Caption (optional)",
+              "type": "string",
+              "required": false
             }
           ]
         },
         {
           "name": "video_url",
-          "label": "YouTube link or direct video URL",
-          "type": "string"
+          "label": "YouTube link or direct video URL (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "attachments",
+          "label": "Supporting documents (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Document name (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "file",
+              "label": "PDF or image (optional)",
+              "type": "file",
+              "required": false,
+              "options": {
+                "media": "uploads",
+                "extensions": [
+                  "pdf",
+                  "jpg",
+                  "jpeg",
+                  "png",
+                  "webp"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "related_links",
+          "label": "Related links (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Link text (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "label": "Link URL (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
         }
       ]
     },
@@ -604,20 +911,8 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026–2028)",
+          "label": "Date / period (or use start and end dates below)",
           "type": "string"
-        },
-        {
-          "name": "published",
-          "label": "Show on website",
-          "type": "boolean",
-          "default": true
-        },
-        {
-          "name": "order",
-          "label": "Display order (smaller first)",
-          "type": "number",
-          "default": 10
         },
         {
           "name": "institution",
@@ -651,8 +946,207 @@
         },
         {
           "name": "badge",
-          "label": "Result / badge (optional)",
+          "label": "Other result / badge (optional; separate CGPA fields below)",
           "type": "string"
+        },
+        {
+          "name": "degree",
+          "label": "Degree / qualification (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "department",
+          "label": "Department (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "specialization",
+          "label": "Specialization / major (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "location",
+          "label": "City / country (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "start_date",
+          "label": "Start date (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "end_date",
+          "label": "End date (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "currently_studying",
+          "label": "Currently studying (optional)",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "grade",
+          "label": "CGPA / GPA / classification (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "grade_scale",
+          "label": "Grade scale, e.g. 4.00 or 5.00 (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "thesis_title",
+          "label": "Thesis / dissertation title (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "supervisor",
+          "label": "Supervisor (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "coursework",
+          "label": "Relevant coursework (optional)",
+          "type": "string",
+          "required": false,
+          "list": true
+        },
+        {
+          "name": "additional_details",
+          "label": "Additional details (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "extra_fields",
+          "label": "Other facts (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "value",
+              "label": "Value (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "gallery",
+          "label": "Pictures & captions (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "image",
+              "label": "Picture (optional)",
+              "type": "image",
+              "required": false,
+              "options": {
+                "media": "uploads"
+              }
+            },
+            {
+              "name": "caption",
+              "label": "Caption (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "video_url",
+          "label": "YouTube link or direct video URL (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "attachments",
+          "label": "Supporting documents (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Document name (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "file",
+              "label": "PDF or image (optional)",
+              "type": "file",
+              "required": false,
+              "options": {
+                "media": "uploads",
+                "extensions": [
+                  "pdf",
+                  "jpg",
+                  "jpeg",
+                  "png",
+                  "webp"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "related_links",
+          "label": "Related links (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Link text (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "label": "Link URL (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
         }
       ]
     },
@@ -684,20 +1178,8 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026–2028)",
+          "label": "Date / period (or use start and end dates below)",
           "type": "string"
-        },
-        {
-          "name": "published",
-          "label": "Show on website",
-          "type": "boolean",
-          "default": true
-        },
-        {
-          "name": "order",
-          "label": "Display order (smaller first)",
-          "type": "number",
-          "default": 10
         },
         {
           "name": "institution",
@@ -733,6 +1215,209 @@
           "name": "badge",
           "label": "Result / badge (optional)",
           "type": "string"
+        },
+        {
+          "name": "employment_type",
+          "label": "Employment type (optional)",
+          "type": "select",
+          "required": false,
+          "options": {
+            "values": [
+              "Full-time",
+              "Part-time",
+              "Internship",
+              "Traineeship",
+              "Contract",
+              "Freelance",
+              "Volunteer",
+              "Other"
+            ]
+          }
+        },
+        {
+          "name": "location",
+          "label": "Location / remote (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "start_date",
+          "label": "Start date (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "end_date",
+          "label": "End date (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "currently_working",
+          "label": "Currently working here (optional)",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "organization_url",
+          "label": "Organization website (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "responsibilities",
+          "label": "Responsibilities (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "achievements",
+          "label": "Achievements / impact (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "skills",
+          "label": "Skills used (optional)",
+          "type": "string",
+          "required": false,
+          "list": true
+        },
+        {
+          "name": "additional_details",
+          "label": "Additional details (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "extra_fields",
+          "label": "Other facts (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "value",
+              "label": "Value (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "gallery",
+          "label": "Pictures & captions (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "image",
+              "label": "Picture (optional)",
+              "type": "image",
+              "required": false,
+              "options": {
+                "media": "uploads"
+              }
+            },
+            {
+              "name": "caption",
+              "label": "Caption (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "video_url",
+          "label": "YouTube link or direct video URL (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "attachments",
+          "label": "Supporting documents (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Document name (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "file",
+              "label": "PDF or image (optional)",
+              "type": "file",
+              "required": false,
+              "options": {
+                "media": "uploads",
+                "extensions": [
+                  "pdf",
+                  "jpg",
+                  "jpeg",
+                  "png",
+                  "webp"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "related_links",
+          "label": "Related links (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Link text (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "label": "Link URL (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
         }
       ]
     },
@@ -768,18 +1453,6 @@
           "type": "string"
         },
         {
-          "name": "published",
-          "label": "Show on website",
-          "type": "boolean",
-          "default": true
-        },
-        {
-          "name": "order",
-          "label": "Display order (smaller first)",
-          "type": "number",
-          "default": 10
-        },
-        {
           "name": "institution",
           "label": "Institution / organization",
           "type": "string"
@@ -808,6 +1481,169 @@
               "webp"
             ]
           }
+        },
+        {
+          "name": "issue_date",
+          "label": "Issue date (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "expiry_date",
+          "label": "Expiry date (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "does_not_expire",
+          "label": "Does not expire (optional)",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "credential_id",
+          "label": "Credential ID (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "verification_url",
+          "label": "Verification URL (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "skills",
+          "label": "Skills gained (optional)",
+          "type": "string",
+          "required": false,
+          "list": true
+        },
+        {
+          "name": "additional_details",
+          "label": "Additional details (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "extra_fields",
+          "label": "Other facts (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "value",
+              "label": "Value (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "gallery",
+          "label": "Pictures & captions (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "image",
+              "label": "Picture (optional)",
+              "type": "image",
+              "required": false,
+              "options": {
+                "media": "uploads"
+              }
+            },
+            {
+              "name": "caption",
+              "label": "Caption (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "video_url",
+          "label": "YouTube link or direct video URL (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "attachments",
+          "label": "Supporting documents (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Document name (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "file",
+              "label": "PDF or image (optional)",
+              "type": "file",
+              "required": false,
+              "options": {
+                "media": "uploads",
+                "extensions": [
+                  "pdf",
+                  "jpg",
+                  "jpeg",
+                  "png",
+                  "webp"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "related_links",
+          "label": "Related links (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Link text (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "label": "Link URL (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
         }
       ]
     },
@@ -843,18 +1679,6 @@
           "type": "string"
         },
         {
-          "name": "published",
-          "label": "Show on website",
-          "type": "boolean",
-          "default": true
-        },
-        {
-          "name": "order",
-          "label": "Display order (smaller first)",
-          "type": "number",
-          "default": 10
-        },
-        {
           "name": "institution",
           "label": "Institution / organization",
           "type": "string"
@@ -883,6 +1707,173 @@
               "webp"
             ]
           }
+        },
+        {
+          "name": "award_category",
+          "label": "Award category (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "recognition_type",
+          "label": "Recognition type (optional)",
+          "type": "select",
+          "required": false,
+          "options": {
+            "values": [
+              "Individual",
+              "Team"
+            ]
+          }
+        },
+        {
+          "name": "reason",
+          "label": "Reason / selection criteria (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "related_work",
+          "label": "Related work / project (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "verification_url",
+          "label": "Official award / verification link (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "additional_details",
+          "label": "Additional details (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "extra_fields",
+          "label": "Other facts (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "value",
+              "label": "Value (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "gallery",
+          "label": "Pictures & captions (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "image",
+              "label": "Picture (optional)",
+              "type": "image",
+              "required": false,
+              "options": {
+                "media": "uploads"
+              }
+            },
+            {
+              "name": "caption",
+              "label": "Caption (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "video_url",
+          "label": "YouTube link or direct video URL (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "attachments",
+          "label": "Supporting documents (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Document name (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "file",
+              "label": "PDF or image (optional)",
+              "type": "file",
+              "required": false,
+              "options": {
+                "media": "uploads",
+                "extensions": [
+                  "pdf",
+                  "jpg",
+                  "jpeg",
+                  "png",
+                  "webp"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "related_links",
+          "label": "Related links (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Link text (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "label": "Link URL (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
         }
       ]
     },
@@ -918,18 +1909,6 @@
           "type": "string"
         },
         {
-          "name": "published",
-          "label": "Show on website",
-          "type": "boolean",
-          "default": true
-        },
-        {
-          "name": "order",
-          "label": "Display order (smaller first)",
-          "type": "number",
-          "default": 10
-        },
-        {
           "name": "institution",
           "label": "Institution / organization",
           "type": "string"
@@ -963,6 +1942,161 @@
           "name": "badge",
           "label": "Result / badge (optional)",
           "type": "string"
+        },
+        {
+          "name": "duration",
+          "label": "Duration (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "location",
+          "label": "Location / online (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "participation_role",
+          "label": "Your role (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "learning_outcomes",
+          "label": "Learning outcomes (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "additional_details",
+          "label": "Additional details (optional)",
+          "type": "rich-text",
+          "required": false,
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "extra_fields",
+          "label": "Other facts (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "value",
+              "label": "Value (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "gallery",
+          "label": "Pictures & captions (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "image",
+              "label": "Picture (optional)",
+              "type": "image",
+              "required": false,
+              "options": {
+                "media": "uploads"
+              }
+            },
+            {
+              "name": "caption",
+              "label": "Caption (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "video_url",
+          "label": "YouTube link or direct video URL (optional)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "attachments",
+          "label": "Supporting documents (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Document name (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "file",
+              "label": "PDF or image (optional)",
+              "type": "file",
+              "required": false,
+              "options": {
+                "media": "uploads",
+                "extensions": [
+                  "pdf",
+                  "jpg",
+                  "jpeg",
+                  "png",
+                  "webp"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "related_links",
+          "label": "Related links (optional)",
+          "type": "object",
+          "required": false,
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Link text (optional)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "label": "Link URL (optional)",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
         }
       ]
     }
