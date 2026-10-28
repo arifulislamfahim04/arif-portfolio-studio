@@ -37,6 +37,25 @@ def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, sele
  if background:
   small=url(settings.get('background_image_small'));sources=f' srcset="{esc(small)} 640w, {esc(background)} 1280w" sizes="100vw"' if small else ''
   stage=one(h,'//div[@class="home-stage"]');stage.insert(0,html.fragment_fromstring(f'<div class="hero-backdrop" aria-hidden="true"><img src="{esc(background)}"{sources} alt="" width="1280" height="853" decoding="async" fetchpriority="low"></div>'))
+ # Two independently looping rows; the original single track remains the accessible slideshow.
+ for showcase in select(h,'//div[@class="moments-carousel"]'):
+  showcase.set('class','moments-showcase is-slideshow');showcase.set('data-default-mode',settings.get('gallery_mode') or 'Marquee')
+  track=one(showcase,'.//div[@class="moments-track"]');track.set('class','slideshow-track');track.set('aria-label','Photo slideshow. Use left and right arrow keys or the previous and next buttons.')
+  slides=list(track);wall=html.Element('div',{'class':'marquee-wall','aria-hidden':'true','hidden':''})
+  for row in range(2):
+   viewport=etree.SubElement(wall,'div',{'class':'marquee-row'});belt=etree.SubElement(viewport,'div',{'class':'marquee-belt'})
+   selected=slides[row::2] or slides
+   # At least three cells per group, even with a small personal collection.
+   while len(selected)<3:selected=selected+selected
+   for repeat in range(2):
+    group=etree.SubElement(belt,'div',{'class':'marquee-group'})
+    for original in selected:
+     clone=deepcopy(original)
+     for button in clone.xpath('.//button'):button.set('tabindex','-1')
+     group.append(clone)
+  showcase.insert(0,wall)
+  controls=one(showcase,'.//div[@class="moments-controls"]');set_html(controls,f'<button class="gallery-mode" data-gallery-mode aria-pressed="true">Slideshow</button><button class="gallery-pause" data-gallery-pause aria-pressed="false">Pause motion</button><div class="slideshow-controls"><button class="round-control" data-slide-prev aria-label="Previous moments">{icon("left")}</button><span class="slide-position" role="status"></span><button class="round-control" data-slide-next aria-label="Next moments">{icon("right")}</button></div>')
+  add(controls,'<span class="gallery-mode-help">Switch to Slideshow to browse with a keyboard or swipe.</span>')
  # Only the homepage symbol library is replaced; original vectors remain on other routes.
  library=one(h,'//svg[@class="icon-library"]')
  for child in list(library):library.remove(child)

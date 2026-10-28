@@ -285,6 +285,17 @@
           "label": "Rotating interests / roles",
           "type": "string",
           "list": true
+        },
+        {
+          "name": "gallery_mode",
+          "label": "Default gallery preview mode",
+          "type": "select",
+          "options": {
+            "values": [
+              "Marquee",
+              "Slideshow"
+            ]
+          }
         }
       ],
       "operations": {
