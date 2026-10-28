@@ -23,6 +23,7 @@ with tempfile.TemporaryDirectory() as t:
  empty=dict(body='<p><br></p>',additional_details='<p> </p>',extra_fields=[{'label':'Never show this empty label','value':''}],gallery=[{'image':'','caption':'Orphan caption'}],attachments=[{'file':'','label':'Orphan document'}],related_links=[{'label':'Orphan link','url':''}])
  for e in collections:dump(base/'editor'/e['name']/'optional-empty.json',dict(title='Empty '+e['name'],published=True,**empty))
  build();stories,docs=data()
+ initial_asset=html.parse(str(base/'docs/index.html')).xpath('//script[contains(@src,"content.js?v=")]/@src')[0]
  for kind in ('education','experience','workshops','certificates','achievements'):
   c=card('Empty '+kind)
   assert not c.xpath('.//details|.//p|.//img|.//button|.//span[contains(@class,"care-chip") or contains(@class,"fact-chip")]'),html.tostring(c)
@@ -40,7 +41,10 @@ with tempfile.TemporaryDirectory() as t:
  'posts':dict(author='Example author',tags=['Textiles'],last_updated='2027-02-01',references='<p>Reference source</p>'),
  'workshops':dict(duration='12 hours',location='Online',participation_role='Participant',learning_outcomes='<p>New learning</p>')}
  for kind,values in fixtures.items():dump(base/'editor'/kind/'optional-full.json',dict(title='Full '+kind,**common,**values))
- build();stories,docs=data();document_bodies={d['id']:d['body'] for d in docs}
+ build();stories,docs=data()
+ next_asset=html.parse(str(base/'docs/index.html')).xpath('//script[contains(@src,"content.js?v=")]/@src')[0]
+ assert initial_asset!=next_asset,'Content changes must invalidate cached assets'
+ document_bodies={d['id']:d['body'] for d in docs}
  for kind in fixtures:
   if kind in ('posts','projects'):body=stories[kind+'-optional-full']['body']
   elif kind in ('certificates','achievements'):body=document_bodies[kind+'-optional-full']

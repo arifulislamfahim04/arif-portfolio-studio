@@ -2,7 +2,7 @@
 from pathlib import Path
 from html import escape
 from urllib.parse import urlsplit
-import json, shutil, re
+import json, shutil, re, hashlib
 from lxml import html
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs'
@@ -163,6 +163,7 @@ def build():
  # Immutable original design lives in templates; uploaded media lives in docs/assets.
  pages={p.stem:html.parse(str(p)) for p in (ROOT/'templates').glob('*.html')}
  profile=read('profile.json'); about=read('about.json'); details={};documents=[]
+ version=hashlib.sha256(Path(__file__).read_bytes()+b''.join(p.read_bytes() for p in sorted((ROOT/'editor').rglob('*.json')))).hexdigest()[:16]
  for d in pages.values():
   for a in select(d,'//a[@href]'):
    href=a.get('href')
@@ -250,7 +251,7 @@ def build():
   for p in OUT.glob(pattern):p.unlink()
  for name,d in pages.items():
   # All pages use the same editable contact and resume values.
-  pass
+  for e in select(d,'//script[@src="content.js" or @src="site.js"]'):e.set('src',e.get('src')+'?v='+version)
   for e in select(d,'//a[@href]'):
    old=e.get('href')
    if old=='assets/ariful-islam-fahim-cv.pdf':e.set('href',url(profile['resume']));e.attrib.pop('download',None)
@@ -265,7 +266,7 @@ def build():
      setattr(e,key,value)
   for e in select(d,'//head'):
 
-   e.append(html.Element('link',rel='stylesheet',href='editor.css'))
+   e.append(html.Element('link',rel='stylesheet',href='editor.css?v='+version))
   (OUT/(name+'.html')).write_text(html.tostring(d,encoding='unicode',doctype='<!doctype html>'))
  payload='window.PORTFOLIO_DETAILS='+json.dumps(details,ensure_ascii=False)+';\nwindow.PORTFOLIO_DOCUMENTS='+json.dumps(documents,ensure_ascii=False)+';\nwindow.PORTFOLIO_PROFILE='+json.dumps(profile,ensure_ascii=False)+';'
  (OUT/'content.js').write_text(payload)
