@@ -1,0 +1,14 @@
+{
+  "title": "A checklist, not a magic spell.",
+  "category": "prompting",
+  "summary": "Why a simple request doesn’t need five paragraphs of instructions.",
+  "cover": "assets/wool-weave.jpg",
+  "cover_alt": "An indigo textile study accompanying a field note",
+  "body": "<p>A prompt is a request. Its job is to give enough information for a useful response. Making it longer is not automatically an improvement.</p><p>For a simple definition, the subject may be enough. For exam notes, the course material, expected depth, and answer format can change the result substantially.</p><p>MOLDS helps you notice those missing decisions. Start with the outcome, add the context that affects it, and stop when the request is clear. You do not need to fill every box.</p>",
+  "label": "FIELD NOTE · PROMPTING",
+  "date": "2026-10-28",
+  "published": true,
+  "order": 1,
+  "video_url": "",
+  "gallery": []
+}

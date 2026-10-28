@@ -1,0 +1,970 @@
+{
+  "media": [
+    {
+      "name": "uploads",
+      "label": "Pictures, résumé & certificates",
+      "input": "docs/assets",
+      "output": "assets",
+      "rename": "safe",
+      "extensions": [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "gif",
+        "pdf",
+        "mp4",
+        "webm"
+      ]
+    }
+  ],
+  "content": [
+    {
+      "name": "profile",
+      "label": "Profile, résumé & homepage",
+      "type": "file",
+      "path": "editor/profile.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Your full name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "role",
+          "label": "Professional title",
+          "type": "string"
+        },
+        {
+          "name": "location",
+          "label": "Location",
+          "type": "string"
+        },
+        {
+          "name": "availability",
+          "label": "Availability",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "label": "Phone number",
+          "type": "string"
+        },
+        {
+          "name": "linkedin",
+          "label": "LinkedIn URL",
+          "type": "string"
+        },
+        {
+          "name": "photo",
+          "label": "Profile portrait (leave empty for original design)",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          }
+        },
+        {
+          "name": "photo_alt",
+          "label": "Describe your portrait",
+          "type": "string"
+        },
+        {
+          "name": "cover",
+          "label": "Homepage background image",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          }
+        },
+        {
+          "name": "secondary_image",
+          "label": "Secondary textile image",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          }
+        },
+        {
+          "name": "resume",
+          "label": "Résumé PDF",
+          "type": "file",
+          "options": {
+            "media": "uploads",
+            "extensions": [
+              "pdf",
+              "jpg",
+              "jpeg",
+              "png",
+              "webp"
+            ]
+          }
+        },
+        {
+          "name": "hero_title",
+          "label": "Homepage headline",
+          "type": "string"
+        },
+        {
+          "name": "rotating_words",
+          "label": "Rotating headline phrases",
+          "type": "string",
+          "list": true
+        },
+        {
+          "name": "hero_description",
+          "label": "Short introduction",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "introduction",
+          "label": "Homepage about paragraph",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "call_to_action",
+          "label": "Opportunity / availability paragraph",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "stats",
+          "label": "Homepage statistics",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "value",
+              "label": "Number",
+              "type": "string"
+            },
+            {
+              "name": "decimals",
+              "label": "Decimal places",
+              "type": "number"
+            },
+            {
+              "name": "suffix",
+              "label": "Suffix, e.g. + or /4.00",
+              "type": "string"
+            },
+            {
+              "name": "label",
+              "label": "Label",
+              "type": "string"
+            },
+            {
+              "name": "detail",
+              "label": "Detail",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "about",
+      "label": "Biography, skills & references",
+      "type": "file",
+      "path": "editor/about.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "biography",
+          "label": "Biography",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "information",
+          "label": "Personal information",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "label": "Value",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "glance",
+          "label": "At a glance",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "label": "Value",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "skills",
+          "label": "Skill groups",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "title",
+              "label": "Title",
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "label": "Description",
+              "type": "rich-text",
+              "options": {
+                "format": "html",
+                "media": "uploads",
+                "switcher": false
+              }
+            },
+            {
+              "name": "items",
+              "label": "Skills",
+              "type": "string",
+              "list": true
+            }
+          ]
+        },
+        {
+          "name": "languages",
+          "label": "Languages",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "title",
+              "label": "Language",
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "label": "Proficiency",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "recommendations",
+          "label": "Recommendations",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "title",
+              "label": "Person / role",
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "label": "Recommendation",
+              "type": "rich-text",
+              "options": {
+                "format": "html",
+                "media": "uploads",
+                "switcher": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "references",
+          "label": "Academic references",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "title",
+              "label": "Name",
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "label": "Reference information",
+              "type": "rich-text",
+              "options": {
+                "format": "html",
+                "media": "uploads",
+                "switcher": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "transcript",
+          "label": "Transcript PDF or image",
+          "type": "file",
+          "options": {
+            "media": "uploads",
+            "extensions": [
+              "pdf",
+              "jpg",
+              "jpeg",
+              "png",
+              "webp"
+            ]
+          }
+        },
+        {
+          "name": "transcript_body",
+          "label": "Transcript summary",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "posts",
+      "label": "Blogs & articles",
+      "type": "collection",
+      "path": "editor/posts",
+      "format": "json",
+      "filename": "{primary}.json",
+      "subfolders": false,
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "date",
+          "published",
+          "order"
+        ],
+        "sort": "order",
+        "order": "asc"
+      },
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "date",
+          "label": "Date / period (e.g. 2026–2028)",
+          "type": "string"
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
+        },
+        {
+          "name": "category",
+          "label": "Category",
+          "type": "string",
+          "default": "General"
+        },
+        {
+          "name": "label",
+          "label": "Short label / status",
+          "type": "string"
+        },
+        {
+          "name": "summary",
+          "label": "Card summary",
+          "type": "text"
+        },
+        {
+          "name": "cover",
+          "label": "Cover image",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          }
+        },
+        {
+          "name": "cover_alt",
+          "label": "Describe the cover image",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "label": "Write your article or project here",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "gallery",
+          "label": "Extra pictures with captions",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "image",
+              "label": "Picture",
+              "type": "image",
+              "options": {
+                "media": "uploads"
+              }
+            },
+            {
+              "name": "caption",
+              "label": "Caption",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "video_url",
+          "label": "YouTube link or direct video URL",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "projects",
+      "label": "Projects",
+      "type": "collection",
+      "path": "editor/projects",
+      "format": "json",
+      "filename": "{primary}.json",
+      "subfolders": false,
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "date",
+          "published",
+          "order"
+        ],
+        "sort": "order",
+        "order": "asc"
+      },
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "date",
+          "label": "Date / period (e.g. 2026–2028)",
+          "type": "string"
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
+        },
+        {
+          "name": "category",
+          "label": "Category",
+          "type": "string",
+          "default": "General"
+        },
+        {
+          "name": "label",
+          "label": "Short label / status",
+          "type": "string"
+        },
+        {
+          "name": "summary",
+          "label": "Card summary",
+          "type": "text"
+        },
+        {
+          "name": "cover",
+          "label": "Cover image",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          }
+        },
+        {
+          "name": "cover_alt",
+          "label": "Describe the cover image",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "label": "Write your article or project here",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "gallery",
+          "label": "Extra pictures with captions",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "image",
+              "label": "Picture",
+              "type": "image",
+              "options": {
+                "media": "uploads"
+              }
+            },
+            {
+              "name": "caption",
+              "label": "Caption",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "video_url",
+          "label": "YouTube link or direct video URL",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "education",
+      "label": "Education",
+      "type": "collection",
+      "path": "editor/education",
+      "format": "json",
+      "filename": "{primary}.json",
+      "subfolders": false,
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "date",
+          "published",
+          "order"
+        ],
+        "sort": "order",
+        "order": "asc"
+      },
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "date",
+          "label": "Date / period (e.g. 2026–2028)",
+          "type": "string"
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
+        },
+        {
+          "name": "institution",
+          "label": "Institution / organization",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "label": "Description",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "file",
+          "label": "Certificate / supporting document",
+          "type": "file",
+          "options": {
+            "media": "uploads",
+            "extensions": [
+              "pdf",
+              "jpg",
+              "jpeg",
+              "png",
+              "webp"
+            ]
+          }
+        },
+        {
+          "name": "badge",
+          "label": "Result / badge (optional)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "experience",
+      "label": "Experience",
+      "type": "collection",
+      "path": "editor/experience",
+      "format": "json",
+      "filename": "{primary}.json",
+      "subfolders": false,
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "date",
+          "published",
+          "order"
+        ],
+        "sort": "order",
+        "order": "asc"
+      },
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "date",
+          "label": "Date / period (e.g. 2026–2028)",
+          "type": "string"
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
+        },
+        {
+          "name": "institution",
+          "label": "Institution / organization",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "label": "Description",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "file",
+          "label": "Certificate / supporting document",
+          "type": "file",
+          "options": {
+            "media": "uploads",
+            "extensions": [
+              "pdf",
+              "jpg",
+              "jpeg",
+              "png",
+              "webp"
+            ]
+          }
+        },
+        {
+          "name": "badge",
+          "label": "Result / badge (optional)",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "certificates",
+      "label": "Certificates",
+      "type": "collection",
+      "path": "editor/certificates",
+      "format": "json",
+      "filename": "{primary}.json",
+      "subfolders": false,
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "date",
+          "published",
+          "order"
+        ],
+        "sort": "order",
+        "order": "asc"
+      },
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "date",
+          "label": "Date / period (e.g. 2026–2028)",
+          "type": "string"
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
+        },
+        {
+          "name": "institution",
+          "label": "Institution / organization",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "label": "Description",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "file",
+          "label": "Certificate / supporting document",
+          "type": "file",
+          "options": {
+            "media": "uploads",
+            "extensions": [
+              "pdf",
+              "jpg",
+              "jpeg",
+              "png",
+              "webp"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "achievements",
+      "label": "Achievements & awards",
+      "type": "collection",
+      "path": "editor/achievements",
+      "format": "json",
+      "filename": "{primary}.json",
+      "subfolders": false,
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "date",
+          "published",
+          "order"
+        ],
+        "sort": "order",
+        "order": "asc"
+      },
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "date",
+          "label": "Date / period (e.g. 2026–2028)",
+          "type": "string"
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
+        },
+        {
+          "name": "institution",
+          "label": "Institution / organization",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "label": "Description",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "file",
+          "label": "Certificate / supporting document",
+          "type": "file",
+          "options": {
+            "media": "uploads",
+            "extensions": [
+              "pdf",
+              "jpg",
+              "jpeg",
+              "png",
+              "webp"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "workshops",
+      "label": "Workshops & seminars",
+      "type": "collection",
+      "path": "editor/workshops",
+      "format": "json",
+      "filename": "{primary}.json",
+      "subfolders": false,
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "date",
+          "published",
+          "order"
+        ],
+        "sort": "order",
+        "order": "asc"
+      },
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "date",
+          "label": "Date / period (e.g. 2026–2028)",
+          "type": "string"
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
+        },
+        {
+          "name": "institution",
+          "label": "Institution / organization",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "label": "Description",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "file",
+          "label": "Certificate / supporting document",
+          "type": "file",
+          "options": {
+            "media": "uploads",
+            "extensions": [
+              "pdf",
+              "jpg",
+              "jpeg",
+              "png",
+              "webp"
+            ]
+          }
+        },
+        {
+          "name": "badge",
+          "label": "Result / badge (optional)",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

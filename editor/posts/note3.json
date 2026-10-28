@@ -1,0 +1,14 @@
+{
+  "title": "Look beyond the finished garment.",
+  "category": "textiles",
+  "summary": "Every fabric is a chain of decisions.",
+  "cover": "assets/loom-spools.jpg",
+  "cover_alt": "An indigo textile study accompanying a field note",
+  "body": "<p>A garment is the visible end of a much longer process. Fibre choice, yarn structure, fabric construction, dyeing, finishing, and assembly all influence its properties.</p><p>A comfortable shirt is not explained by a single specification. Its feel and performance come from decisions made across the production chain.</p><p>Following those connections is part of learning textile engineering: look at the finished product, then work backwards through the choices that made it possible.</p>",
+  "label": "FIELD NOTE · TEXTILES",
+  "date": "2026-10-28",
+  "published": true,
+  "order": 3,
+  "video_url": "",
+  "gallery": []
+}

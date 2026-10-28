@@ -1,0 +1,14 @@
+{
+  "title": "Start with the thing people can use.",
+  "category": "learning",
+  "summary": "A useful explanation gives someone a next step.",
+  "cover": "assets/wool-weave.jpg",
+  "cover_alt": "An indigo textile study accompanying a field note",
+  "body": "<p>A helpful explanation should leave someone able to do something: ask a clearer question, compare two options, or understand why a process works.</p><p>One way to get there is to start with an everyday problem. Show the first attempt, make one meaningful change, and explain the result.</p><p>Examples do more than make a lesson interesting. They let people see where an idea applies and decide whether it helps them.</p>",
+  "label": "FIELD NOTE · LEARNING",
+  "date": "2026-10-28",
+  "published": true,
+  "order": 2,
+  "video_url": "",
+  "gallery": []
+}

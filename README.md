@@ -1,3 +1,9 @@
+# Manage your portfolio without code
+
+See [EDITING.md](EDITING.md) for the visual editor and content management instructions. The new publishing workflow builds from `editor/` and retains the existing design in `templates/`. GitHub Pages should use **GitHub Actions** after this integration is activated.
+
+The following original export notes are retained for reference; use the new editing guide for updates.
+
 # Arif — Personal Portfolio
 
 The original five-page portfolio for Ariful Islam Fahim, exported from the latest portfolio studio source. Includes Home, About, Blogs, Projects, Contact, styles, JavaScript, fonts, images, and the résumé PDF.

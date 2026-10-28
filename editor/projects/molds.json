@@ -1,0 +1,14 @@
+{
+  "title": "The MOLDS checklist",
+  "category": "creator",
+  "summary": "A practical checklist for clearer requests and more useful answers.",
+  "cover": "assets/wool-weave.jpg",
+  "cover_alt": "Textile yarn and weaving study",
+  "body": "<p>A small checklist I made to think more clearly before sending a complicated request to ChatGPT.</p><h3>Five things to consider</h3><p><strong>Material:</strong> What information does ChatGPT need?<br><strong>Outcome:</strong> What are you trying to get done?<br><strong>Limits:</strong> What restrictions or requirements matter?<br><strong>Done when:</strong> What would make the result good enough?<br><strong>Shape:</strong> What should the final answer look like?</p><p>Not every request needs all five. “What is evaporation?” is already a clear request. The checklist is useful when the task has more moving parts.</p>",
+  "label": "PERSONAL FRAMEWORK · IN DEVELOPMENT",
+  "date": "",
+  "published": true,
+  "order": 4,
+  "video_url": "",
+  "gallery": []
+}
