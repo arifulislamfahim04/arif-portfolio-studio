@@ -271,6 +271,7 @@ def build():
 
    e.append(html.Element('link',rel='stylesheet',href='editor.css?v='+version))
    e.append(html.Element('link',rel='stylesheet',href='home.css?v='+version))
+  for script in select(d,'//script[@src]'):script.set('defer','')
   (OUT/(name+'.html')).write_text(html.tostring(d,encoding='unicode',doctype='<!doctype html>'))
  payload='window.PORTFOLIO_DETAILS='+json.dumps(details,ensure_ascii=False)+';\nwindow.PORTFOLIO_DOCUMENTS='+json.dumps(documents,ensure_ascii=False)+';\nwindow.PORTFOLIO_PROFILE='+json.dumps(profile,ensure_ascii=False)+';'
  (OUT/'content.js').write_text(payload+'\nwindow.PORTFOLIO_MOMENTS='+json.dumps([dict(m,body=visible_rich(m.get('body')),source_url=url(m.get('source_url'))) for m in moments],ensure_ascii=False)+';')

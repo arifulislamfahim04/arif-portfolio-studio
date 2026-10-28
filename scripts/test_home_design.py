@@ -15,7 +15,8 @@ with tempfile.TemporaryDirectory() as t:
  assert not home.xpath('//div[@class="profile-location"]')
  for path in (base/'docs').glob('*.html'):
   if path.name.startswith('qa-'):continue
-  d=doc(path.name);nav=d.xpath('//nav[@id="right-navigation"]/a/@href')
+  d=doc(path.name);assert all('defer' in e.attrib for e in d.xpath('//script[@src]')),'Moved controls require deferred initialization'
+  nav=d.xpath('//nav[@id="right-navigation"]/a/@href')
   assert nav==['index.html','about.html','blogs.html','projects.html','gallery.html','contact.html'],(path.name,nav)
   assert len(d.xpath('//aside[@class="site-rail"]'))==1
   assert len(d.xpath('//*[@id="moment-viewer"]'))==1
