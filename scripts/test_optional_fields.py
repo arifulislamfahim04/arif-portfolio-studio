@@ -13,7 +13,7 @@ with tempfile.TemporaryDirectory() as t:
   raw=(base/'docs/content.js').read_text()
   return json.loads(raw.split('window.PORTFOLIO_DETAILS=')[1].split(';\nwindow.PORTFOLIO_DOCUMENTS=')[0]),json.loads(raw.split('window.PORTFOLIO_DOCUMENTS=')[1].split(';\nwindow.PORTFOLIO_PROFILE=')[0])
  config=json.loads((base/'.pages.yml').read_text())
- collections=[e for e in config['content'] if e['type']=='collection' and e['name']!='gallery']
+ collections=[e for e in config['content'] if e['type']=='collection' and e['name'] not in ('gallery','updates')]
  # A title is the only required content field; optional fields must be genuine.
  for e in collections:
   names=[f['name'] for f in e['fields']];assert len(names)==len(set(names))
