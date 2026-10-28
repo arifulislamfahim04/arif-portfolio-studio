@@ -269,6 +269,16 @@
           "name": "gallery_page_description",
           "label": "Gallery page introduction",
           "type": "text"
+        },
+        {
+          "name": "background_image",
+          "label": "Hero background (optional, decorative)",
+          "type": "image"
+        },
+        {
+          "name": "background_image_small",
+          "label": "Smaller hero background (optional; same photograph)",
+          "type": "image"
         }
       ],
       "operations": {

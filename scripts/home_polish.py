@@ -24,6 +24,10 @@ def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, sele
  photo=one(stage,'.//div[@class="identity-photo"]');add(photo,'<span class="photo-foil" aria-hidden="true"></span>')
  for img in select(photo,'.//img'):
   img.set('width','600');img.set('height','750');img.set('loading','eager');img.set('decoding','async');img.set('fetchpriority','high')
+ background=url(settings.get('background_image'))
+ if background:
+  small=url(settings.get('background_image_small'));sources=f' srcset="{esc(small)} 640w, {esc(background)} 1280w" sizes="100vw"' if small else ''
+  stage=one(h,'//div[@class="home-stage"]');stage.insert(0,html.fragment_fromstring(f'<div class="hero-backdrop" aria-hidden="true"><img src="{esc(background)}"{sources} alt="" width="1280" height="853" decoding="async" fetchpriority="low"></div>'))
  # These assets are only loaded on index: other pages retain their existing design.
  add(one(h,'//head'),'<link rel="stylesheet" href="home-polish.css">')
  add(body,'<script src="home-polish.js" defer></script>')

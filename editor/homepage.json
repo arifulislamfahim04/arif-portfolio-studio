@@ -11,5 +11,7 @@
   "gallery_autoplay": true,
   "gallery_limit": 6,
   "gallery_page_title": "Between the threads.",
-  "gallery_page_description": "Learning, making, and the moments worth keeping."
+  "gallery_page_description": "Learning, making, and the moments worth keeping.",
+  "background_image": "assets/placeholders/pixabay-laptop-1280.webp",
+  "background_image_small": "assets/placeholders/pixabay-laptop-640.webp"
 }

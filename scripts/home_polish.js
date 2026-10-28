@@ -23,4 +23,6 @@ if(stage&&card&&grip){
  new IntersectionObserver(es=>{visible=es[0].isIntersecting;stage.classList.toggle('is-moving',visible&&!motion.matches);if(visible)start();else{cancelAnimationFrame(raf);raf=0;release()}},{threshold:0}).observe(stage);
  document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0;release()}else start()});motion.addEventListener('change',()=>{release();start()});addEventListener('resize',()=>{[x,y]=bounds(x,y);[tx,ty]=bounds(tx,ty);paint()});paint();
 }
+const backdrop=$('.hero-backdrop img');
+if(backdrop){let queued=false,inView=false;function parallax(){queued=false;if(inView&&!motion.matches)backdrop.style.transform='translate3d(0,'+clamp(-$('.home-stage').getBoundingClientRect().top*.045,-24,24)+'px,0) scale(1.06)';else backdrop.style.transform='none'}new IntersectionObserver(es=>{inView=es[0].isIntersecting;parallax()}).observe(backdrop);addEventListener('scroll',()=>{if(inView&&!queued&&!motion.matches){queued=true;requestAnimationFrame(parallax)}},{passive:true});motion.addEventListener('change',parallax)}
 })();
