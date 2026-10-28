@@ -1,6 +1,7 @@
 """Scoped homepage presentation layer; original templates and other routes stay intact."""
 from lxml import html, etree
 import json
+from datetime import date
 from copy import deepcopy
 
 def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, select, set_html):
@@ -56,6 +57,21 @@ def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, sele
   showcase.insert(0,wall)
   controls=one(showcase,'.//div[@class="moments-controls"]');set_html(controls,f'<button class="gallery-mode" data-gallery-mode aria-pressed="true">Slideshow</button><button class="gallery-pause" data-gallery-pause aria-pressed="false">Pause motion</button><div class="slideshow-controls"><button class="round-control" data-slide-prev aria-label="Previous moments">{icon("left")}</button><span class="slide-position" role="status"></span><button class="round-control" data-slide-next aria-label="Next moments">{icon("right")}</button></div>')
   add(controls,'<span class="gallery-mode-help">Switch to Slideshow to browse with a keyboard or swipe.</span>')
+ # A dated feed replaces the old generic overview cards on the homepage only.
+ topics=['Content creation','Research','Fabric testing','Apparel manufacturing'];items=sorted(updates,key=lambda u:str(u.get('date') or ''),reverse=True)
+ chips=''.join(f'<button class="update-filter" data-update-filter="{esc(t)}" aria-pressed="{str(i==0).lower()}">{esc(t)}</button>' for i,t in enumerate(['All']+topics))
+ cards=[]
+ for i,u in enumerate(items):
+  raw=str(u.get('date') or '')[:10]
+  try:label=date.fromisoformat(raw).strftime('%d %b %Y').lstrip('0')
+  except ValueError:label=raw or 'Date to be announced'
+  sample='<span class="update-sample">Sample update</span>' if u.get('sample') else ''
+  picture=f'<img class="update-photo" src="{esc(url(u["image"]))}" alt="{esc(u.get("image_alt") or u["title"])}" loading="lazy" width="320" height="200">' if url(u.get('image')) else ''
+  link=f'<a class="text-link" href="{esc(url(u["link"]))}">Read more<span class="sr-only">: {esc(u["title"])}</span> {icon("arrow")}</a>' if url(u.get('link')) else ''
+  cards.append(f'<article class="update-entry" data-update-topic="{esc(u.get("topic") or topics[0])}"{(" hidden" if i>=3 else "")}><div class="update-date"><time datetime="{esc(raw)}">{esc(label)}</time>{sample}</div><div class="update-copy"><span class="update-topic">{esc(u.get("topic"))}</span><h3>{esc(u["title"])}</h3><p>On {esc(label)}, '+('this example illustrates how a new update will appear.' if u.get('sample') else esc(u.get('text')))+f'</p>{("<p>"+esc(u.get("text"))+"</p>" if u.get("sample") else "")}{link}</div>{picture}</article>')
+ markup='<section class="section updates-section" id="updates" aria-labelledby="updates-title"><header class="section-heading"><span class="section-label">THE LATEST THREADS</span><h2 id="updates-title">'+esc(settings.get('updates_heading') or 'A few threads in progress.')+'</h2><p>'+esc(settings.get('updates_intro'))+'</p></header><div class="update-filters" role="group" aria-label="Filter updates by topic">'+chips+'</div><div class="updates-feed">'+''.join(cards)+'</div><p class="updates-empty"'+(' hidden' if cards else '')+'>No updates here yet. There will be more to share soon.</p><p class="updates-count" role="status">'+str(min(3,len(cards)))+' latest updates</p></section>'
+ old=one(h,'//main//section[contains(@class,"section") and not(contains(@class,"cta-section")) and not(contains(@class,"moments"))]');old.getparent().replace(old,html.fragment_fromstring(markup))
+ for e in select(h,'//div[@class="skills-marquee"]'):erase(e)
  # Only the homepage symbol library is replaced; original vectors remain on other routes.
  library=one(h,'//svg[@class="icon-library"]')
  for child in list(library):library.remove(child)

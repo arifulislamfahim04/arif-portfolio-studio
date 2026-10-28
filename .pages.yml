@@ -296,6 +296,16 @@
               "Slideshow"
             ]
           }
+        },
+        {
+          "name": "updates_heading",
+          "label": "Updates heading",
+          "type": "string"
+        },
+        {
+          "name": "updates_intro",
+          "label": "Updates introduction",
+          "type": "text"
         }
       ],
       "operations": {
@@ -2314,6 +2324,90 @@
           "label": "Show on website",
           "type": "boolean",
           "default": true
+        }
+      ]
+    },
+    {
+      "name": "updates",
+      "label": "Homepage news & updates",
+      "type": "collection",
+      "path": "editor/updates",
+      "format": "json",
+      "filename": "{primary}.json",
+      "view": {
+        "fields": [
+          "title",
+          "date",
+          "topic",
+          "sample",
+          "published"
+        ],
+        "primary": "title",
+        "sort": [
+          "date"
+        ],
+        "default": {
+          "sort": "date",
+          "order": "desc"
+        }
+      },
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "topic",
+          "label": "Topic",
+          "type": "select",
+          "options": {
+            "values": [
+              "Content creation",
+              "Research",
+              "Fabric testing",
+              "Apparel manufacturing"
+            ]
+          }
+        },
+        {
+          "name": "text",
+          "label": "Short update (write this as a complete sentence)",
+          "type": "text"
+        },
+        {
+          "name": "image",
+          "label": "Optional image",
+          "type": "image"
+        },
+        {
+          "name": "image_alt",
+          "label": "Describe the image (if added)",
+          "type": "string"
+        },
+        {
+          "name": "link",
+          "label": "Optional link",
+          "type": "string"
+        },
+        {
+          "name": "sample",
+          "label": "This is an example, not a real update",
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": false
         }
       ]
     }
