@@ -23,6 +23,7 @@ jobs:
       - run: python scripts/check_site.py
       - run: python scripts/test_editor.py
       - run: python scripts/test_optional_fields.py
+      - run: python scripts/test_home_design.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

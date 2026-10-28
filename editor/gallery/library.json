@@ -1,0 +1,15 @@
+{
+  "title": "Room for curiosity",
+  "image": "assets/sample-library.jpg",
+  "alt": "Library shelves and a quiet study space. A sample image to replace with a personal memory.",
+  "caption": "Library shelves and a quiet study space. A sample image to replace with a personal memory.",
+  "category": "Learning",
+  "shape": "Portrait",
+  "body": "<p>This sample demonstrates the photo story layout. Replace it with your own photo, caption, and memory in Pages CMS.</p>",
+  "credit": "Sadnan Bashar / Unsplash",
+  "source_url": "https://unsplash.com/photos/a-library-filled-with-lots-of-books-next-to-a-window-wd6bZXiZf4s",
+  "featured": true,
+  "placeholder": true,
+  "published": true,
+  "order": 2
+}

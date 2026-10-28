@@ -3,6 +3,7 @@ from pathlib import Path
 from html import escape
 from urllib.parse import urlsplit
 import json, shutil, re, hashlib
+from home_design import enhance
 from lxml import html
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs'
@@ -163,7 +164,7 @@ def build():
  # Immutable original design lives in templates; uploaded media lives in docs/assets.
  pages={p.stem:html.parse(str(p)) for p in (ROOT/'templates').glob('*.html')}
  profile=read('profile.json'); about=read('about.json'); details={};documents=[]
- version=hashlib.sha256(Path(__file__).read_bytes()+b''.join(p.read_bytes() for p in sorted((ROOT/'editor').rglob('*.json')))).hexdigest()[:16]
+ version=hashlib.sha256(b''.join(p.read_bytes() for p in sorted((ROOT/'scripts').glob('*')) if p.is_file())+b''.join(p.read_bytes() for p in sorted((ROOT/'editor').rglob('*.json')))).hexdigest()[:16]
  for d in pages.values():
   for a in select(d,'//a[@href]'):
    href=a.get('href')
@@ -246,6 +247,7 @@ def build():
   filterattr='data-blog-filter' if folder=='posts' else 'data-project-filter'
   markup=''.join(f'<button class="filter {"active" if i==0 else ""}" {filterattr}="{esc(c)}" aria-pressed="{str(i==0).lower()}">{esc("All" if i==0 else c)}</button>' for i,c in enumerate(['all']+sorted(set(cats))))
   set_html(one(pages[page],'//div[contains(@class,"filter-bar")]'),markup)
+ moments=enhance(pages,profile,entries('gallery'),read('homepage.json'),esc=esc,url=url,rich=rich,image=image,set_html=set_html,one=one,select=select,story_body=story_body,root=ROOT)
  # Remove previously generated post pages, so deleted/unpublished entries disappear.
  for pattern in ('posts-*.html','projects-*.html'):
   for p in OUT.glob(pattern):p.unlink()
@@ -264,16 +266,21 @@ def build():
     if value:
      value=value.replace('Ariful Islam Fahim',profile['name']).replace('arifulislamfahim04@gmail.com',profile['email']).replace('+880 1968-718018',profile['phone'])
      setattr(e,key,value)
+  one(d,'//body').append(html.Element('script',src='home.js?v='+version))
   for e in select(d,'//head'):
 
    e.append(html.Element('link',rel='stylesheet',href='editor.css?v='+version))
+   e.append(html.Element('link',rel='stylesheet',href='home.css?v='+version))
   (OUT/(name+'.html')).write_text(html.tostring(d,encoding='unicode',doctype='<!doctype html>'))
  payload='window.PORTFOLIO_DETAILS='+json.dumps(details,ensure_ascii=False)+';\nwindow.PORTFOLIO_DOCUMENTS='+json.dumps(documents,ensure_ascii=False)+';\nwindow.PORTFOLIO_PROFILE='+json.dumps(profile,ensure_ascii=False)+';'
- (OUT/'content.js').write_text(payload)
+ (OUT/'content.js').write_text(payload+'\nwindow.PORTFOLIO_MOMENTS='+json.dumps([dict(m,body=visible_rich(m.get('body')),source_url=url(m.get('source_url'))) for m in moments],ensure_ascii=False)+';')
+ shutil.copyfile(ROOT/'scripts/home.css',OUT/'home.css')
+ shutil.copyfile(ROOT/'scripts/home.js',OUT/'home.js')
  js=(ROOT/'dist/site.js').read_text().replace("const words=['CREATOR’S CURIOSITY','ENGINEER’S MIND','STORYTELLER’S EYE','LOVE FOR AI'];","const words=window.PORTFOLIO_PROFILE.rotating_words?.length ? window.PORTFOLIO_PROFILE.rotating_words : ['CURIOUS MIND'];")
  js=js.replace('mailto:arifulislamfahim04@gmail.com?subject=',"mailto:${window.PORTFOLIO_PROFILE.email}?subject=")
  js=js.replace("h.setAttribute('aria-label','I’m Arif, a textile engineering student with a creator’s curiosity.');","h.setAttribute('aria-label',window.PORTFOLIO_PROFILE.hero_title+' '+words[0]);")
  js=js.replace("if(e.button!==0||","if(a.hasAttribute('data-project')||e.button!==0||")
+ js=js.replace("hour:'2-digit',minute:'2-digit'","hour:'numeric',minute:'2-digit',hour12:true").replace("el.textContent=time+' BD'","el.textContent=time.toUpperCase()+' BD'")
  (OUT/'site.js').write_text(js)
  (OUT/'editor.css').write_text('''.portrait-upload{object-fit:cover!important;filter:none!important}.story-page{max-width:900px}.story-page h1{font-size:clamp(2rem,5vw,4rem);line-height:1.15;margin:2rem 0}.story-body{font-size:1.1rem;line-height:1.85}.story-cover{width:100%;max-height:500px;object-fit:cover;border-radius:16px}.story-body img,#reader-body img,#document-body img{max-width:100%;height:auto;border-radius:12px}.story-body figure,#reader-body figure{margin:1.5rem 0}.story-body figcaption,#reader-body figcaption{font-size:.9rem;opacity:.75}.story-video,video{width:100%;aspect-ratio:16/9;border:0}.certificate-pdf{width:100%;height:65vh;border:0}.story-body table,#reader-body table{width:100%;border-collapse:collapse}.story-body td,.story-body th,#reader-body td,#reader-body th{padding:.5rem;border:1px solid #8886}.info-card dd{overflow-wrap:anywhere}.certificate-card .text-link{margin-top:1rem}.certificate-card img{max-width:100%}.entry-facts{margin:1rem 0}.entry-facts>div{display:grid;grid-template-columns:minmax(7rem,1fr) minmax(0,2fr);gap:.6rem;padding:.55rem 0;border-bottom:1px solid #8883}.entry-facts dt{font-size:.85rem;opacity:.75}.entry-facts dd{margin:0;overflow-wrap:anywhere}.entry-extra{margin-top:1.25rem;border-top:1px solid #8883;padding-top:1rem}.entry-extra summary{cursor:pointer;font-weight:600}.entry-extra-body{padding-top:1rem}.entry-extra img{max-width:100%;height:auto}.entry-detail-section{margin:1.4rem 0}.entry-detail-section h3{font-size:1.05rem!important;margin-bottom:.6rem}.entry-extra-body p,.entry-facts dd{overflow-wrap:anywhere}.entry-extra .button{white-space:normal}.profile-socials{flex-wrap:wrap}@media(max-width:540px){.entry-facts>div{grid-template-columns:1fr;gap:.2rem}.entry-extra .certificate-pdf{height:50vh}}''')
  (OUT/'.nojekyll').touch()

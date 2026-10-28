@@ -1,0 +1,15 @@
+{
+  "title": "A place to begin",
+  "image": "assets/sample-campus.jpg",
+  "alt": "A university library archway. A sample image for the gallery layout, not a photograph from my university.",
+  "caption": "A university library archway. A sample image for the gallery layout, not a photograph from my university.",
+  "category": "Campus",
+  "shape": "Landscape",
+  "body": "<p>This sample demonstrates the photo story layout. Replace it with your own photo, caption, and memory in Pages CMS.</p>",
+  "credit": "T / Unsplash",
+  "source_url": "https://unsplash.com/photos/university-library-stone-archway-P0fCeHF0ZDU",
+  "featured": true,
+  "placeholder": true,
+  "published": true,
+  "order": 1
+}

@@ -108,27 +108,6 @@
           }
         },
         {
-          "name": "hero_title",
-          "label": "Homepage headline",
-          "type": "string"
-        },
-        {
-          "name": "rotating_words",
-          "label": "Rotating headline phrases",
-          "type": "string",
-          "list": true
-        },
-        {
-          "name": "hero_description",
-          "label": "Short introduction",
-          "type": "rich-text",
-          "options": {
-            "format": "html",
-            "media": "uploads",
-            "switcher": false
-          }
-        },
-        {
           "name": "introduction",
           "label": "Homepage about paragraph",
           "type": "rich-text",
@@ -203,6 +182,93 @@
           ]
         }
       ]
+    },
+    {
+      "name": "homepage",
+      "label": "Homepage design & identity tag",
+      "type": "file",
+      "path": "editor/homepage.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "logo_text",
+          "label": "Logo text",
+          "type": "string"
+        },
+        {
+          "name": "preferred_name",
+          "label": "Preferred name in headline",
+          "type": "string"
+        },
+        {
+          "name": "eyebrow",
+          "label": "Small heading above introduction",
+          "type": "string"
+        },
+        {
+          "name": "headline",
+          "label": "Main headline (line breaks supported)",
+          "type": "text"
+        },
+        {
+          "name": "description",
+          "label": "Homepage introduction",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "tagline",
+          "label": "Short line on portrait tag",
+          "type": "string"
+        },
+        {
+          "name": "tag_label",
+          "label": "Identity tag label",
+          "type": "string"
+        },
+        {
+          "name": "gallery_heading",
+          "label": "Homepage gallery heading",
+          "type": "string"
+        },
+        {
+          "name": "gallery_intro",
+          "label": "Homepage gallery introduction",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "gallery_autoplay",
+          "label": "Automatically advance homepage photos",
+          "type": "boolean"
+        },
+        {
+          "name": "gallery_limit",
+          "label": "Featured photos on homepage (1–20)",
+          "type": "number"
+        },
+        {
+          "name": "gallery_page_title",
+          "label": "Gallery page heading",
+          "type": "string"
+        },
+        {
+          "name": "gallery_page_description",
+          "label": "Gallery page introduction",
+          "type": "text"
+        }
+      ],
+      "operations": {
+        "delete": false
+      }
     },
     {
       "name": "about",
@@ -2097,6 +2163,125 @@
           "label": "Display order (smaller first)",
           "type": "number",
           "default": 10
+        }
+      ]
+    },
+    {
+      "name": "gallery",
+      "label": "Gallery · moments & photo stories",
+      "type": "collection",
+      "path": "editor/gallery",
+      "format": "json",
+      "filename": "{primary}.json",
+      "subfolders": false,
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "category",
+          "featured",
+          "published",
+          "order"
+        ],
+        "sort": "order",
+        "order": "asc"
+      },
+      "fields": [
+        {
+          "name": "title",
+          "label": "Moment title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "image",
+          "label": "Photo",
+          "type": "image",
+          "required": true,
+          "options": {
+            "media": "uploads"
+          }
+        },
+        {
+          "name": "alt",
+          "label": "Describe the picture for accessibility",
+          "type": "string"
+        },
+        {
+          "name": "caption",
+          "label": "Short caption",
+          "type": "text"
+        },
+        {
+          "name": "category",
+          "label": "Category",
+          "type": "string"
+        },
+        {
+          "name": "date",
+          "label": "Date / year (optional)",
+          "type": "string"
+        },
+        {
+          "name": "location",
+          "label": "Location (optional)",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "label": "The story behind this moment (optional)",
+          "type": "rich-text",
+          "options": {
+            "format": "html",
+            "media": "uploads",
+            "switcher": false
+          }
+        },
+        {
+          "name": "credit",
+          "label": "Photo credit (optional)",
+          "type": "string"
+        },
+        {
+          "name": "source_url",
+          "label": "Source / photographer link (optional)",
+          "type": "string"
+        },
+        {
+          "name": "shape",
+          "label": "Photo layout",
+          "type": "select",
+          "options": {
+            "values": [
+              "Landscape",
+              "Portrait",
+              "Square"
+            ]
+          }
+        },
+        {
+          "name": "featured",
+          "label": "Show in homepage preview",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "name": "placeholder",
+          "label": "This is a sample image",
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "name": "order",
+          "label": "Display order (smaller first)",
+          "type": "number",
+          "default": 10
+        },
+        {
+          "name": "published",
+          "label": "Show on website",
+          "type": "boolean",
+          "default": true
         }
       ]
     }

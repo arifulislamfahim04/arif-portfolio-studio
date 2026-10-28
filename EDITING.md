@@ -54,3 +54,21 @@ If you enter separate start/end dates, they replace the older Date / period disp
 For pictures and documents, upload/select the file inside its field in Pages CMS, then save the entry. Uploading to media storage alone does not place the file on a page. Remove a picture selection or clear an optional field and save to remove it from the public display. This does not erase its file or GitHub history.
 
 There is no need to fill every form field. Add only the information you want visitors to see. Homepage statistics and the résumé PDF remain separately editable; adding education does not rewrite those automatically.
+
+## New homepage and Moments gallery
+
+**Homepage design & identity tag** controls the logo, preferred name, headline, introduction, tag label/tagline, gallery headings and slideshow settings. Your **full name and portrait** remain in Profile, résumé & homepage. Replace the portrait there at any time; the tag frame uses the new image automatically. The card responds to dragging (on phones, start at its grip) and returns gently to its resting position. Arrow keys move the focused grip; Escape resets it.
+
+The clock uses Dhaka time in 12-hour AM/PM format. Location comes from your profile. The right rail contains navigation, theme and back-to-top. On phones, tap the grid button to expand navigation. Back-to-top appears after scrolling.
+
+Use **Gallery · moments & photo stories → New** for each photo:
+
+1. Enter a title and upload/select a picture. These are required.
+2. Optionally add a caption, category, date, location, longer story, credit and source link. Blank details stay hidden.
+3. Choose Landscape, Portrait or Square framing. The original uploaded file is retained.
+4. Enable **Show in homepage preview** for featured photos. All published photos appear on the Gallery page, including unfeatured photos.
+5. Save with **Show on website** enabled to publish. Turn it off to remove the entry from both views.
+
+The four initial stock photographs are clearly marked **Sample image**. They demonstrate the layout and do not claim to depict your university, achievements or personal experiences. Replace them with your own photos, update the captions and credits, then turn off **This is a sample image**. You can also delete the sample entries.
+
+The homepage preview swipes on phones and supports previous/next and play/pause buttons. It pauses during interaction and when offscreen. Reduced-motion preferences disable autoplay by default. Clicking a picture opens its story; **Explore the gallery** opens the complete gallery. Visitors can search and filter categories there. If there are no published featured photos, the homepage gallery preview disappears automatically.

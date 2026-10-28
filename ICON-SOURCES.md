@@ -27,3 +27,6 @@ UI icons: Bootstrap UI and Bootstrap Filled UI, via SVG Repo. Brand icons: Socia
 Bootstrap icons: MIT, Copyright (c) 2019–2021 The Bootstrap Authors. https://github.com/twbs/icons/blob/main/LICENSE
 
 - star: https://www.svgrepo.com/svg/344378/star-fill
+
+
+Gallery camera: SVG Repo Camera Fill, CC0, https://www.svgrepo.com/svg/439516/camera-fill. Downloaded SVG is retained in vendor/gallery-camera.svg; fills are adapted for the site theme. Back-to-top uses the already bundled filled caret, rotated upward.

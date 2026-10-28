@@ -1,0 +1,15 @@
+{
+  "title": "Following the thread",
+  "image": "assets/loom-spools.jpg",
+  "alt": "Spools on a weaving machine. A sample image for future industrial visits and projects.",
+  "caption": "Spools on a weaving machine. A sample image for future industrial visits and projects.",
+  "category": "Making",
+  "shape": "Landscape",
+  "body": "<p>This sample demonstrates the photo story layout. Replace it with your own photo, caption, and memory in Pages CMS.</p>",
+  "credit": "Daniel Schild / Unsplash",
+  "source_url": "https://unsplash.com/photos/spools-of-thread-on-a-weaving-machine-u5-bbIrbXNM",
+  "featured": true,
+  "placeholder": true,
+  "published": true,
+  "order": 4
+}

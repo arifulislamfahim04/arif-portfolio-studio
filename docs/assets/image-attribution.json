@@ -10,5 +10,24 @@
     "author": "Daniel Schild",
     "source": "https://unsplash.com/photos/spools-of-thread-on-a-weaving-machine-u5-bbIrbXNM",
     "license": "Unsplash License"
+  },
+  {
+    "file": "sample-campus.jpg",
+    "author": "T (@tanyabarrow)",
+    "source": "https://unsplash.com/photos/university-library-stone-archway-P0fCeHF0ZDU",
+    "license": "Unsplash License",
+    "usage": "Clearly labeled sample gallery image"
+  },
+  {
+    "file": "sample-library.jpg",
+    "author": "Sadnan Bashar",
+    "source": "https://unsplash.com/photos/a-library-filled-with-lots-of-books-next-to-a-window-wd6bZXiZf4s",
+    "license": "Unsplash License",
+    "usage": "Clearly labeled sample gallery image"
+  },
+  {
+    "file": "ariful-portrait.jpg",
+    "source": "User-provided portrait",
+    "usage": "Replaceable homepage portrait"
   }
 ]
