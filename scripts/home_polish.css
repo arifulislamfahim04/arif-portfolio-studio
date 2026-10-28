@@ -60,3 +60,14 @@ body[data-home-polish]{--home-width:1280px;--home-pad:32px;--primary:#a3a1ff;--f
 [data-home-polish] .hero-backdrop:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0a0d1af2 0%,#0a0d1abf 45%,#0a0d1aee 100%),linear-gradient(0deg,var(--bg),transparent 65%)}
 [data-theme=light] [data-home-polish] .hero-backdrop img{opacity:.24}
 [data-theme=light] [data-home-polish] .hero-backdrop:after{background:linear-gradient(90deg,#f7f3e9f5,#f7f3e9d9 50%,#f7f3e9eb),linear-gradient(0deg,var(--bg),transparent 65%)}
+[data-home-polish] .typed-line{position:relative;display:block;white-space:pre-line}
+[data-home-polish] .typed-reserve{display:block;visibility:hidden}
+[data-home-polish] .typed-live{position:absolute;inset:0;display:block}
+[data-home-polish] .typed-line:first-child{color:var(--primary);font-size:1.18em;margin-bottom:12px}
+[data-home-polish] .typed-line:first-child .typed-live{white-space:nowrap}
+[data-home-polish] .typed-line:nth-child(2){font-size:.76em;line-height:1.17;letter-spacing:-.04em}
+[data-home-polish] .role-line{display:grid;position:relative;margin-top:18px;font:500 clamp(10px,1.1vw,13px)/1.65 var(--mono);letter-spacing:.015em;color:var(--primary)}
+[data-home-polish] .role-reserve{grid-area:1/1;visibility:hidden}
+[data-home-polish] .typing:after{content:'▏';display:inline;animation:home-caret 1s steps(1,end) infinite;color:var(--primary)}
+@keyframes home-caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){[data-home-polish] .typing:after{display:none}}

@@ -24,6 +24,14 @@ def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, sele
  photo=one(stage,'.//div[@class="identity-photo"]');add(photo,'<span class="photo-foil" aria-hidden="true"></span>')
  for img in select(photo,'.//img'):
   img.set('width','600');img.set('height','750');img.set('loading','eager');img.set('decoding','async');img.set('fetchpriority','high')
+ # Full text is server rendered; reserve layers give typing the final layout from frame one.
+ title=one(h,'//*[@id="home-title"]');name=(settings.get('preferred_name') or 'Ariful').upper()+'.';headline=settings.get('headline') or 'Textile engineering, with a practical mind.'
+ def typed(key,text):return f'<span class="typed-line"><span class="typed-reserve" aria-hidden="true">{esc(text)}</span><span class="typed-live" data-type="{key}">{esc(text)}</span></span>'
+ set_html(title,typed('name',name)+typed('headline',headline));title.set('aria-label',name+' '+headline)
+ roles=[str(v).strip() for v in settings.get('roles',[]) if str(v).strip()][:12]
+ if roles:
+  reserve=''.join('<span class="role-reserve" aria-hidden="true">'+esc(v)+'</span>' for v in roles)
+  title.addnext(html.fragment_fromstring('<div class="role-line" data-roles="'+esc(__import__('json').dumps(roles))+'"><span class="sr-only">Exploring '+esc(', '.join(roles))+'</span>'+reserve+'<span class="typed-live" data-type="roles" aria-hidden="true">'+esc(roles[0])+'</span></div>'))
  background=url(settings.get('background_image'))
  if background:
   small=url(settings.get('background_image_small'));sources=f' srcset="{esc(small)} 640w, {esc(background)} 1280w" sizes="100vw"' if small else ''

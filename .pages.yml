@@ -279,6 +279,12 @@
           "name": "background_image_small",
           "label": "Smaller hero background (optional; same photograph)",
           "type": "image"
+        },
+        {
+          "name": "roles",
+          "label": "Rotating interests / roles",
+          "type": "string",
+          "list": true
         }
       ],
       "operations": {
