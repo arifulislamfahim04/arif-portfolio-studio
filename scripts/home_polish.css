@@ -71,3 +71,24 @@ body[data-home-polish]{--home-width:1280px;--home-pad:32px;--primary:#a3a1ff;--f
 [data-home-polish] .typing:after{content:'▏';display:inline;animation:home-caret 1s steps(1,end) infinite;color:var(--primary)}
 @keyframes home-caret{0%,49%{opacity:1}50%,100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){[data-home-polish] .typing:after{display:none}}
+[data-home-polish] .shell{width:calc(100% - 120px);margin-left:max(100px,calc((100% - var(--home-width))/2));margin-right:auto}
+[data-home-polish] .site-rail{left:18px;right:auto;top:50%;bottom:auto;transform:translateY(-50%);padding:0;gap:20px;overflow:visible;max-height:calc(100dvh - 20px)}
+[data-home-polish] .site-rail .dock{position:relative;order:0;gap:10px;padding:10px 8px;border-radius:32px;display:flex;background:var(--surface)}
+[data-home-polish] .site-rail .dock-item{width:48px;height:48px;position:relative}
+[data-home-polish] .site-rail .icon{width:24px;height:24px}
+[data-home-polish] .site-rail .dock-item.active:before{display:none}
+[data-home-polish] .site-rail .dock-item.active{background:none}
+[data-home-polish] .site-rail .dock-item.preview-active{background:color-mix(in srgb,var(--primary) 18%,transparent);color:var(--fg)}
+[data-home-polish] .rail-marker{position:absolute;left:3px;top:0;width:3px;height:20px;border-radius:4px;background:var(--lime);transition:transform .35s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+[data-home-polish] .site-rail .utilities{order:1}
+[data-home-polish] .site-rail .back-top-slot{order:2;margin-top:18px;flex-shrink:0}
+[data-home-polish] .site-rail .back-top .icon{transform:none}
+[data-home-polish] .site-rail .back-top{opacity:0;transform:translateY(8px);transition:transform .25s,opacity .25s}
+[data-home-polish] .site-rail .back-top.shown{opacity:1;transform:translateY(0)}
+[data-home-polish] .site-rail .nav-tooltip{left:calc(100% + 14px);right:auto;top:50%;bottom:auto;translate:0 -50%;font-size:11px;background:var(--surface);color:var(--fg);padding:7px 11px;box-shadow:0 2px 12px #0003;border:1px solid var(--line)}
+[data-home-polish] .site-rail :is(a,button):is(:hover,:focus-visible) .nav-tooltip{opacity:1;visibility:visible;translate:0 -50%}
+[data-home-polish] .site-header>.menu-trigger{width:44px;height:44px;flex-shrink:0;order:4}
+[data-home-polish] .site-header>.menu-trigger .nav-tooltip{display:none}
+@media(min-width:701px) and (max-height:760px){[data-home-polish] .site-rail{gap:12px}[data-home-polish] .site-rail .dock{gap:5px;padding-block:8px}[data-home-polish] .site-rail .back-top-slot{margin-top:8px}}
+@media(max-width:700px){[data-home-polish] .shell{width:100%;margin-inline:auto}[data-home-polish] .site-rail{inset:auto 10px max(10px,env(safe-area-inset-bottom));transform:none;display:flex;flex-direction:row;justify-content:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:6px;max-height:none}[data-home-polish] .site-rail .dock{flex-direction:row;gap:0;border:0;padding:0;box-shadow:none;background:none;flex:1;justify-content:space-around}[data-home-polish] .site-rail .dock-item{width:44px;height:48px}[data-home-polish] .site-rail .dock-item .icon{width:23px;height:23px}[data-home-polish] .site-rail .rail-toggle{display:none}[data-home-polish] .site-rail .utilities .round-control{width:44px;height:48px;background:none}[data-home-polish] .site-rail .back-top-slot{position:absolute;right:0;bottom:84px;margin:0;width:48px;height:48px;overflow:visible}[data-home-polish] .site-rail .back-top{background:var(--surface);width:48px;height:48px}[data-home-polish] .rail-marker{display:none}[data-home-polish] .site-rail .nav-tooltip{display:block;top:auto;bottom:calc(100% + 12px);left:50%;translate:-50% 0!important;right:auto}[data-home-polish] .site-header>.menu-trigger{display:none}[data-home-polish] .site-header{flex-wrap:nowrap}[data-home-polish] .header-location{flex-basis:auto;flex-wrap:wrap;justify-content:flex-end;white-space:normal}[data-home-polish] .brand-label{display:none}}
+@media(max-width:350px){[data-home-polish] .site-rail{inset-inline:4px;padding-inline:2px;gap:0}[data-home-polish] .site-rail .dock-item{width:42px}}

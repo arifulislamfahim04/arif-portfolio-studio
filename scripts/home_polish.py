@@ -1,5 +1,6 @@
 """Scoped homepage presentation layer; original templates and other routes stay intact."""
-from lxml import html
+from lxml import html, etree
+import json
 from copy import deepcopy
 
 def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, select, set_html):
@@ -36,6 +37,25 @@ def polish(pages, profile, settings, updates, *, root, esc, url, rich, one, sele
  if background:
   small=url(settings.get('background_image_small'));sources=f' srcset="{esc(small)} 640w, {esc(background)} 1280w" sizes="100vw"' if small else ''
   stage=one(h,'//div[@class="home-stage"]');stage.insert(0,html.fragment_fromstring(f'<div class="hero-backdrop" aria-hidden="true"><img src="{esc(background)}"{sources} alt="" width="1280" height="853" decoding="async" fetchpriority="low"></div>'))
+ # Only the homepage symbol library is replaced; original vectors remain on other routes.
+ library=one(h,'//svg[@class="icon-library"]')
+ for child in list(library):library.remove(child)
+ manifest=json.loads((root/'vendor/home-icons/sources.json').read_text())
+ for key,asset in manifest.items():
+  svg=etree.parse(str(root/'vendor/home-icons'/asset['file'])).getroot()
+  symbol=etree.SubElement(library,'symbol',id='i-'+key,viewBox=svg.get('viewBox'),fill='currentColor')
+  for path in svg.iter():
+   if isinstance(path.tag,str) and etree.QName(path).localname in ('path','polygon','circle','rect','ellipse','polyline','line'):
+    item=deepcopy(path);item.tag=etree.QName(item).localname
+    for key in ('id','style','fill','stroke'):item.attrib.pop(key,None)
+    if path.get('fill')=='none':continue
+    symbol.append(item)
+ rail=one(h,'//aside[@class="site-rail"]');nav=one(rail,'.//nav');rail.insert(0,nav)
+ menu=one(rail,'.//button[contains(@class,"menu-trigger")]');one(h,'//header[contains(@class,"site-header")]').append(menu)
+ for u in select(h,'//*[@id="back-top"]//use'):u.set('href','#i-up')
+ add(nav,'<span class="rail-marker" aria-hidden="true"></span>')
+ one(h,'//div[@class="home-stage"]').set('id','home-top')
+ for a in select(nav,'./a'):a.set('title',a.get('aria-label',''))
  # These assets are only loaded on index: other pages retain their existing design.
  add(one(h,'//head'),'<link rel="stylesheet" href="home-polish.css">')
  add(body,'<script src="home-polish.js" defer></script>')
