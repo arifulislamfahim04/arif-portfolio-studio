@@ -198,5 +198,10 @@
     "file": "camera-fill.svg",
     "source": "https://www.svgrepo.com/svg/364302/camera-fill",
     "license": "CC0-1.0"
+  },
+  "whatsapp": {
+    "file": "whatsapp-logo-fill.svg",
+    "source": "https://www.svgrepo.com/svg/364988/whatsapp-logo-fill",
+    "license": "CC0-1.0"
   }
 }
