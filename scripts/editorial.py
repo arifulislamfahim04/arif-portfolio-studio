@@ -114,7 +114,7 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
  if stats:add(main,'<div class="slim-stats shell" data-reveal>'+stats+'</div>')
  updates=sorted(entries('updates'),key=lambda u:str(u.get('date') or ''),reverse=True)
  if updates:
-  items=''.join('<a href="#update-'+esc(u['_id'])+'">'+esc(u['title'])+'</a>' for u in updates)
+  items=''.join('<a href="#update-'+esc(u['_id'])+'">'+esc(u.get('ticker_text') or u['title'])+'</a>' for u in updates)
   ticker='<div class="news-ticker"><span class="ticker-label">'+esc(settings.get('ticker_label') or 'Highlights')+'</span><div class="ticker-viewport"><div class="ticker-belt"><div class="ticker-group">'+items+'</div><div class="ticker-group" aria-hidden="true">'+items.replace('<a ','<a tabindex="-1" ')+'</div></div></div><button class="ticker-toggle" aria-pressed="false">'+t('Pause')+'</button></div>'
   news=''
   # Every ticker destination exists, even beyond the three initially expanded cards.
@@ -166,7 +166,7 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
   else:erase(box)
  for folder,section_id in [('education','education'),('experience','experience'),('workshops','certificates')]:
   for v in entries(folder):
-   targets=select(a,'//section[@id="'+section_id+'"]//article[./h3[text()="'+v['title'].replace('"','')+'"]]')
+   targets=select(a,'//section[@id="'+section_id+'"]//article[@data-entry-id="'+esc(v['_id'])+'"]')
    for card in targets:
     institution=select(card,'./p[@class="institution"]');website=url(v.get('website') or v.get('organization_url'))
     if institution and website:set_html(institution[0],link(website,esc(v.get('institution')),'institution-link','arrow',True))
@@ -177,7 +177,7 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
     if v.get('file'):add(card,'<button class="text-link" data-document="'+esc(v['_id'])+'">'+t('View certificate')+' '+icon('certificate')+'</button>')
  for folder,section_id in [('achievements','recognition'),('certificates','certificates')]:
   for v in entries(folder):
-   for card in select(a,'//section[@id="'+section_id+'"]//article[./h3[text()="'+v['title'].replace('"','')+'"]]'):
+   for card in select(a,'//section[@id="'+section_id+'"]//article[@data-entry-id="'+esc(v['_id'])+'"]'):
     for button in select(card,'.//button[@data-document]'):erase(button)
     details_html=story_body(v,folder)
     if details_html:

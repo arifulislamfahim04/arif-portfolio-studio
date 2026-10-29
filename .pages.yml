@@ -16,6 +16,16 @@
         "mp4",
         "webm"
       ]
+    },
+    {
+      "name": "icons",
+      "label": "SVG icons (SVG Repo)",
+      "input": "docs/assets/icons",
+      "output": "assets/icons",
+      "rename": "safe",
+      "extensions": [
+        "svg"
+      ]
     }
   ],
   "content": [
@@ -161,6 +171,54 @@
               "name": "detail",
               "label": "Detail",
               "type": "string"
+            },
+            {
+              "name": "icon",
+              "label": "Filled statistic icon (optional)",
+              "type": "select",
+              "options": [
+                "home",
+                "about",
+                "blogs",
+                "projects",
+                "contact",
+                "sun",
+                "moon",
+                "menu",
+                "close",
+                "arrow",
+                "up",
+                "down",
+                "left",
+                "right",
+                "download",
+                "linkedin",
+                "facebook",
+                "youtube",
+                "x",
+                "phone",
+                "location",
+                "award",
+                "users",
+                "book",
+                "research",
+                "copy",
+                "check",
+                "tag",
+                "message",
+                "quote",
+                "fabric",
+                "focus",
+                "globe",
+                "language",
+                "search",
+                "certificate",
+                "zoom",
+                "minus",
+                "clock",
+                "gallery",
+                "whatsapp"
+              ]
             }
           ]
         },
@@ -219,7 +277,7 @@
           "name": "headline",
           "label": "Main headline (line breaks supported)",
           "type": "text",
-          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
+          "description": "Fallback role text. Normally use Hero typewriter phrases below."
         },
         {
           "name": "description",
@@ -235,13 +293,13 @@
           "name": "tagline",
           "label": "ID card tagline",
           "type": "string",
-          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
+          "description": "Optional short sentence on the ID card. Leave blank to hide."
         },
         {
           "name": "tag_label",
           "label": "ID card small label",
           "type": "string",
-          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
+          "description": "Legacy card label, kept for rollback. Use Professional title on card for the current design."
         },
         {
           "name": "gallery_heading",
@@ -400,6 +458,187 @@
           "label": "Closing contact heading",
           "type": "string",
           "description": "Leave empty to omit optional text."
+        },
+        {
+          "name": "greeting",
+          "label": "Greeting before your name",
+          "type": "string",
+          "description": "Optional. Edit this text without code."
+        },
+        {
+          "name": "card_title",
+          "label": "Professional title on card",
+          "type": "string",
+          "description": "Optional. Edit this text without code."
+        },
+        {
+          "name": "secondary_button_text",
+          "label": "Secondary hero button text",
+          "type": "string",
+          "description": "Optional. Edit this text without code."
+        },
+        {
+          "name": "secondary_button_link",
+          "label": "Secondary hero button destination",
+          "type": "string",
+          "description": "Optional. Edit this text without code."
+        },
+        {
+          "name": "gallery_motion_label",
+          "label": "Gallery motion switch label",
+          "type": "string",
+          "description": "Optional label beside the gallery play/pause switch. Defaults to Gallery motion."
+        },
+        {
+          "name": "ticker_motion_label",
+          "label": "Highlights motion switch label",
+          "type": "string",
+          "description": "Optional. Defaults to Highlights motion."
+        },
+        {
+          "name": "card_socials",
+          "label": "Card and footer contact buttons (up to 4)",
+          "type": "object",
+          "list": true,
+          "description": "Add, remove or reorder buttons. Only the first four are displayed. A blank destination hides that button. Email, LinkedIn and Facebook reuse your Profile fields.",
+          "fields": [
+            {
+              "name": "label",
+              "label": "Button label",
+              "type": "string"
+            },
+            {
+              "name": "source",
+              "label": "Use link from",
+              "type": "select",
+              "options": [
+                "Email",
+                "LinkedIn",
+                "Facebook",
+                "Custom URL"
+              ]
+            },
+            {
+              "name": "url",
+              "label": "Custom URL (only for Custom URL)",
+              "type": "string",
+              "description": "Full https:// URL for YouTube or another profile. Email and LinkedIn values belong in Profile."
+            },
+            {
+              "name": "icon",
+              "label": "Filled icon",
+              "type": "select",
+              "options": [
+                "home",
+                "about",
+                "blogs",
+                "projects",
+                "contact",
+                "sun",
+                "moon",
+                "menu",
+                "close",
+                "arrow",
+                "up",
+                "down",
+                "left",
+                "right",
+                "download",
+                "linkedin",
+                "facebook",
+                "youtube",
+                "x",
+                "phone",
+                "location",
+                "award",
+                "users",
+                "book",
+                "research",
+                "copy",
+                "check",
+                "tag",
+                "message",
+                "quote",
+                "fabric",
+                "focus",
+                "globe",
+                "language",
+                "search",
+                "certificate",
+                "zoom",
+                "minus",
+                "clock",
+                "gallery",
+                "whatsapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "icon_overrides",
+          "label": "Replace icons (Home and About)",
+          "type": "object",
+          "list": true,
+          "description": "Choose the icon to replace and upload a transparent SVG from SVG Repo. Leave the upload blank to restore the default filled icon. Replacements inherit the page colour. Other pages will be connected as we redesign them.",
+          "fields": [
+            {
+              "name": "key",
+              "label": "Icon to replace",
+              "type": "select",
+              "options": [
+                "home",
+                "about",
+                "blogs",
+                "projects",
+                "contact",
+                "sun",
+                "moon",
+                "menu",
+                "close",
+                "arrow",
+                "up",
+                "down",
+                "left",
+                "right",
+                "download",
+                "linkedin",
+                "facebook",
+                "youtube",
+                "x",
+                "phone",
+                "location",
+                "award",
+                "users",
+                "book",
+                "research",
+                "copy",
+                "check",
+                "tag",
+                "message",
+                "quote",
+                "fabric",
+                "focus",
+                "globe",
+                "language",
+                "search",
+                "certificate",
+                "zoom",
+                "minus",
+                "clock",
+                "gallery",
+                "whatsapp"
+              ]
+            },
+            {
+              "name": "image",
+              "label": "Replacement SVG",
+              "type": "file",
+              "options": {
+                "media": "icons"
+              },
+              "description": "Upload an SVG, using a simple filename. A transparent background works best."
+            }
+          ]
         }
       ],
       "operations": {
@@ -2640,6 +2879,12 @@
           "label": "Show on website",
           "type": "boolean",
           "default": false
+        },
+        {
+          "name": "ticker_text",
+          "label": "Longer headline for homepage ticker (optional)",
+          "type": "text",
+          "description": "Use a longer sentence in the moving Highlights strip. Leave blank to use the update title. The card keeps its short title."
         }
       ]
     },
