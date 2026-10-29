@@ -2121,6 +2121,21 @@
             ]
           },
           "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
+        },
+        {
+          "name": "image",
+          "label": "Certificate / leadership photo (optional)",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          },
+          "description": "Appears automatically in the shared image viewer. Awards show a medal placeholder until you upload a photo."
+        },
+        {
+          "name": "image_alt",
+          "label": "Photo description (accessibility)",
+          "type": "string",
+          "description": "Describe the certificate or photograph in plain English."
         }
       ]
     },
@@ -2368,6 +2383,21 @@
             ]
           },
           "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
+        },
+        {
+          "name": "image",
+          "label": "Certificate / leadership photo (optional)",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          },
+          "description": "Appears automatically in the shared image viewer. Awards show a medal placeholder until you upload a photo."
+        },
+        {
+          "name": "image_alt",
+          "label": "Photo description (accessibility)",
+          "type": "string",
+          "description": "Describe the certificate or photograph in plain English."
         }
       ]
     },
@@ -2404,12 +2434,12 @@
         },
         {
           "name": "institution",
-          "label": "Institution / organization",
+          "label": "Issuer / institution",
           "type": "string"
         },
         {
           "name": "body",
-          "label": "Description",
+          "label": "Award description",
           "type": "rich-text",
           "options": {
             "format": "html",
@@ -2604,8 +2634,49 @@
           "label": "Institution / organization website",
           "type": "string",
           "description": "Paste the official website URL. The institution name becomes a link in a new tab."
+        },
+        {
+          "name": "year",
+          "label": "Year or year range",
+          "type": "string",
+          "description": "For example 2025. Keep a range only when the exact year is not yet known."
+        },
+        {
+          "name": "semester",
+          "label": "Semester / term",
+          "type": "string",
+          "description": "For example Spring 2024. Leave blank until you know the actual term."
+        },
+        {
+          "name": "received_date",
+          "label": "Date received (optional)",
+          "type": "string",
+          "description": "YYYY-MM-DD. For your record; use Display order to arrange the carousel."
+        },
+        {
+          "name": "featured",
+          "label": "Featured card",
+          "type": "boolean",
+          "default": false,
+          "description": "Makes this individual award slightly larger. It does not group awards."
+        },
+        {
+          "name": "image",
+          "label": "Certificate / leadership photo (optional)",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          },
+          "description": "Appears automatically in the shared image viewer. Awards show a medal placeholder until you upload a photo."
+        },
+        {
+          "name": "image_alt",
+          "label": "Photo description (accessibility)",
+          "type": "string",
+          "description": "Describe the certificate or photograph in plain English."
         }
-      ]
+      ],
+      "description": "One record per individual award or semester. Add another entry whenever you receive another award; records are never merged."
     },
     {
       "name": "workshops",
@@ -4698,6 +4769,133 @@
               "label": "Value (leave blank to hide)",
               "type": "string",
               "description": ""
+            }
+          ]
+        },
+        {
+          "name": "award_labels",
+          "label": "Award carousel & shared photo viewer labels",
+          "type": "object",
+          "fields": [
+            {
+              "name": "view",
+              "label": "View",
+              "type": "string",
+              "default": "View"
+            },
+            {
+              "name": "open",
+              "label": "Open",
+              "type": "string",
+              "default": "Open"
+            },
+            {
+              "name": "previous_awards",
+              "label": "Previous awards",
+              "type": "string",
+              "default": "Previous awards"
+            },
+            {
+              "name": "next_awards",
+              "label": "Next awards",
+              "type": "string",
+              "default": "Next awards"
+            },
+            {
+              "name": "instruction",
+              "label": "Instruction",
+              "type": "string",
+              "default": "Each card is a separate award. Swipe, drag or use the arrow buttons to explore."
+            },
+            {
+              "name": "carousel_label",
+              "label": "Carousel label",
+              "type": "string",
+              "default": "Individual academic awards"
+            },
+            {
+              "name": "empty",
+              "label": "Empty",
+              "type": "string",
+              "default": "Awards will appear here when published."
+            },
+            {
+              "name": "view_certificate",
+              "label": "View certificate",
+              "type": "string",
+              "default": "View certificate"
+            },
+            {
+              "name": "view_photos",
+              "label": "View photos",
+              "type": "string",
+              "default": "View photos"
+            },
+            {
+              "name": "zoom_out",
+              "label": "Zoom out",
+              "type": "string",
+              "default": "Zoom out"
+            },
+            {
+              "name": "zoom_in",
+              "label": "Zoom in",
+              "type": "string",
+              "default": "Zoom in"
+            },
+            {
+              "name": "reset",
+              "label": "Reset",
+              "type": "string",
+              "default": "Reset"
+            },
+            {
+              "name": "close",
+              "label": "Close",
+              "type": "string",
+              "default": "Close viewer"
+            },
+            {
+              "name": "image_controls",
+              "label": "Image controls",
+              "type": "string",
+              "default": "Certificate image. Use the zoom buttons, pinch to zoom or drag to pan."
+            },
+            {
+              "name": "missing",
+              "label": "Missing",
+              "type": "string",
+              "default": "Certificate image not uploaded yet."
+            },
+            {
+              "name": "pdf_title",
+              "label": "Pdf title",
+              "type": "string",
+              "default": "Certificate PDF"
+            },
+            {
+              "name": "open_file",
+              "label": "Open file",
+              "type": "string",
+              "default": "Open or download certificate"
+            },
+            {
+              "name": "previous_item",
+              "label": "Previous item",
+              "type": "string",
+              "default": "Previous item"
+            },
+            {
+              "name": "next_item",
+              "label": "Next item",
+              "type": "string",
+              "default": "Next item"
+            },
+            {
+              "name": "swipe_hint",
+              "label": "Swipe hint",
+              "type": "string",
+              "default": "Swipe or use the arrow keys"
             }
           ]
         }

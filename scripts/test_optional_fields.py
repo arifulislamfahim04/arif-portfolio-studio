@@ -26,7 +26,7 @@ with tempfile.TemporaryDirectory() as t:
  initial_asset=html.parse(str(base/'docs/index.html')).xpath('//script[contains(@src,"content.js?v=")]/@src')[0]
  for kind in ('education','experience','workshops','certificates','achievements'):
   c=card('Empty '+kind)
-  assert not c.xpath('.//details|.//p|.//img|.//button|.//span[contains(@class,"care-chip") or contains(@class,"fact-chip")]'),html.tostring(c)
+  assert not c.xpath('.//details|.//p|.//img|.//button[not(@data-credential-open)]|.//span[contains(@class,"care-chip") or contains(@class,"fact-chip")]'),html.tostring(c)
  for kind in ('posts','projects'):
   d=html.parse(str(base/'docs'/f'{kind}-optional-empty.html'))
   assert not d.xpath('//div[@class="story-body"]/*'),html.tostring(d)
@@ -48,6 +48,7 @@ with tempfile.TemporaryDirectory() as t:
  for kind in fixtures:
   if kind in ('posts','projects'):body=stories[kind+'-optional-full']['body']
   elif kind in ('certificates','achievements'):body=document_bodies[kind+'-optional-full']
+  elif kind=='achievements':body=document_bodies[kind+'-optional-full']
   else:body=html.tostring(card('Full '+kind),encoding='unicode')
   assert all(x in body for x in ('Extra narrative','Custom value','Gallery caption','Supporting report','Official link','youtube-nocookie.com')),(kind,body)
   for key,value in fixtures[kind].items():

@@ -37,5 +37,27 @@
       "label": "Relocation",
       "value": ""
     }
-  ]
+  ],
+  "award_labels": {
+    "view": "View",
+    "open": "Open",
+    "previous_awards": "Previous awards",
+    "next_awards": "Next awards",
+    "instruction": "Each card is a separate award. Swipe, drag or use the arrow buttons to explore.",
+    "carousel_label": "Individual academic awards",
+    "empty": "Awards will appear here when published.",
+    "view_certificate": "View certificate",
+    "view_photos": "View photos",
+    "zoom_out": "Zoom out",
+    "zoom_in": "Zoom in",
+    "reset": "Reset",
+    "close": "Close viewer",
+    "image_controls": "Certificate image. Use the zoom buttons, pinch to zoom or drag to pan.",
+    "missing": "Certificate image not uploaded yet.",
+    "pdf_title": "Certificate PDF",
+    "open_file": "Open or download certificate",
+    "previous_item": "Previous item",
+    "next_item": "Next item",
+    "swipe_hint": "Swipe or use the arrow keys"
+  }
 }

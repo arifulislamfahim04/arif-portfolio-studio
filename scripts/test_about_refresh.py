@@ -15,7 +15,7 @@ try:
   assert d.xpath('//aside[@class="hero-rail"]//a[@href="index.html"]/span[contains(@class,"custom-icon")]'),name
   assert not d.xpath('//a[@aria-label="Facebook"]'),name
  a=page('about.html');assert len(a.xpath('//section[@id="recognition"]//article'))==5
- assert all(len(e.xpath('./details'))==1 for e in a.xpath('//section[@id="recognition"]//article'))
+ assert all(len(e.xpath('./button[@data-credential-open="awards"]'))==1 and not e.xpath('./details') for e in a.xpath('//section[@id="recognition"]//article'))
  assert a.xpath('//a[@href="about.html" and @aria-current="page"]')
  settings['card_socials']=[];settings['icon_overrides']=[];p.write_text(json.dumps(settings));build()
  for name in ('index.html','about.html'):
