@@ -40,6 +40,19 @@
         "jpeg",
         "webp"
       ]
+    },
+    {
+      "name": "skill_logos",
+      "label": "Skill logos (SVG Repo)",
+      "input": "docs/assets/skill-logos",
+      "output": "assets/skill-logos",
+      "rename": "safe",
+      "extensions": [
+        "svg",
+        "png",
+        "jpg",
+        "webp"
+      ]
     }
   ],
   "content": [
@@ -708,53 +721,6 @@
             {
               "name": "value",
               "label": "Value",
-              "type": "string"
-            }
-          ]
-        },
-        {
-          "name": "skills",
-          "label": "Skill groups",
-          "type": "object",
-          "list": true,
-          "fields": [
-            {
-              "name": "title",
-              "label": "Title",
-              "type": "string"
-            },
-            {
-              "name": "body",
-              "label": "Description",
-              "type": "rich-text",
-              "options": {
-                "format": "html",
-                "media": "uploads",
-                "switcher": false
-              }
-            },
-            {
-              "name": "items",
-              "label": "Skills",
-              "type": "string",
-              "list": true
-            }
-          ]
-        },
-        {
-          "name": "languages",
-          "label": "Languages",
-          "type": "object",
-          "list": true,
-          "fields": [
-            {
-              "name": "title",
-              "label": "Language",
-              "type": "string"
-            },
-            {
-              "name": "description",
-              "label": "Proficiency",
               "type": "string"
             }
           ]
@@ -4713,6 +4679,220 @@
           "label": "Copy failure feedback",
           "type": "string",
           "description": "Defaults to Copy failed. Please select and copy the text."
+        },
+        {
+          "name": "recruiter_details",
+          "label": "Optional recruiter details",
+          "type": "object",
+          "list": true,
+          "description": "Useful examples: roles of interest, earliest start, preferred work location, relocation. Only filled values appear. Do not guess; leave unknown details blank.",
+          "fields": [
+            {
+              "name": "label",
+              "label": "Label",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "value",
+              "label": "Value (leave blank to hide)",
+              "type": "string",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "about_skills",
+      "label": "About skills & languages",
+      "type": "file",
+      "path": "editor/skills.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "heading",
+          "label": "Skills heading",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "intro",
+          "label": "Skills introduction",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "tools_heading",
+          "label": "Toolkit heading",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "tools_description",
+          "label": "Toolkit description",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "level_note",
+          "label": "Level explanation",
+          "type": "string",
+          "description": "The rings are decorative; do not enter percentage scores."
+        },
+        {
+          "name": "tools",
+          "label": "Software & creative tools",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "name",
+              "label": "Tool or skill name",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "level",
+              "label": "Experience label",
+              "type": "string",
+              "description": "For example Advanced, Proficient, Hands-on, Familiar, Basic or Learning. No score is calculated."
+            },
+            {
+              "name": "logo",
+              "label": "Logo (optional)",
+              "type": "image",
+              "options": {
+                "media": "skill_logos"
+              }
+            },
+            {
+              "name": "monogram",
+              "label": "Fallback initials",
+              "type": "string",
+              "description": "Used when no logo is uploaded."
+            },
+            {
+              "name": "usage",
+              "label": "Where I used it (optional)",
+              "type": "string",
+              "description": "Shows on hover/keyboard focus; visible as a note on touch devices."
+            },
+            {
+              "name": "published",
+              "label": "Show this tool",
+              "type": "boolean",
+              "default": true
+            }
+          ]
+        },
+        {
+          "name": "groups",
+          "label": "Textile & other skill groups",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "title",
+              "label": "Group title",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "description",
+              "label": "Short description",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "icon",
+              "label": "Filled group icon",
+              "type": "select",
+              "options": {
+                "values": [
+                  "research",
+                  "projects",
+                  "focus",
+                  "fabric",
+                  "book"
+                ]
+              }
+            },
+            {
+              "name": "items",
+              "label": "Skills (add/remove/reorder)",
+              "type": "string",
+              "list": true
+            },
+            {
+              "name": "draft",
+              "label": "Mark these as suggested skills for review",
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "name": "draft_label",
+              "label": "Suggestion label",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "published",
+              "label": "Show this group",
+              "type": "boolean",
+              "default": true
+            }
+          ]
+        },
+        {
+          "name": "languages_heading",
+          "label": "Languages heading",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "languages",
+          "label": "Languages",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "name",
+              "label": "Language name",
+              "type": "string",
+              "description": "Also supplies the simple chips in your personal facts panel."
+            },
+            {
+              "name": "native_script",
+              "label": "Native script (optional)",
+              "type": "string",
+              "description": "For example বাংলা."
+            },
+            {
+              "name": "native_tag",
+              "label": "Script language code (optional)",
+              "type": "string",
+              "description": "For example bn for Bengali. Helps screen readers pronounce the script."
+            },
+            {
+              "name": "level",
+              "label": "Proficiency label",
+              "type": "string",
+              "description": "For example Native or Professional working. No numerical score."
+            },
+            {
+              "name": "published",
+              "label": "Show this language",
+              "type": "boolean",
+              "default": true
+            }
+          ]
+        },
+        {
+          "name": "icon_credits_label",
+          "label": "Icon credits label",
+          "type": "string",
+          "description": ""
         }
       ]
     }

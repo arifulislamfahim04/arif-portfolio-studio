@@ -38,11 +38,14 @@ def refine_facts(page,*,root,esc,url,set_html):
   if stage:now+='<p class="facts-stage-status">'+esc(stage)+(' · '+label('study_level','undergraduate') if settings.get('study_level','undergraduate') else '')+'</p>'
   now+='</dd></div></dl>'
  identity='<dl class="facts-identity">'+fact('Full name',profile.get('name'))+fact('Nationality',values.get('nationality'))+fact('Based in',profile.get('location'),'location')
- languages=[str(v.get('title') or '').strip() for v in about.get('languages',[]) if str(v.get('title') or '').strip()]
+ language_source=json.loads((root/'editor/skills.json').read_text()).get('languages',[])
+ languages=[str(v.get('name') or '').strip() for v in language_source if v.get('published',True) and str(v.get('name') or '').strip()]
  if languages:identity+='<div class="facts-pair"><dt>Languages</dt><dd class="facts-languages">'+''.join('<span>'+esc(v)+'</span>' for v in languages)+'</dd></div>'
  handled={'full name','nationality','based in','languages','email','phone','study stage','specialization','focus area','current focus','availability'}
  for title,value in existing:
   if title.lower() not in handled:identity+=fact(title,value)
+ for item in settings.get('recruiter_details',[]):
+  identity+=fact(item.get('label') or '',item.get('value'))
  identity+='</dl>'
  contacts=''
  for key,title,glyph,scheme in [('email','Email','contact','mailto:'),('phone','Phone','phone','tel:')]:
