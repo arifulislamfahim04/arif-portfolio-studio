@@ -23,5 +23,6 @@
   "show_progress": true,
   "programme_duration": "4-year programme",
   "status_pulse": true,
-  "timeline_label": ""
+  "timeline_label": "",
+  "timeline_state": "results-pending"
 }

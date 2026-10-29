@@ -27,5 +27,6 @@
   "end_date": "2021",
   "programme_duration": "2-year programme",
   "status_pulse": false,
-  "timeline_label": ""
+  "timeline_label": "",
+  "timeline_state": "completed"
 }

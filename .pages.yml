@@ -1820,6 +1820,21 @@
           "type": "boolean",
           "default": false,
           "description": "Enable for Results pending or another current status. Keep off for Completed. Reduced-motion visitors see a still dot."
+        },
+        {
+          "name": "timeline_state",
+          "label": "Timeline marker state",
+          "type": "select",
+          "default": "completed",
+          "options": {
+            "values": [
+              "completed",
+              "in-progress",
+              "results-pending",
+              "upcoming"
+            ]
+          },
+          "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
         }
       ]
     },
@@ -2106,6 +2121,21 @@
             "media": "uploads"
           },
           "description": "Upload your institution logo. Leave blank for an initial badge."
+        },
+        {
+          "name": "timeline_state",
+          "label": "Timeline marker state",
+          "type": "select",
+          "default": "completed",
+          "options": {
+            "values": [
+              "completed",
+              "in-progress",
+              "results-pending",
+              "upcoming"
+            ]
+          },
+          "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
         }
       ]
     },
@@ -2338,6 +2368,21 @@
           "label": "Institution / organization website",
           "type": "string",
           "description": "Paste the official website URL. The institution name becomes a link in a new tab."
+        },
+        {
+          "name": "timeline_state",
+          "label": "Timeline marker state",
+          "type": "select",
+          "default": "completed",
+          "options": {
+            "values": [
+              "completed",
+              "in-progress",
+              "results-pending",
+              "upcoming"
+            ]
+          },
+          "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
         }
       ]
     },
@@ -2803,6 +2848,21 @@
           "label": "Institution / organization website",
           "type": "string",
           "description": "Paste the official website URL. The institution name becomes a link in a new tab."
+        },
+        {
+          "name": "timeline_state",
+          "label": "Timeline marker state",
+          "type": "select",
+          "default": "completed",
+          "options": {
+            "values": [
+              "completed",
+              "in-progress",
+              "results-pending",
+              "upcoming"
+            ]
+          },
+          "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
         }
       ]
     },

@@ -120,3 +120,38 @@
 .education-v2 .edu-status[data-pulse="true"]>span{animation:edu-status 2.4s ease-in-out infinite}
 @media(max-width:700px){[data-about-refresh] .education-v2{padding-bottom:14px}}
 @media(max-width:600px){[data-about-refresh] .education-featured .edu-ring{margin-top:0}[data-about-refresh] .education-featured .edu-ring .edu-grade-label{font-size:8px}[data-about-refresh] .edu-duration{font-size:12px}}
+/* About section navigation: quieter than the primary page dock. */
+[data-about-refresh] .section-index{position:sticky;top:calc(var(--hero-header-height,88px) + 24px);padding-left:12px;gap:6px;align-self:start}
+[data-about-refresh] .section-index a{position:relative;min-height:44px;padding:11px 10px 11px 14px;display:flex;gap:10px;border:0;border-radius:0 9px 9px 0;color:var(--muted);background:transparent;font-weight:400;line-height:1.5}
+[data-about-refresh] .section-index a:before{content:'';position:absolute;inset:7px auto 7px 0;width:3px;background:#78cc6d;border-radius:3px;opacity:0}
+[data-about-refresh] .section-index a:hover{background:#78cc6d0c;color:var(--fg)}
+[data-about-refresh] .section-index a.active{background:#78cc6d14;color:var(--fg);font-weight:600}
+[data-about-refresh] .section-index a.active:before{opacity:1}
+.section-number{font-size:10px;font-weight:400;font-variant-numeric:tabular-nums;color:var(--muted)}
+[data-about-refresh] .section-index a:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.section-scroll-track{position:absolute;inset:0 auto 0 0;width:2px;background:var(--line);border-radius:2px;overflow:hidden;pointer-events:none}
+.section-scroll-track>span,.about-timeline-track>span{display:block;width:100%;height:100%;background:#78cc6d;transform-origin:top;transform:scaleY(var(--section-progress,0))}
+[data-about-refresh] .about-body>.section{scroll-margin-top:var(--about-anchor-offset,130px)}
+/* Timelines belong only to academic/experience records, never skills or awards. */
+[data-about-refresh] .about-timeline{--timeline-offset:32px;position:relative;display:grid;grid-template-columns:1fr;gap:22px;padding-left:var(--timeline-offset);border:0}
+.about-timeline-track{position:absolute;left:0;top:var(--timeline-start,32px);bottom:var(--timeline-bottom,32px);width:2px;border-radius:2px;overflow:hidden;background:color-mix(in srgb,var(--fg) 26%,var(--bg));pointer-events:none}
+.about-timeline-track>span{transform:scaleY(var(--timeline-progress,0))}
+[data-about-refresh] .timeline-entry{position:relative;overflow:visible}
+[data-about-refresh] .timeline-entry:before{display:none}
+.about-timeline-dot{position:absolute;top:var(--dot-y,32px);left:calc(-1 * var(--timeline-offset) - 5px);width:12px;height:12px;box-sizing:border-box;border:2px solid #78cc6d;background:#78cc6d;border-radius:50%;transform:translateY(-50%);z-index:2}
+.timeline-entry[data-timeline-state="upcoming"]>.about-timeline-dot{background:var(--bg)}
+.timeline-entry:is([data-timeline-state="in-progress"],[data-timeline-state="results-pending"])>.about-timeline-dot:after{content:'';position:absolute;inset:-6px;border:1px solid #78cc6d;border-radius:50%;animation:timeline-pending 2.5s ease-out infinite}
+@keyframes timeline-pending{0%{transform:scale(.8);opacity:.6}100%{transform:scale(1.45);opacity:0}}
+@media(max-width:1000px){
+ [data-about-refresh] .section-index{top:var(--hero-header-height,88px);flex-direction:row;align-items:center;gap:5px;padding:9px 0;margin-bottom:24px;scrollbar-width:none;scroll-snap-type:x proximity;background:var(--bg)}
+ [data-about-refresh] .section-index::-webkit-scrollbar{display:none}
+ [data-about-refresh] .section-index a{flex:none;min-height:44px;padding:10px 13px;border:1px solid var(--line);border-radius:24px;gap:7px;scroll-snap-align:center}
+ [data-about-refresh] .section-index a.active{border-color:#78cc6d66}
+ [data-about-refresh] .section-index a:before{inset:auto 12px 3px;height:2px;width:auto}
+ .section-scroll-track{display:none}
+}
+@media(max-width:600px){[data-about-refresh] .about-timeline{--timeline-offset:22px;gap:18px}}
+@media(prefers-reduced-motion:reduce){.about-timeline-dot:after{animation:none!important;opacity:.35}.about-timeline-track>span,.section-scroll-track>span{transition:none}}
+
+html:has(body[data-about-refresh]){scroll-padding-top:0}
+[data-about-refresh] .about-body>.section:focus{outline:none}
