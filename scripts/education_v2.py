@@ -40,24 +40,26 @@ def education_v2(page,*,root,esc,url,set_html,rich):
   start=str(v.get('start_date') or '');end=str(v.get('end_date') or '')
   date=' – '.join(filter(None,[month(start),'Present' if v.get('currently_studying') else month(end)])) or v.get('date') or ''
   if v.get('expected_completion') and not v.get('currently_studying'):date+=' · Expected'
-  if date:title+='<p class="edu-date">'+esc(date)+'</p>'
+  duration=str(v.get('programme_duration') or '').strip()
+  if duration:title+='<p class="edu-duration">'+esc(duration)+'</p>'
+  elif date and not (featured and v.get('show_progress',False) and start and end):title+='<p class="edu-date">'+esc(date)+'</p>'
   grade=str(v.get('grade') or '').strip();scale=str(v.get('grade_scale') or '').strip();label=v.get('grade_label') or 'GPA'
   result=''
   try:ratio=max(0,min(1,float(grade)/float(scale)))
   except (ValueError,ZeroDivisionError):ratio=None
   if grade:
    if featured and ratio is not None:
-    result='<div class="edu-grade" aria-label="'+esc(label+' '+grade+' of '+scale)+'"><span class="edu-grade-label">'+esc(label)+'</span><div class="edu-ring" data-ratio="'+str(ratio)+'"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="edu-ring-track" cx="50" cy="50" r="44"/><circle class="edu-ring-fill" cx="50" cy="50" r="44" pathLength="1" stroke-dasharray="'+str(ratio)+' 1"/></svg><div><strong>'+esc(grade)+'</strong><small>of '+esc(scale)+'</small></div></div></div>'
+    result='<div class="edu-grade" aria-label="'+esc(label+' '+grade+' of '+scale)+'"><div class="edu-ring" data-ratio="'+str(ratio)+'"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="edu-ring-track" cx="50" cy="50" r="44"/><circle class="edu-ring-fill" cx="50" cy="50" r="44" pathLength="1" stroke-dasharray="'+str(ratio)+' 1"/></svg><div><span class="edu-grade-label">'+esc(label)+'</span><strong>'+esc(grade)+'</strong><small>of '+esc(scale)+'</small></div></div></div>'
    else:result='<span class="edu-grade-chip">'+esc(label+' '+grade+(' / '+scale if scale else ''))+'</span>'
   elif v.get('badge'):result='<span class="edu-grade-chip">'+esc(v['badge'])+'</span>'
   set_html(card,'<div class="edu-heading">'+logo_html+'<div class="edu-title">'+title+'</div>'+result+'</div>')
   if featured and v.get('show_progress',False) and start and end:
    progress=html.Element('div',{'class':'edu-progress','data-start':start,'data-end':end})
    status=v.get('status') or ('In progress' if v.get('currently_studying') else '')
-   timeline_label=v.get('timeline_label','Qualification timeline')
-   set_html(progress,'<div class="edu-progress-top">'+('<span class="edu-status"><span aria-hidden="true"></span>'+esc(status)+'</span>' if status else '')+('<span class="edu-timeline-label">'+esc(timeline_label)+'</span>' if timeline_label else '')+'</div><div class="edu-progress-track" role="progressbar" aria-label="Elapsed programme period" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><div class="edu-progress-dates"><span>'+esc(month(start))+'</span><span>'+esc(month(end))+'</span></div>');card.append(progress)
+   timeline_label=v.get('timeline_label','')
+   set_html(progress,'<div class="edu-progress-top">'+('<span class="edu-status" data-pulse="'+str(bool(v.get('status_pulse',False))).lower()+'"><span aria-hidden="true"></span>'+esc(status)+'</span>' if status else '')+('<span class="edu-timeline-label">'+esc(timeline_label)+'</span>' if timeline_label else '')+'</div><div class="edu-progress-track" role="progressbar" aria-label="Elapsed programme period" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><div class="edu-progress-dates"><span>'+esc(month(start))+'</span><span>'+esc(month(end)+(' · Expected' if v.get('expected_completion') else ''))+'</span></div>');card.append(progress)
   elif v.get('status'):
-   status=html.fragment_fromstring('<div class="edu-completed-status"><span class="edu-status"><span aria-hidden="true"></span>'+esc(v['status'])+'</span></div>');card.append(status)
+   status=html.fragment_fromstring('<div class="edu-completed-status"><span class="edu-status" data-pulse="'+str(bool(v.get('status_pulse',False))).lower()+'"><span aria-hidden="true"></span>'+esc(v['status'])+'</span></div>');card.append(status)
   # Descriptive text remains CMS-controlled. Existing grade-only prose migrated to subtitle.
   body=v.get('body') or ''
   if body and html.fragment_fromstring('<div>'+body+'</div>').text_content().strip():

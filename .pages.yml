@@ -1805,8 +1805,21 @@
           "name": "timeline_label",
           "label": "Timeline caption",
           "type": "string",
-          "default": "Qualification timeline",
-          "description": "Explains that the bar shows time, while the ring shows your grade. Clear this field to hide the caption."
+          "default": "",
+          "description": "Optional caption beside the status. Leave blank for a cleaner card."
+        },
+        {
+          "name": "programme_duration",
+          "label": "Programme duration",
+          "type": "string",
+          "description": "For example 4-year programme or 2-year programme. This is the course length, separate from its calendar dates."
+        },
+        {
+          "name": "status_pulse",
+          "label": "Softly pulse the status dot",
+          "type": "boolean",
+          "default": false,
+          "description": "Enable for Results pending or another current status. Keep off for Completed. Reduced-motion visitors see a still dot."
         }
       ]
     },

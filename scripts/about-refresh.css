@@ -106,3 +106,17 @@
 }
 
 .edu-progress-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 12px;margin-bottom:12px}.edu-progress-top .edu-status{margin:0}.edu-timeline-label{font-size:10px;color:var(--muted)}
+
+/* Education spacing and hierarchy refinement. */
+[data-about-refresh] .education-v2{padding-bottom:18px}
+.edu-grade>.edu-grade-label{display:none}
+.edu-ring .edu-grade-label{font-size:9px;line-height:1.2;letter-spacing:.05em;margin-bottom:2px}
+.edu-ring small{margin-top:2px}
+.edu-ring{margin-top:0}
+.edu-grade{align-self:center}
+[data-about-refresh] .edu-duration{font-size:13px;line-height:1.6;color:var(--muted);margin:8px 0 0}
+.edu-arrow{opacity:.72}
+.education-v2 .edu-status>span{animation:none}
+.education-v2 .edu-status[data-pulse="true"]>span{animation:edu-status 2.4s ease-in-out infinite}
+@media(max-width:700px){[data-about-refresh] .education-v2{padding-bottom:14px}}
+@media(max-width:600px){[data-about-refresh] .education-featured .edu-ring{margin-top:0}[data-about-refresh] .education-featured .edu-ring .edu-grade-label{font-size:8px}[data-about-refresh] .edu-duration{font-size:12px}}

@@ -10,7 +10,11 @@ with tempfile.TemporaryDirectory() as t:
   return html.parse(str(root/'docs/about.html'))
  def save(path,data):path.write_text(json.dumps(data))
  a=build();b=a.xpath('//article[@data-entry-id="education-01"]')[0]
- assert b.xpath('.//p[@class="edu-date" and text()="Oct 2022 – Dec 2026 · Expected"]')
+ assert b.xpath('.//p[@class="edu-duration" and text()="4-year programme"]')
+ assert not b.xpath('.//p[@class="edu-date"]|.//span[@class="edu-timeline-label"]')
+ assert b.xpath('.//div[@class="edu-progress-dates"]/span[text()="Dec 2026 · Expected"]')
+ assert b.xpath('.//div[@class="edu-ring"]//span[@class="edu-grade-label" and text()="CGPA"]')
+ assert b.xpath('.//span[@data-pulse="true"]')
  assert b.xpath('.//div[@aria-label="CGPA 3.90 of 4.00"]')
  assert b.xpath('.//span[@class="edu-status" and contains(.,"Results pending")]')
  assert len(a.xpath('//article[contains(@class,"education-featured")]'))==3
@@ -21,7 +25,9 @@ with tempfile.TemporaryDirectory() as t:
   assert school.xpath('.//span[@class="edu-status" and contains(.,"Completed")]')
   assert school.xpath('.//details//dt[text()="Group"]/following-sibling::dd[text()="Science"]')
   assert school.xpath('.//div[@class="edu-progress"]')
-  assert school.xpath('.//p[@class="edu-date" and text()="'+('2019 – 2021' if entry=='02' else '2017 – 2019')+'"]')
+  assert school.xpath('.//p[@class="edu-duration" and text()="2-year programme"]')
+  assert not school.xpath('.//p[@class="edu-date"]|.//span[@class="edu-timeline-label"]')
+  assert school.xpath('.//span[@data-pulse="false"]')
  p=root/'editor/education/01.json';d=json.loads(p.read_text());d.update(title='A future degree',grade='4.20',grade_label='GPA',grade_scale='5.00',institution_logo='assets/loom-spools.jpg',focus='Quality science',location='Example location',coursework=['Materials','Testing'],thesis_title='A sample thesis',transcript_link='https://example.org/public-transcript',student_id='DEMO-ONLY',body='<p><strong>Formatted</strong> description</p><script>alert(1)</script>');save(p,d);a=build();b=a.xpath('//article[@data-entry-id="education-01"]')[0]
  assert b.xpath('.//h3[text()="A future degree"]')
  assert b.xpath('.//div[@aria-label="GPA 4.20 of 5.00"]')

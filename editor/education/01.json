@@ -20,5 +20,8 @@
   "subtitle": "Major in Apparel Manufacturing",
   "specialization": "Apparel Manufacturing",
   "location": "Dhaka, Bangladesh",
-  "show_progress": true
+  "show_progress": true,
+  "programme_duration": "4-year programme",
+  "status_pulse": true,
+  "timeline_label": ""
 }
