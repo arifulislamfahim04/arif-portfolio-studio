@@ -90,3 +90,19 @@
 @media(prefers-reduced-motion:reduce){[data-about-refresh] .education-v2,[data-about-refresh] .education-v2 *,[data-about-refresh] .education-v2:after{transition:none!important;animation:none!important}[data-about-refresh] .education-v2:hover{transform:none}}
 
 .edu-completed-status{margin-top:20px}.edu-completed-status .edu-status{margin-bottom:0}.edu-completed-status .edu-status>span{animation:none}
+
+/* A full timeline remains visible after the end date. */
+.edu-progress[data-progress="1"] .edu-status>span{animation:none}
+@media(max-width:600px){
+ [data-about-refresh] .education-featured .edu-heading{grid-template-columns:48px minmax(0,1fr) 76px;gap:16px 12px}
+ [data-about-refresh] .education-featured .edu-title{grid-column:1/-1;grid-row:2}
+ [data-about-refresh] .education-featured .edu-grade{grid-column:3;grid-row:1;display:block;justify-self:end}
+ [data-about-refresh] .education-featured .edu-ring{width:76px;height:76px;margin-top:3px}
+ [data-about-refresh] .education-featured .edu-grade-label{font-size:9px}
+ [data-about-refresh] .education-featured h3{font-size:21px;line-height:1.35}
+ [data-about-refresh] .education-featured .edu-date{font-size:12px}
+ [data-about-refresh] .education-featured .institution{font-size:12px}
+ [data-about-refresh] .education-featured .edu-detail-grid{grid-template-columns:1fr}
+}
+
+.edu-progress-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 12px;margin-bottom:12px}.edu-progress-top .edu-status{margin:0}.edu-timeline-label{font-size:10px;color:var(--muted)}

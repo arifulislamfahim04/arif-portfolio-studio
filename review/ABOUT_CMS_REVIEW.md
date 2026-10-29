@@ -38,3 +38,8 @@ No new photography or icon pack. Existing images, icon sources and licences are 
 
 ### HSC / SSC follow-up
 Both completed qualifications now use the same full three-zone card and animated 88px GPA ring as the BSc, with Science group subtitle, editable Group fact, and a static Completed badge. No elapsed-period bar for these completed entries. The existing grades/dates/institutions are unchanged. The optional compact layout remains available by disabling Featured education card.
+
+### Completed timeline bars and phone layout
+HSC/SSC now keep full timeline bars using their existing year-only dates (no invented study months). BSc continues filling and stays visible at 100% after its end date; status stays manually editable. Date fields support years, months or days. The CMS timeline toggle applies to both completed and ongoing qualifications. On phones, logo and grade ring occupy the top row and the degree/institution block gets the full width below.
+
+Phone QA for completed bars: Chromium iframe viewports 320, 375, 390, 430 and 768px in light and dark; no horizontal overflow on page/cards; phone rings 76px, tablet rings 88px. HSC and SSC report 100%; BSc 96% on 29 October. HSC detail opened successfully at 375px. Physical Android/iOS and touch hardware not available. Timeline caption is CMS-editable.

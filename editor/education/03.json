@@ -22,5 +22,7 @@
       "value": "Science"
     }
   ],
-  "show_progress": false
+  "show_progress": true,
+  "start_date": "2017",
+  "end_date": "2019"
 }

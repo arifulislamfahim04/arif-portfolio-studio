@@ -5,6 +5,7 @@ from datetime import datetime
 
 def month(value):
  value=str(value or '').strip()
+ if re.fullmatch(r'\d{4}',value):return value
  for fmt in ('%Y-%m-%d','%Y-%m','%b %Y','%B %Y','%Y'):
   try:return datetime.strptime(value,fmt).strftime('%b %Y')
   except ValueError:pass
@@ -53,7 +54,8 @@ def education_v2(page,*,root,esc,url,set_html,rich):
   if featured and v.get('show_progress',False) and start and end:
    progress=html.Element('div',{'class':'edu-progress','data-start':start,'data-end':end})
    status=v.get('status') or ('In progress' if v.get('currently_studying') else '')
-   set_html(progress,('<span class="edu-status"><span aria-hidden="true"></span>'+esc(status)+'</span>' if status else '')+'<div class="edu-progress-track" role="progressbar" aria-label="Elapsed programme period" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><div class="edu-progress-dates"><span>'+esc(month(start))+'</span><span>'+esc(month(end))+'</span></div>');card.append(progress)
+   timeline_label=v.get('timeline_label','Qualification timeline')
+   set_html(progress,'<div class="edu-progress-top">'+('<span class="edu-status"><span aria-hidden="true"></span>'+esc(status)+'</span>' if status else '')+('<span class="edu-timeline-label">'+esc(timeline_label)+'</span>' if timeline_label else '')+'</div><div class="edu-progress-track" role="progressbar" aria-label="Elapsed programme period" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><div class="edu-progress-dates"><span>'+esc(month(start))+'</span><span>'+esc(month(end))+'</span></div>');card.append(progress)
   elif v.get('status'):
    status=html.fragment_fromstring('<div class="edu-completed-status"><span class="edu-status"><span aria-hidden="true"></span>'+esc(v['status'])+'</span></div>');card.append(status)
   # Descriptive text remains CMS-controlled. Existing grade-only prose migrated to subtitle.

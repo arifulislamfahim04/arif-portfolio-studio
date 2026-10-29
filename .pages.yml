@@ -1542,14 +1542,14 @@
           "label": "Start date (optional)",
           "type": "string",
           "required": false,
-          "description": "Use YYYY-MM, for example 2022-10. These dates calculate the featured card’s elapsed-period bar. A readable year or date still displays, but cannot calculate progress."
+          "description": "Use YYYY (2019), YYYY-MM (2022-10), or YYYY-MM-DD. Keep the precision you know. The bar measures elapsed calendar time and remains full after the end date."
         },
         {
           "name": "end_date",
           "label": "End date (optional)",
           "type": "string",
           "required": false,
-          "description": "Use YYYY-MM, for example 2022-10. These dates calculate the featured card’s elapsed-period bar. A readable year or date still displays, but cannot calculate progress."
+          "description": "Use YYYY (2019), YYYY-MM (2022-10), or YYYY-MM-DD. Keep the precision you know. The bar measures elapsed calendar time and remains full after the end date."
         },
         {
           "name": "currently_studying",
@@ -1796,10 +1796,17 @@
         },
         {
           "name": "show_progress",
-          "label": "Show date-progress bar",
+          "label": "Show qualification timeline bar",
           "type": "boolean",
           "default": false,
-          "description": "Enable for an ongoing qualification with start and end dates. Leave off for completed HSC, SSC or other qualifications. The GPA ring is separate."
+          "description": "Show a date-based timeline. Past qualifications stay at 100%; this does not change your status text or GPA/CGPA. Enter start and end dates above."
+        },
+        {
+          "name": "timeline_label",
+          "label": "Timeline caption",
+          "type": "string",
+          "default": "Qualification timeline",
+          "description": "Explains that the bar shows time, while the ring shows your grade. Clear this field to hide the caption."
         }
       ]
     },

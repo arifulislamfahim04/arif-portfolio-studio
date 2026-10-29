@@ -20,7 +20,8 @@ with tempfile.TemporaryDirectory() as t:
   assert school.xpath('.//p[text()="Science group"]')
   assert school.xpath('.//span[@class="edu-status" and contains(.,"Completed")]')
   assert school.xpath('.//details//dt[text()="Group"]/following-sibling::dd[text()="Science"]')
-  assert not school.xpath('.//div[@class="edu-progress"]')
+  assert school.xpath('.//div[@class="edu-progress"]')
+  assert school.xpath('.//p[@class="edu-date" and text()="'+('2019 – 2021' if entry=='02' else '2017 – 2019')+'"]')
  p=root/'editor/education/01.json';d=json.loads(p.read_text());d.update(title='A future degree',grade='4.20',grade_label='GPA',grade_scale='5.00',institution_logo='assets/loom-spools.jpg',focus='Quality science',location='Example location',coursework=['Materials','Testing'],thesis_title='A sample thesis',transcript_link='https://example.org/public-transcript',student_id='DEMO-ONLY',body='<p><strong>Formatted</strong> description</p><script>alert(1)</script>');save(p,d);a=build();b=a.xpath('//article[@data-entry-id="education-01"]')[0]
  assert b.xpath('.//h3[text()="A future degree"]')
  assert b.xpath('.//div[@aria-label="GPA 4.20 of 5.00"]')
