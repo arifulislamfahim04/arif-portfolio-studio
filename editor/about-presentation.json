@@ -88,5 +88,49 @@
     "empty": "Published roles and visits will appear here.",
     "year": "yr",
     "month": "mo"
+  },
+  "header_subtitles": {
+    "education": "",
+    "experience": "",
+    "recognition": "",
+    "certificates": "",
+    "recommendations": "",
+    "resume": ""
+  },
+  "header_units": {
+    "qualification_one": "qualification",
+    "qualification_many": "qualifications",
+    "role_one": "role",
+    "role_many": "roles",
+    "visit_one": "visit",
+    "visit_many": "visits",
+    "skill_one": "skill",
+    "skill_many": "skills",
+    "language_one": "language",
+    "language_many": "languages",
+    "award_one": "award",
+    "award_many": "awards",
+    "certificate_one": "certificate",
+    "certificate_many": "certificates",
+    "event_one": "event",
+    "event_many": "events",
+    "recommendation_one": "recommendation",
+    "recommendation_many": "recommendations",
+    "sample_one": "sample",
+    "sample_many": "samples",
+    "page_one": "page",
+    "page_many": "pages"
+  },
+  "cv_panel": {
+    "pitch": "My education, practical experience and skills, together in one document.",
+    "download": "Download CV",
+    "view_online": "View online",
+    "preview": "",
+    "preview_alt": "First page of Ariful Islam Fahim’s CV",
+    "open_preview": "Open full CV",
+    "preview_hint": "Preview · open full CV",
+    "updated": "Updated",
+    "document": "Document",
+    "empty": "Upload your CV through the CMS to show download and preview links."
   }
 }

@@ -146,7 +146,8 @@
               "png",
               "webp"
             ]
-          }
+          },
+          "description": "The CV file used everywhere on the site. Upload a PDF to automatically generate the About-page preview, page count, size and file-change date. For a custom preview, use About design, motion & recommendations → CV panel."
         },
         {
           "name": "introduction",
@@ -5120,6 +5121,224 @@
             {
               "name": "month",
               "label": "Duration singular month label",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "header_subtitles",
+          "label": "Section subtitles (optional)",
+          "type": "object",
+          "description": "Leave a subtitle blank to hide it. The Skills subtitle stays in About skills & languages → Intro so it has only one source.",
+          "fields": [
+            {
+              "name": "education",
+              "label": "Education",
+              "type": "string"
+            },
+            {
+              "name": "experience",
+              "label": "Experience & leadership",
+              "type": "string"
+            },
+            {
+              "name": "recognition",
+              "label": "Awards",
+              "type": "string"
+            },
+            {
+              "name": "certificates",
+              "label": "Certificates & workshops",
+              "type": "string"
+            },
+            {
+              "name": "recommendations",
+              "label": "Perspectives",
+              "type": "string"
+            },
+            {
+              "name": "resume",
+              "label": "CV",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "header_units",
+          "label": "Automatic item-count wording",
+          "type": "object",
+          "description": "Counts come from published CMS records. Change only the wording here; numbers update automatically.",
+          "fields": [
+            {
+              "name": "qualification_one",
+              "label": "Qualification one",
+              "type": "string"
+            },
+            {
+              "name": "qualification_many",
+              "label": "Qualification many",
+              "type": "string"
+            },
+            {
+              "name": "role_one",
+              "label": "Role one",
+              "type": "string"
+            },
+            {
+              "name": "role_many",
+              "label": "Role many",
+              "type": "string"
+            },
+            {
+              "name": "visit_one",
+              "label": "Visit one",
+              "type": "string"
+            },
+            {
+              "name": "visit_many",
+              "label": "Visit many",
+              "type": "string"
+            },
+            {
+              "name": "skill_one",
+              "label": "Skill one",
+              "type": "string"
+            },
+            {
+              "name": "skill_many",
+              "label": "Skill many",
+              "type": "string"
+            },
+            {
+              "name": "language_one",
+              "label": "Language one",
+              "type": "string"
+            },
+            {
+              "name": "language_many",
+              "label": "Language many",
+              "type": "string"
+            },
+            {
+              "name": "award_one",
+              "label": "Award one",
+              "type": "string"
+            },
+            {
+              "name": "award_many",
+              "label": "Award many",
+              "type": "string"
+            },
+            {
+              "name": "certificate_one",
+              "label": "Certificate one",
+              "type": "string"
+            },
+            {
+              "name": "certificate_many",
+              "label": "Certificate many",
+              "type": "string"
+            },
+            {
+              "name": "event_one",
+              "label": "Event one",
+              "type": "string"
+            },
+            {
+              "name": "event_many",
+              "label": "Event many",
+              "type": "string"
+            },
+            {
+              "name": "recommendation_one",
+              "label": "Recommendation one",
+              "type": "string"
+            },
+            {
+              "name": "recommendation_many",
+              "label": "Recommendation many",
+              "type": "string"
+            },
+            {
+              "name": "sample_one",
+              "label": "Sample one",
+              "type": "string"
+            },
+            {
+              "name": "sample_many",
+              "label": "Sample many",
+              "type": "string"
+            },
+            {
+              "name": "page_one",
+              "label": "Page one",
+              "type": "string"
+            },
+            {
+              "name": "page_many",
+              "label": "Page many",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "cv_panel",
+          "label": "CV panel",
+          "type": "object",
+          "description": "The PDF is uploaded in Profile → Résumé PDF. Page count and file size are read from the real file. Updated date comes from its latest Git change, never the site build date.",
+          "fields": [
+            {
+              "name": "pitch",
+              "label": "One-line introduction",
+              "type": "string"
+            },
+            {
+              "name": "download",
+              "label": "Download button text",
+              "type": "string"
+            },
+            {
+              "name": "view_online",
+              "label": "View online button text",
+              "type": "string"
+            },
+            {
+              "name": "preview",
+              "label": "Custom preview image (optional)",
+              "type": "image",
+              "options": {
+                "media": "uploads"
+              },
+              "description": "Leave blank to use the automatically generated first page of your PDF. Upload your own image to replace that preview."
+            },
+            {
+              "name": "preview_alt",
+              "label": "Preview image description",
+              "type": "string"
+            },
+            {
+              "name": "open_preview",
+              "label": "Preview link accessibility label",
+              "type": "string"
+            },
+            {
+              "name": "preview_hint",
+              "label": "Preview caption",
+              "type": "string"
+            },
+            {
+              "name": "updated",
+              "label": "Updated-date prefix",
+              "type": "string"
+            },
+            {
+              "name": "document",
+              "label": "Document type fallback",
+              "type": "string"
+            },
+            {
+              "name": "empty",
+              "label": "Missing CV message",
               "type": "string"
             }
           ]

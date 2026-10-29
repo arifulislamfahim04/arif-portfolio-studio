@@ -16,6 +16,7 @@ from about_skills import refine_skills
 from about_awards import refine_awards
 from about_learning import refine_learning
 from about_exposure import refine_exposure
+from about_headers_cv import refine_headers_cv
 from lxml import html
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs'
@@ -272,6 +273,7 @@ def build():
  refine_awards(pages['about'],root=ROOT,esc=esc,url=url,rich=visible_rich,set_html=set_html,story_body=story_body)
  refine_learning(pages['about'],root=ROOT,esc=esc,url=url,rich=visible_rich,set_html=set_html,story_body=story_body)
  refine_exposure(pages['about'],root=ROOT,esc=esc,url=url,rich=visible_rich,set_html=set_html,story_body=story_body)
+ refine_headers_cv(pages['about'],root=ROOT,esc=esc,url=url,set_html=set_html)
  # Remove previously generated post pages, so deleted/unpublished entries disappear.
  for pattern in ('posts-*.html','projects-*.html'):
   for p in OUT.glob(pattern):p.unlink()
@@ -332,12 +334,13 @@ def build():
   shutil.copyfile(ROOT/('scripts/about-awards.'+extension),OUT/('about-awards.'+extension))
   shutil.copyfile(ROOT/('scripts/about-learning.'+extension),OUT/('about-learning.'+extension))
   shutil.copyfile(ROOT/('scripts/about-exposure.'+extension),OUT/('about-exposure.'+extension))
+  shutil.copyfile(ROOT/('scripts/about-headers-cv.'+extension),OUT/('about-headers-cv.'+extension))
  gallery_source=(ROOT/'scripts/home.js').read_text().split('// Gallery filter and photo-story lightbox work independently of the carousel.')[1]
  (OUT/'gallery-runtime.js').write_text("(()=>{'use strict';const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];\n"+gallery_source)
  (OUT/'content.js').write_text((OUT/'content.js').read_text()+'\nwindow.PORTFOLIO_SITE='+json.dumps(editorial_site,ensure_ascii=False)+';\nwindow.PORTFOLIO_UI='+json.dumps(editorial_ui,ensure_ascii=False)+';\nwindow.PORTFOLIO_LABELS='+json.dumps({v:editorial_ui.get(k,v) for k,v in json.loads((ROOT/'scripts/interface-defaults.json').read_text()).items()},ensure_ascii=False)+';')
  for p in OUT.glob('*.html'):
   d=html.parse(str(p))
-  for e in d.xpath('//link[@href="editorial.css" or @href="hero-refresh.css" or @href="about-refresh.css" or @href="shared-motion.css" or @href="about-awards.css" or @href="about-learning.css" or @href="about-exposure.css"]|//script[@src="editorial.js" or @src="gallery-runtime.js" or @src="hero-refresh.js" or @src="about-refresh.js" or @src="shared-motion.js" or @src="about-awards.js" or @src="about-learning.js" or @src="about-exposure.js"]'):e.set('href' if e.tag=='link' else 'src',e.get('href' if e.tag=='link' else 'src')+'?v='+version)
+  for e in d.xpath('//link[@href="editorial.css" or @href="hero-refresh.css" or @href="about-refresh.css" or @href="shared-motion.css" or @href="about-awards.css" or @href="about-learning.css" or @href="about-exposure.css" or @href="about-headers-cv.css"]|//script[@src="editorial.js" or @src="gallery-runtime.js" or @src="hero-refresh.js" or @src="about-refresh.js" or @src="shared-motion.js" or @src="about-awards.js" or @src="about-learning.js" or @src="about-exposure.js" or @src="about-headers-cv.js"]'):e.set('href' if e.tag=='link' else 'src',e.get('href' if e.tag=='link' else 'src')+'?v='+version)
   p.write_text(html.tostring(d,encoding='unicode',doctype='<!doctype html>'))
  from xml.sax.saxutils import escape as xml_escape
  base=editorial_site['site_url'].rstrip('/')+'/'
