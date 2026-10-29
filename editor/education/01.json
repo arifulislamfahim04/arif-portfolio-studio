@@ -24,5 +24,8 @@
   "programme_duration": "4-year programme",
   "status_pulse": true,
   "timeline_label": "",
-  "timeline_state": "results-pending"
+  "timeline_state": "results-pending",
+  "use_for_now_panel": true,
+  "programme_years": 4,
+  "programme_year": 4
 }

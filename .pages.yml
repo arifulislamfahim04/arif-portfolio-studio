@@ -1835,6 +1835,25 @@
             ]
           },
           "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
+        },
+        {
+          "name": "use_for_now_panel",
+          "label": "Use this qualification in the About Now panel",
+          "type": "boolean",
+          "default": false,
+          "description": "Enable for one qualification. Its status and specialization appear in the Now panel. If multiple are enabled, the first by display order is used."
+        },
+        {
+          "name": "programme_years",
+          "label": "Number of programme years",
+          "type": "number",
+          "description": "For the Now panel’s year segments, for example 4. This is not a graduation confirmation."
+        },
+        {
+          "name": "programme_year",
+          "label": "Programme year reached",
+          "type": "number",
+          "description": "For example 4 fills Years 1–4. Your result-pending or completed status remains separate."
         }
       ]
     },
@@ -4604,6 +4623,96 @@
               "type": "boolean"
             }
           ]
+        },
+        {
+          "name": "now_label",
+          "label": "Now panel heading",
+          "type": "string",
+          "description": "Defaults to Now."
+        },
+        {
+          "name": "specialization_label",
+          "label": "Specialization label",
+          "type": "string",
+          "description": "The value comes from the selected education entry."
+        },
+        {
+          "name": "study_label",
+          "label": "Study stage label",
+          "type": "string",
+          "description": "The status comes from the selected education entry."
+        },
+        {
+          "name": "year_label",
+          "label": "Year segment label",
+          "type": "string",
+          "description": "Defaults to Year."
+        },
+        {
+          "name": "study_level",
+          "label": "Qualification level suffix",
+          "type": "string",
+          "description": "For example undergraduate. Leave blank to hide."
+        },
+        {
+          "name": "reviewed_on",
+          "label": "Profile last reviewed date (optional)",
+          "type": "string",
+          "description": "YYYY-MM-DD. Shows Updated and the month/year only when you enter a real review date. Leave blank to hide."
+        },
+        {
+          "name": "updated_label",
+          "label": "Updated label",
+          "type": "string",
+          "description": "Text before the review month."
+        },
+        {
+          "name": "whatsapp_url",
+          "label": "WhatsApp link (optional)",
+          "type": "string",
+          "description": "Paste your https://wa.me/… link. Leave blank to hide. Your phone number is not automatically used."
+        },
+        {
+          "name": "whatsapp_text",
+          "label": "WhatsApp button text",
+          "type": "string",
+          "description": "Defaults to Message on WhatsApp."
+        },
+        {
+          "name": "contact_heading",
+          "label": "Contact group accessible label",
+          "type": "string",
+          "description": "Defaults to Contact."
+        },
+        {
+          "name": "copy_email_label",
+          "label": "Copy email button label",
+          "type": "string",
+          "description": "Defaults to Copy email."
+        },
+        {
+          "name": "copy_phone_label",
+          "label": "Copy phone button label",
+          "type": "string",
+          "description": "Defaults to Copy phone."
+        },
+        {
+          "name": "email_copied_text",
+          "label": "Email copied feedback",
+          "type": "string",
+          "description": "Defaults to Email copied."
+        },
+        {
+          "name": "phone_copied_text",
+          "label": "Phone copied feedback",
+          "type": "string",
+          "description": "Defaults to Phone copied."
+        },
+        {
+          "name": "copy_failed_text",
+          "label": "Copy failure feedback",
+          "type": "string",
+          "description": "Defaults to Copy failed. Please select and copy the text."
         }
       ]
     }

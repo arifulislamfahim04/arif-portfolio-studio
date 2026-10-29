@@ -11,6 +11,7 @@ from about_refresh import refresh_about
 from about_finish import finish_about
 from education_v2 import education_v2
 from about_timeline import refine_timeline
+from about_facts import refine_facts
 from lxml import html
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs'
@@ -262,6 +263,7 @@ def build():
  finish_about(pages,root=ROOT,esc=esc,url=url,set_html=set_html)
  education_v2(pages['about'],root=ROOT,esc=esc,url=url,set_html=set_html,rich=rich)
  refine_timeline(pages['about'],root=ROOT,esc=esc)
+ refine_facts(pages['about'],root=ROOT,esc=esc,url=url,set_html=set_html)
  # Remove previously generated post pages, so deleted/unpublished entries disappear.
  for pattern in ('posts-*.html','projects-*.html'):
   for p in OUT.glob(pattern):p.unlink()

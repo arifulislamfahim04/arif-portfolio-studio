@@ -11,5 +11,13 @@
       "published": true
     }
   ],
-  "intro_wordmark": "ARIFUL"
+  "intro_wordmark": "ARIFUL",
+  "now_label": "Now",
+  "specialization_label": "Specialization",
+  "study_label": "Study stage",
+  "year_label": "Year",
+  "study_level": "undergraduate",
+  "reviewed_on": "",
+  "whatsapp_url": "",
+  "whatsapp_text": "Message on WhatsApp"
 }

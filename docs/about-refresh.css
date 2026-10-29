@@ -155,3 +155,58 @@
 
 html:has(body[data-about-refresh]){scroll-padding-top:0}
 [data-about-refresh] .about-body>.section:focus{outline:none}
+/* Profile facts: current focus first, identity and contact kept compact. */
+[data-about-refresh] .profile-facts-panel{padding:0;position:relative;isolation:isolate;overflow:hidden;border-radius:22px;transition:transform .2s,border-color .2s}
+.profile-facts-panel:after{content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle 240px at var(--facts-x,50%) var(--facts-y,50%),#78cc6d14,transparent);opacity:0;transition:opacity .2s}
+[data-about-refresh] .profile-facts-panel:hover{border-color:#78cc6d66;transform:translateY(-2px)}
+.profile-facts-panel:hover:after{opacity:1}
+.facts-panel-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:23px 26px 0}
+.facts-panel-heading>.section-label{display:flex;align-items:center;gap:10px}
+
+.facts-panel-heading time{font-size:11px;color:var(--muted);white-space:nowrap}
+.facts-zones{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:26px;padding:24px 26px 26px;align-items:stretch}
+.facts-now{background:#78cc6d13;border:1px solid #78cc6d25;border-radius:17px;padding:24px;min-width:0}
+.facts-now>.section-label{font-size:10px}
+.facts-availability{display:flex;gap:9px;align-items:flex-start;font-size:13px;font-weight:600;line-height:1.65;margin:15px 0 28px;color:var(--fg)}
+.facts-availability>span{width:7px;height:7px;border-radius:50%;background:#78cc6d;flex:none;margin-top:7px;animation:edu-status 2.4s ease-in-out infinite}
+.facts-now dl{margin:0}.facts-now dt,.facts-pair dt,.facts-contact-label{font-size:11px;line-height:1.5;color:var(--muted);margin-bottom:5px}
+.facts-now .facts-specialization dd{font-size:clamp(23px,2.5vw,32px);line-height:1.25;letter-spacing:-.035em;font-weight:500;overflow-wrap:anywhere;color:var(--fg)}
+.facts-now .facts-study{margin-top:30px}
+.study-segments{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:6px;margin-top:12px}
+.study-segments i{display:block;background:var(--line);border-radius:3px;height:5px}
+.study-segments .reached i{background:#78cc6d}
+.study-segments small{display:block;font-size:9px;line-height:1.4;margin-top:7px;color:var(--muted);white-space:nowrap}
+.facts-stage-status{margin:12px 0 0;font-size:12px;line-height:1.6;color:var(--fg)}
+.facts-right{min-width:0;padding:3px 0}
+.facts-identity{display:grid;grid-template-columns:1fr 1fr;gap:23px 24px;margin:0}
+.facts-pair{min-width:0}.facts-pair dt{display:flex;gap:5px;align-items:center}
+.facts-pair dt>.icon{width:14px;height:14px;flex:none}
+.facts-pair dd{font-size:14px;font-weight:500;line-height:1.65;color:var(--fg);overflow-wrap:anywhere}
+.facts-languages{display:flex;gap:6px;flex-wrap:wrap}
+.facts-languages>span{padding:3px 10px;border:1px solid var(--line);border-radius:16px;font-size:12px;font-weight:500}
+.facts-contacts{border-top:1px solid var(--line);margin-top:25px;padding-top:17px}
+.facts-contact-row{display:grid;grid-template-columns:23px minmax(0,1fr) 40px;align-items:center;gap:12px;min-height:65px}
+.facts-contact-row>.icon{width:21px;height:21px;color:var(--muted)}
+.facts-contact-row>div{min-width:0}.facts-contact-label{display:block;margin-bottom:2px}
+.facts-contact-row a{display:inline-block;font-size:14px;font-weight:500;line-height:1.65;overflow-wrap:anywhere;color:var(--fg);text-decoration:none}
+.facts-contact-row a:hover{text-decoration:underline;text-decoration-color:#78cc6d;text-underline-offset:4px}
+.facts-copy{display:grid;place-items:center;width:40px;height:44px;min-height:44px;border:1px solid var(--line);background:transparent;border-radius:12px;color:var(--fg);cursor:pointer;transition:opacity .18s,transform .18s}
+.facts-copy .icon{width:18px;height:18px}.facts-copy .copied-glyph{display:none}
+.facts-copy[data-copied="true"] .copy-glyph{display:none}.facts-copy[data-copied="true"] .copied-glyph{display:block}
+.facts-copy[data-copied="true"]{background:#78cc6d25;border-color:#78cc6d}
+.facts-copy:disabled{cursor:wait}
+.profile-facts-panel :is(a,button):focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+.facts-whatsapp{display:inline-flex;gap:8px;align-items:center;font-size:12px;margin-top:10px;padding:10px 13px;border-radius:22px;background:#78cc6d20;color:var(--fg)}
+.facts-whatsapp .icon{width:18px;height:18px}
+.facts-copy-status{position:fixed;bottom:110px;left:50%;transform:translate(-50%,8px);opacity:0;pointer-events:none;background:var(--fg);color:var(--bg);font-size:12px;line-height:1.5;padding:10px 16px;border-radius:12px;z-index:90;max-width:calc(100vw - 40px);transition:opacity .18s,transform .18s}
+.facts-copy-status.show{opacity:1;transform:translate(-50%,0)}
+@media(hover:hover) and (pointer:fine){.facts-copy{opacity:0}.facts-contact-row:is(:hover,:focus-within) .facts-copy,.facts-copy[data-copied="true"]{opacity:1}}
+@media(max-width:800px){.facts-zones{grid-template-columns:1fr}.facts-identity{grid-template-columns:1fr 1fr}.facts-now{padding:22px}.facts-now .facts-specialization dd{font-size:28px}.facts-availability{margin-bottom:22px}.facts-now .facts-study{margin-top:24px}}
+@media(max-width:600px){.facts-panel-heading{padding:20px 20px 0;align-items:flex-start;flex-wrap:wrap;gap:8px}.facts-zones{padding:20px;gap:24px}.facts-identity{grid-template-columns:1fr;gap:20px}.facts-contact-row{gap:9px;grid-template-columns:20px minmax(0,1fr) 40px}.facts-contact-row a{font-size:13px}.facts-now{padding:20px}.facts-copy{opacity:1}.facts-now .facts-specialization dd{font-size:27px}}
+@media(prefers-reduced-motion:reduce){.facts-availability>span{animation:none}[data-about-refresh] .profile-facts-panel:hover{transform:none}.facts-copy,.facts-copy-status{transition:none}}
+
+.facts-zones:has(>.facts-right:only-child){grid-template-columns:1fr}.study-segments{grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(36px,1fr))}.study-segments>span{min-width:0}
+
+.profile-facts-panel{scroll-margin-top:calc(var(--hero-header-height,88px) + 24px)}
+
+@media(max-width:360px){.facts-now .facts-specialization dd{font-size:23px}}
