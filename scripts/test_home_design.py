@@ -8,13 +8,17 @@ with tempfile.TemporaryDirectory() as t:
  def build():subprocess.run([sys.executable,str(base/'scripts/build_editor.py')],check=True,capture_output=True)
  def doc(name):return html.parse(str(base/'docs'/name))
  def save(path,value):(base/path).write_text(json.dumps(value))
- build();h=doc('index.html');assert h.xpath('//img[@class="identity-portrait"]/@src')==['assets/ariful-portrait.jpg'];assert h.xpath('//h1/@data-phrases');assert not h.xpath('//*[contains(@class,"physical-stage")]');assert len(h.xpath('//div[@class="slim-stat"]'))==4
+ build();h=doc('index.html');assert h.xpath('//div[@class="hero-card-photo"]/img/@src')==['assets/ariful-portrait.jpg'];assert h.xpath('//div[@class="hero-role"]/@data-hero-phrases');assert not h.xpath('//*[contains(@class,"physical-stage")]');assert len(h.xpath('//div[@class="hero-stat"]'))==4
  for p in (base/'docs').glob('*.html'):
   d=doc(p.name);expected=['index.html','about.html','projects.html','gallery.html','blogs.html','contact.html']
-  assert d.xpath('//nav[@class="header-nav"]/a/@href')==expected
-  assert d.xpath('//nav[@aria-label="Footer navigation"]/a/@href')==expected
+  if p.name in ('index.html','about.html'):
+   assert d.xpath('//nav[@class="hero-page-nav"]/a/@href')==expected
+   assert len(d.xpath('//nav[@class="hero-page-nav"]/a[@aria-current="page"]'))==1
+  else:
+   assert d.xpath('//nav[@class="header-nav"]/a/@href')==expected
+   assert d.xpath('//nav[@aria-label="Footer navigation"]/a/@href')==expected
   assert d.xpath('//nav[@class="menu-links"]/a/@href')==expected
-  assert len(d.xpath('//nav[@class="header-nav"]/a[@aria-current="page"]'))==1
+  if p.name not in ('index.html','about.html'):assert len(d.xpath('//nav[@class="header-nav"]/a[@aria-current="page"]'))==1
   assert len(d.xpath('//*[@id="moment-viewer"]'))==1
   assert len(d.xpath('//*[@id="back-top"]'))==1
   assert d.xpath('//link[starts-with(@href,"editorial.css")]')
@@ -27,5 +31,5 @@ with tempfile.TemporaryDirectory() as t:
  item['published']=False;save('editor/gallery/personal.json',item);build();assert not doc('gallery.html').xpath('//*[@id="gallery-personal"]');assert 'A real moment' not in (base/'docs/content.js').read_text()
  for p in (base/'editor/gallery').glob('*.json'):p.unlink()
  build();assert not doc('index.html').xpath('//div[@class="preview-wall"]');assert doc('gallery.html').xpath('//*[contains(@class,"gallery-empty-state")]')
- p=json.loads((base/'editor/profile.json').read_text());p.update(photo='',name='New Full Name');save('editor/profile.json',p);s=json.loads((base/'editor/homepage.json').read_text());s.update(typewriter_phrases=['A new phrase.'],status_chips=['New chip'],logo_text='newname');save('editor/homepage.json',s);build();h=doc('index.html');assert h.xpath('//div[@class="identity-monogram"]');assert 'A new phrase.' in h.xpath('string(//h1)');assert h.xpath('//article[@class="compact-profile"]/h2/text()')==['New Full Name'];assert 'New chip' in h.xpath('string(//div[@class="profile-chips"])')
-print('Passed: six-page shared nav, portrait/CMS replacement, typewriter/chips, gallery lifecycle and empty states')
+ p=json.loads((base/'editor/profile.json').read_text());p.update(photo='',name='New Full Name',availability='New availability');save('editor/profile.json',p);s=json.loads((base/'editor/homepage.json').read_text());s.update(typewriter_phrases=['A new phrase.'],status_chips=['New chip'],logo_text='newname');save('editor/homepage.json',s);build();h=doc('index.html');assert h.xpath('//span[@class="hero-monogram"]');assert 'A new phrase.' in h.xpath('string(//div[@class="hero-role"])');assert h.xpath('//h2[@class="hero-card-name"]/text()')==['New Full Name'];assert 'New availability' in h.xpath('string(//div[@class="hero-availability"])')
+print('Passed: six-page shared nav, portrait/CMS replacement, typewriter/availability, gallery lifecycle and empty states')
