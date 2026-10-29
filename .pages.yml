@@ -2,7 +2,7 @@
   "media": [
     {
       "name": "uploads",
-      "label": "Pictures, r\u00e9sum\u00e9 & certificates",
+      "label": "Pictures, résumé & certificates",
       "input": "docs/assets",
       "output": "assets",
       "rename": "safe",
@@ -21,7 +21,7 @@
   "content": [
     {
       "name": "profile",
-      "label": "Profile, r\u00e9sum\u00e9 & homepage",
+      "label": "Profile, résumé & homepage",
       "type": "file",
       "path": "editor/profile.json",
       "format": "json",
@@ -98,7 +98,7 @@
         },
         {
           "name": "resume",
-          "label": "R\u00e9sum\u00e9 PDF",
+          "label": "Résumé PDF",
           "type": "file",
           "options": {
             "media": "uploads",
@@ -264,7 +264,7 @@
         },
         {
           "name": "gallery_limit",
-          "label": "Featured photos on homepage (1\u201320)",
+          "label": "Featured photos on homepage (1–20)",
           "type": "number"
         },
         {
@@ -345,6 +345,56 @@
           "label": "ID card Connect button destination",
           "type": "string",
           "description": "Use contact.html for your existing Connect page. Leave empty to hide the button."
+        },
+        {
+          "name": "typewriter_phrases",
+          "label": "Hero typewriter phrases",
+          "type": "string",
+          "description": "Add, remove or reorder these phrases. Each types and deletes in turn.",
+          "list": true
+        },
+        {
+          "name": "status_chips",
+          "label": "Profile card status chips",
+          "type": "string",
+          "description": "Short labels below your name. Add or remove as needed.",
+          "list": true
+        },
+        {
+          "name": "ticker_label",
+          "label": "Highlights ticker label",
+          "type": "string",
+          "description": "Leave empty to omit optional text."
+        },
+        {
+          "name": "projects_heading",
+          "label": "Featured projects heading",
+          "type": "string",
+          "description": "Leave empty to omit optional text."
+        },
+        {
+          "name": "notes_heading",
+          "label": "Latest notes heading",
+          "type": "string",
+          "description": "Leave empty to omit optional text."
+        },
+        {
+          "name": "about_teaser_heading",
+          "label": "About teaser heading",
+          "type": "string",
+          "description": "Leave empty to omit optional text."
+        },
+        {
+          "name": "about_teaser",
+          "label": "Short about teaser",
+          "type": "rich-text",
+          "description": "Leave empty to omit optional text."
+        },
+        {
+          "name": "closing_heading",
+          "label": "Closing contact heading",
+          "type": "string",
+          "description": "Leave empty to omit optional text."
         }
       ],
       "operations": {
@@ -494,6 +544,12 @@
                 "media": "uploads",
                 "switcher": false
               }
+            },
+            {
+              "name": "show_publicly",
+              "label": "Show this reference publicly",
+              "type": "boolean",
+              "description": "Off by default. Enable to publish this person’s contact details."
             }
           ]
         },
@@ -521,6 +577,18 @@
             "media": "uploads",
             "switcher": false
           }
+        },
+        {
+          "name": "transcript_public",
+          "label": "Show transcript publicly",
+          "type": "boolean",
+          "description": "Off by default. Enable only when you want your transcript visible."
+        },
+        {
+          "name": "references_notice",
+          "label": "Private references notice",
+          "type": "string",
+          "description": "Shown when no references are marked public."
         }
       ]
     },
@@ -552,7 +620,7 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026\u20132028)",
+          "label": "Date / period (e.g. 2026–2028)",
           "type": "string"
         },
         {
@@ -749,6 +817,39 @@
           "label": "Display order (smaller first)",
           "type": "number",
           "default": 10
+        },
+        {
+          "name": "featured",
+          "label": "Feature on homepage",
+          "type": "boolean",
+          "description": "Enabled by default for existing entries; turn off to hide from the home preview."
+        },
+        {
+          "name": "seo_title",
+          "label": "Search / sharing title",
+          "type": "string",
+          "description": "Optional override. Your name is appended automatically."
+        },
+        {
+          "name": "seo_description",
+          "label": "Search / sharing description",
+          "type": "text",
+          "description": "Optional short description for search engines and social sharing."
+        },
+        {
+          "name": "social_image",
+          "label": "Sharing image",
+          "type": "image",
+          "description": "Optional social preview image.",
+          "options": {
+            "media": "uploads"
+          }
+        },
+        {
+          "name": "share_enabled",
+          "label": "Show share button",
+          "type": "boolean",
+          "description": "Enabled by default; turn off to hide the share button."
         }
       ]
     },
@@ -1027,6 +1128,52 @@
           "label": "Display order (smaller first)",
           "type": "number",
           "default": 10
+        },
+        {
+          "name": "featured",
+          "label": "Feature on homepage",
+          "type": "boolean",
+          "description": "Enabled by default for existing entries; turn off to hide from the home preview."
+        },
+        {
+          "name": "seo_title",
+          "label": "Search / sharing title",
+          "type": "string",
+          "description": "Optional override. Your name is appended automatically."
+        },
+        {
+          "name": "seo_description",
+          "label": "Search / sharing description",
+          "type": "text",
+          "description": "Optional short description for search engines and social sharing."
+        },
+        {
+          "name": "social_image",
+          "label": "Sharing image",
+          "type": "image",
+          "description": "Optional social preview image.",
+          "options": {
+            "media": "uploads"
+          }
+        },
+        {
+          "name": "share_enabled",
+          "label": "Show share button",
+          "type": "boolean",
+          "description": "Enabled by default; turn off to hide the share button."
+        },
+        {
+          "name": "tools",
+          "label": "Tools used",
+          "type": "string",
+          "description": "Optional tools or software used in this project.",
+          "list": true
+        },
+        {
+          "name": "duration",
+          "label": "Project duration",
+          "type": "string",
+          "description": "Optional readable duration, for example 6 weeks."
         }
       ]
     },
@@ -1294,6 +1441,12 @@
           "label": "Display order (smaller first)",
           "type": "number",
           "default": 10
+        },
+        {
+          "name": "website",
+          "label": "Institution / organization website",
+          "type": "string",
+          "description": "Paste the official website URL. The institution name becomes a link in a new tab."
         }
       ]
     },
@@ -1565,6 +1718,12 @@
           "label": "Display order (smaller first)",
           "type": "number",
           "default": 10
+        },
+        {
+          "name": "website",
+          "label": "Institution / organization website",
+          "type": "string",
+          "description": "Paste the official website URL. The institution name becomes a link in a new tab."
         }
       ]
     },
@@ -1596,7 +1755,7 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026\u20132028)",
+          "label": "Date / period (e.g. 2026–2028)",
           "type": "string"
         },
         {
@@ -1791,6 +1950,12 @@
           "label": "Display order (smaller first)",
           "type": "number",
           "default": 10
+        },
+        {
+          "name": "website",
+          "label": "Institution / organization website",
+          "type": "string",
+          "description": "Paste the official website URL. The institution name becomes a link in a new tab."
         }
       ]
     },
@@ -1822,7 +1987,7 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026\u20132028)",
+          "label": "Date / period (e.g. 2026–2028)",
           "type": "string"
         },
         {
@@ -2021,6 +2186,12 @@
           "label": "Display order (smaller first)",
           "type": "number",
           "default": 10
+        },
+        {
+          "name": "website",
+          "label": "Institution / organization website",
+          "type": "string",
+          "description": "Paste the official website URL. The institution name becomes a link in a new tab."
         }
       ]
     },
@@ -2052,7 +2223,7 @@
         },
         {
           "name": "date",
-          "label": "Date / period (e.g. 2026\u20132028)",
+          "label": "Date / period (e.g. 2026–2028)",
           "type": "string"
         },
         {
@@ -2244,12 +2415,18 @@
           "label": "Display order (smaller first)",
           "type": "number",
           "default": 10
+        },
+        {
+          "name": "website",
+          "label": "Institution / organization website",
+          "type": "string",
+          "description": "Paste the official website URL. The institution name becomes a link in a new tab."
         }
       ]
     },
     {
       "name": "gallery",
-      "label": "Gallery \u00b7 moments & photo stories",
+      "label": "Gallery · moments & photo stories",
       "type": "collection",
       "path": "editor/gallery",
       "format": "json",
@@ -2446,6 +2623,1457 @@
           "label": "Show on website",
           "type": "boolean",
           "default": false
+        }
+      ]
+    },
+    {
+      "name": "site",
+      "label": "Site settings · footer, forms & labels",
+      "type": "file",
+      "path": "editor/site.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "site_name",
+          "label": "Site Name",
+          "type": "string",
+          "description": "Editable site-wide content."
+        },
+        {
+          "name": "description",
+          "label": "Description",
+          "type": "string",
+          "description": "Editable site-wide content."
+        },
+        {
+          "name": "site_url",
+          "label": "Site Url",
+          "type": "string",
+          "description": "Editable site-wide content."
+        },
+        {
+          "name": "social_image",
+          "label": "Social Image",
+          "type": "image",
+          "description": "Editable site-wide content.",
+          "options": {
+            "media": "uploads"
+          }
+        },
+        {
+          "name": "footer_text",
+          "label": "Footer Text",
+          "type": "string",
+          "description": "Editable site-wide content."
+        },
+        {
+          "name": "footer_mark",
+          "label": "Footer Mark",
+          "type": "string",
+          "description": "Editable site-wide content."
+        },
+        {
+          "name": "author_bio",
+          "label": "Author Bio",
+          "type": "string",
+          "description": "Editable site-wide content."
+        },
+        {
+          "name": "form_provider",
+          "label": "Contact form delivery",
+          "type": "select",
+          "description": "Email app works immediately. Formspree/Web3Forms need your own form service details.",
+          "options": {
+            "values": [
+              "Email app",
+              "Formspree",
+              "Web3Forms"
+            ]
+          }
+        },
+        {
+          "name": "formspree_endpoint",
+          "label": "Formspree form endpoint",
+          "type": "string",
+          "description": "Public form identifiers only. Never enter a private API secret."
+        },
+        {
+          "name": "web3forms_access_key",
+          "label": "Web3Forms public access key",
+          "type": "string",
+          "description": "Public form identifiers only. Never enter a private API secret."
+        },
+        {
+          "name": "form_note",
+          "label": "Form Note",
+          "type": "string",
+          "description": "Editable site-wide content."
+        },
+        {
+          "name": "project_categories",
+          "label": "Project Categories",
+          "type": "object",
+          "description": "Edit the labels shown on the site.",
+          "fields": [
+            {
+              "name": "textile",
+              "label": "Textile",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "research",
+              "label": "Research",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "industry",
+              "label": "Industry",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "creator",
+              "label": "Creator",
+              "type": "string",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "about_index",
+          "label": "About Index",
+          "type": "object",
+          "description": "Edit the labels shown on the site.",
+          "fields": [
+            {
+              "name": "education",
+              "label": "Education",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "experience",
+              "label": "Experience",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "skills",
+              "label": "Skills",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "recognition",
+              "label": "Recognition",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "certificates",
+              "label": "Certificates",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "recommendations",
+              "label": "Recommendations",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "resume",
+              "label": "Resume",
+              "type": "string",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pages",
+      "label": "Page headings & SEO",
+      "type": "file",
+      "path": "editor/pages.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "index",
+          "label": "Index",
+          "type": "object",
+          "description": "Heading and sharing settings for this page.",
+          "fields": [
+            {
+              "name": "title",
+              "label": "Title",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "eyebrow",
+              "label": "Eyebrow",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "heading",
+              "label": "Heading",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "intro",
+              "label": "Intro",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "social_image",
+              "label": "Social Image",
+              "type": "image",
+              "description": "",
+              "options": {
+                "media": "uploads"
+              }
+            }
+          ]
+        },
+        {
+          "name": "about",
+          "label": "About",
+          "type": "object",
+          "description": "Heading and sharing settings for this page.",
+          "fields": [
+            {
+              "name": "title",
+              "label": "Title",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "eyebrow",
+              "label": "Eyebrow",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "heading",
+              "label": "Heading",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "intro",
+              "label": "Intro",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "social_image",
+              "label": "Social Image",
+              "type": "image",
+              "description": "",
+              "options": {
+                "media": "uploads"
+              }
+            }
+          ]
+        },
+        {
+          "name": "projects",
+          "label": "Projects",
+          "type": "object",
+          "description": "Heading and sharing settings for this page.",
+          "fields": [
+            {
+              "name": "title",
+              "label": "Title",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "eyebrow",
+              "label": "Eyebrow",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "heading",
+              "label": "Heading",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "intro",
+              "label": "Intro",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "social_image",
+              "label": "Social Image",
+              "type": "image",
+              "description": "",
+              "options": {
+                "media": "uploads"
+              }
+            }
+          ]
+        },
+        {
+          "name": "gallery",
+          "label": "Gallery",
+          "type": "object",
+          "description": "Heading and sharing settings for this page.",
+          "fields": [
+            {
+              "name": "title",
+              "label": "Title",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "eyebrow",
+              "label": "Eyebrow",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "heading",
+              "label": "Heading",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "intro",
+              "label": "Intro",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "social_image",
+              "label": "Social Image",
+              "type": "image",
+              "description": "",
+              "options": {
+                "media": "uploads"
+              }
+            }
+          ]
+        },
+        {
+          "name": "blogs",
+          "label": "Blogs",
+          "type": "object",
+          "description": "Heading and sharing settings for this page.",
+          "fields": [
+            {
+              "name": "title",
+              "label": "Title",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "eyebrow",
+              "label": "Eyebrow",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "heading",
+              "label": "Heading",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "intro",
+              "label": "Intro",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "social_image",
+              "label": "Social Image",
+              "type": "image",
+              "description": "",
+              "options": {
+                "media": "uploads"
+              }
+            }
+          ]
+        },
+        {
+          "name": "contact",
+          "label": "Contact",
+          "type": "object",
+          "description": "Heading and sharing settings for this page.",
+          "fields": [
+            {
+              "name": "title",
+              "label": "Title",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "eyebrow",
+              "label": "Eyebrow",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "heading",
+              "label": "Heading",
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "intro",
+              "label": "Intro",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "description": ""
+            },
+            {
+              "name": "social_image",
+              "label": "Social Image",
+              "type": "image",
+              "description": "",
+              "options": {
+                "media": "uploads"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "interface",
+      "label": "Interface wording · buttons, forms & section labels",
+      "type": "file",
+      "path": "editor/interface.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "a97fb50947",
+          "label": "BLOGS",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "f398f46c70",
+          "label": "SMALL IDEAS. USEFUL TAKEAWAYS.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "c326a4660b",
+          "label": "Field",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "bcafdf9440",
+          "label": "notes.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "bb6113797d",
+          "label": "arif",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "3a52ce7809",
+          "label": ".",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "de2b346eee",
+          "label": "FOLLOW A THREAD",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "6c9fc99089",
+          "label": "Close menu",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "ddfe163345",
+          "label": "01",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "70f8bb9a8a",
+          "label": "Home",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "bcac9d1d8e",
+          "label": "02",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "6b21fb791a",
+          "label": "About",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "3ea6c91e24",
+          "label": "03",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "5ef4439786",
+          "label": "Blogs",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "798f861ee7",
+          "label": "04",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "53e890d5f0",
+          "label": "Projects",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "28a5c28185",
+          "label": "05",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "b37456c453",
+          "label": "Contact",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "7ac59684cc",
+          "label": "arifulislamfahim04@gmail.com",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "6b6390a441",
+          "label": "LinkedIn",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "b25a0477c3",
+          "label": "Dhaka, BD ·",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "ceeb27c057",
+          "label": "Close reading view",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "be70b75841",
+          "label": "Previous document",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "1fdb454043",
+          "label": "Next document",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a4ae4b24a1",
+          "label": "Zoom out",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "4fc05f2763",
+          "label": "Zoom in",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "7866c7c236",
+          "label": "Close document",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "d36bcb4719",
+          "label": "Find your thread.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "1f7df2fe36",
+          "label": "Close command palette",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "f27a7d8cb2",
+          "label": "Search pages and actions",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "c92994da54",
+          "label": "Search pages and actions…",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "c8eade842c",
+          "label": "Download CV",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "9b0eaf14d3",
+          "label": "Toggle theme",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "01345289e5",
+          "label": "Email me",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "f8aae44c5e",
+          "label": "MY APPROACH",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "f113803ac0",
+          "label": "THE COMMON THREAD",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "698a041865",
+          "label": "Curiosity, made",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "d585edbaa2",
+          "label": "practical.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "385cc51745",
+          "label": "NEXT CHAPTER",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a80804b43e",
+          "label": "A LITTLE SPACE FOR BIG IDEAS",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "f6774fe69d",
+          "label": "Let’s make something",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a8eb6db6f0",
+          "label": "meaningful.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a64b12d8ee",
+          "label": "WHO I AM",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "1329fd0ad1",
+          "label": "THE PERSON BEHIND THE WORK",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "26e5325f23",
+          "label": "me.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "4e6a22430e",
+          "label": "AT A GLANCE",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "b9e4ab9527",
+          "label": "LEARNING",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "593583b7da",
+          "label": "EDUCATION",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a99e56be67",
+          "label": "Where I’m",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "9f9b15fe4d",
+          "label": "learning.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "21ab114259",
+          "label": "EXPERIENCE",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "194b4835a0",
+          "label": "LEADERSHIP & INDUSTRY EXPOSURE",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "3a628b12c1",
+          "label": "Putting learning in",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "8af1917542",
+          "label": "context.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "2fbbf64505",
+          "label": "CAPABILITIES",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "71b25448aa",
+          "label": "TECHNICAL SKILLS",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "80cc55d5d7",
+          "label": "A practical",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "bf2b84b1e8",
+          "label": "foundation.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "3ae9bc092d",
+          "label": "RECOGNITION",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "200ad80484",
+          "label": "ACADEMIC HONOURS",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "42e5140ff6",
+          "label": "Consistent effort,",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "4ce4103ab6",
+          "label": "recognized.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "81a360f604",
+          "label": "CERTIFICATES",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "661031bec1",
+          "label": "CONTINUING DEVELOPMENT",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "972e77e4cc",
+          "label": "Learning beyond the",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a10864c1f0",
+          "label": "syllabus.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "14683d8111",
+          "label": "RECOMMENDATIONS",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "478a2ad7d9",
+          "label": "REAL PERSPECTIVES",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "3ea4ee781b",
+          "label": "Good work. Real",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "f7ec18bbc3",
+          "label": "perspectives.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a26a6ebdc9",
+          "label": "RESUME",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "64677462f1",
+          "label": "THE FULL STORY",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "058fe80b24",
+          "label": "Take the next",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "9834541834",
+          "label": "thread.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "1742f5d553",
+          "label": "PROJECTS",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "6aea88f48b",
+          "label": "IDEAS, EXPLORATIONS & THINGS IN PROGRESS",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "9a976fc228",
+          "label": "Selected",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "28f3a9b183",
+          "label": "work.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a308935bf6",
+          "label": "SAY HELLO",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "cf5b4626fa",
+          "label": "GOOD CONVERSATIONS START WITH AN IDEA",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "0c50e3c4a6",
+          "label": "Let’s",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "e1fb7c5376",
+          "label": "connect.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "d6fce70456",
+          "label": "LET’S TALK",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "edee6ff660",
+          "label": "Good ideas start",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "cfc31e1e8d",
+          "label": "For internships, trainee roles, academic collaboration, or a conversation about textiles and technology — get in touch.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "0cd50ae658",
+          "label": "SEND A MESSAGE",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "3fd30dbd52",
+          "label": "What’s on your mind?",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "ab42293e29",
+          "label": "Your name",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "6db5ba5e66",
+          "label": "What should I call you?",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "3fa6f5fb50",
+          "label": "Your email",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "50e2b46ef8",
+          "label": "you@example.com",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "8d183dbdce",
+          "label": "Subject",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "e4a1c09b4d",
+          "label": "What’s your idea?",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "f190c98ece",
+          "label": "Your message",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "7c156fc177",
+          "label": "Tell me a little about it…",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "c70a890d14",
+          "label": "Send message",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "ad972af035",
+          "label": "Opens your email app with a draft addressed to me. Review it there, then send.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "38582b4b94",
+          "label": "Your email draft is ready.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "aab1a88bdc",
+          "label": "Finish sending it in your email app.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "781961bc81",
+          "label": "Pause",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "5826b136ec",
+          "label": "Leave this field empty",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "b583bb33fb",
+          "label": "No updates here yet. There will be more to share soon.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "30180a850b",
+          "label": "Pause gallery motion",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "2a8a76d547",
+          "label": "More about me",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "c5bfdb102c",
+          "label": "Contact me",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "1371cbe4a7",
+          "label": "Open in Maps",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "51e0b252cd",
+          "label": "Search site (Ctrl K)",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "7587078164",
+          "label": "Theme: light. Switch to dark.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "197101e9db",
+          "label": "Open menu",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "21deb29339",
+          "label": "Sample update",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "ad086cf55b",
+          "label": "Read more",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "e83249bd3b",
+          "label": "home",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "efd197f3fc",
+          "label": "Main navigation",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "b9bfabec0b",
+          "label": "Change theme",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "378dc0b0bd",
+          "label": "Copy WhatsApp number",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "16f8bb8836",
+          "label": "Search projects…",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "1c0b1b030f",
+          "label": "THE LATEST THREADS",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "058f36b25e",
+          "label": "Mobile navigation",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "f2187c881c",
+          "label": "View projects",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "9426c85d11",
+          "label": "A LITTLE ABOUT ME",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "2bf93931c7",
+          "label": "min read",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "508fadca1c",
+          "label": "Next project",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "30c3c3680e",
+          "label": "Search projects",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "7eb6c2e508",
+          "label": "MOMENTS, COLLECTED",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a8d4a06d59",
+          "label": "Explore the gallery",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "c2cde8edc9",
+          "label": "THE NEXT THREAD",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "3fab95cdf1",
+          "label": "View certificate",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "28fe6e9638",
+          "label": "Map of",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "00b7051632",
+          "label": "Share this page",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "d287e34776",
+          "label": "More from the notebook",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "badd385121",
+          "label": "View details",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "35a6512bae",
+          "label": "Sample image",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "419441605d",
+          "label": "Explore the map",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "a32d98c0ef",
+          "label": "Footer navigation",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "b3bd0b5a70",
+          "label": "Resume",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "4ef6e9e867",
+          "label": "Resume gallery motion",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "55fe1828e4",
+          "label": "Theme: dark. Switch to system.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "2b252b1e92",
+          "label": "Theme: system. Switch to light.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "b7c3ca0ee3",
+          "label": "Copied!",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "ab40d89c86",
+          "label": "Select the text to copy it.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "e9cc6d0e9a",
+          "label": "No results found.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "9539a81a83",
+          "label": "Please complete this field.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "d2306dd897",
+          "label": "Please enter a valid email address.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "b785d343a2",
+          "label": "Your email draft is ready. Finish sending it in your email app.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "cf765512cc",
+          "label": "Sending…",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "18d1dd0bc8",
+          "label": "Message sent. Thank you for getting in touch.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "693a733593",
+          "label": "The message could not be sent. Please try again or email me directly.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "86563d61b6",
+          "label": "Please add your form service details in Pages CMS first.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "9a9a20fae1",
+          "label": "Switch theme",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "6a72085653",
+          "label": "All",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "4e411c43d7",
+          "label": "Academic",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "be601df25e",
+          "label": "Research",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "973d438fe5",
+          "label": "Industry",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "817b79b0af",
+          "label": "Creator",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "be0068f918",
+          "label": "References available on request",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "473710d327",
+          "label": "More details",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "f2b789a1b8",
+          "label": "SELECTED THREADS",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "c1055d0a89",
+          "label": "FROM THE NOTEBOOK",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "c8a290f5ae",
+          "label": "Close photo",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "09972524c1",
+          "label": "Previous photo",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "fe66878201",
+          "label": "Next photo",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "d9c883a905",
+          "label": "Back to top",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "e1815787f2",
+          "label": "About sections",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "6d1d62bc37",
+          "label": "No entries published yet.",
+          "type": "string",
+          "description": "Change this interface label. Content entries are edited in their own sections."
         }
       ]
     }
