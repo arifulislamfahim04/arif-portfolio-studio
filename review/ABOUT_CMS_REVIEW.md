@@ -35,3 +35,6 @@ No new photography or icon pack. Existing images, icon sources and licences are 
 - Animation: ring stroke reveal, status-dot opacity, date bar transform, 300ms disclosure height and plus rotation; reduced motion bypasses these. Logo grayscale and card spotlight are limited decorative effects.
 - Checked: content lifecycle/schema/optional field tests, safe rich text, local references, JS syntax. Chromium desktop light/dark and 375/768px iframe layouts; no page horizontal overflow. Mouse and keyboard disclosure checked. Actual phone hardware, OS reduced-motion switch and live CMS upload UI remain unverified.
 - The review Site remains a built snapshot; CMS edits to the review GitHub branch need a rebuild to appear there. Main is unchanged.
+
+### HSC / SSC follow-up
+Both completed qualifications now use the same full three-zone card and animated 88px GPA ring as the BSc, with Science group subtitle, editable Group fact, and a static Completed badge. No elapsed-period bar for these completed entries. The existing grades/dates/institutions are unchanged. The optional compact layout remains available by disabling Featured education card.

@@ -11,5 +11,16 @@
   "grade": "4.92",
   "grade_scale": "5.00",
   "grade_label": "GPA",
-  "subtitle": "Science"
+  "subtitle": "Science group",
+  "featured": true,
+  "status": "Completed",
+  "currently_studying": false,
+  "expected_completion": false,
+  "extra_fields": [
+    {
+      "label": "Group",
+      "value": "Science"
+    }
+  ],
+  "show_progress": false
 }

@@ -88,3 +88,5 @@
 @media(max-width:700px){[data-about-refresh] .education-v2{padding:20px}.edu-heading{grid-template-columns:48px minmax(0,1fr);gap:14px}[data-about-refresh] .education-v2 .institution-logo,[data-about-refresh] .education-v2 .institution-initial{width:48px;height:48px}.edu-grade{grid-column:2;justify-self:start;display:flex;align-items:center;gap:14px}.edu-ring{margin:0}.edu-ring>div strong{font-size:21px}[data-about-refresh] .education-compact .edu-heading{grid-template-columns:48px minmax(0,1fr)}.edu-grade-chip{grid-column:2;justify-self:start}.edu-detail-grid{grid-template-columns:1fr}}
 @media(hover:none){[data-about-refresh] .education-v2 .institution-logo{filter:none}}
 @media(prefers-reduced-motion:reduce){[data-about-refresh] .education-v2,[data-about-refresh] .education-v2 *,[data-about-refresh] .education-v2:after{transition:none!important;animation:none!important}[data-about-refresh] .education-v2:hover{transform:none}}
+
+.edu-completed-status{margin-top:20px}.edu-completed-status .edu-status{margin-bottom:0}.edu-completed-status .edu-status>span{animation:none}

@@ -19,5 +19,6 @@
   "status": "Results pending",
   "subtitle": "Major in Apparel Manufacturing",
   "specialization": "Apparel Manufacturing",
-  "location": "Dhaka, Bangladesh"
+  "location": "Dhaka, Bangladesh",
+  "show_progress": true
 }

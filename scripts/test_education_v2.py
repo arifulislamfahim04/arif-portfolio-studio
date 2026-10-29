@@ -13,8 +13,14 @@ with tempfile.TemporaryDirectory() as t:
  assert b.xpath('.//p[@class="edu-date" and text()="Oct 2022 – Dec 2026 · Expected"]')
  assert b.xpath('.//div[@aria-label="CGPA 3.90 of 4.00"]')
  assert b.xpath('.//span[@class="edu-status" and contains(.,"Results pending")]')
- assert len(a.xpath('//article[contains(@class,"education-compact")]'))==2
- assert a.xpath('//span[text()="GPA 4.92 / 5.00"]') and a.xpath('//span[text()="GPA 4.67 / 5.00"]')
+ assert len(a.xpath('//article[contains(@class,"education-featured")]'))==3
+ for entry,value in [('02','4.92'),('03','4.67')]:
+  school=a.xpath('//article[@data-entry-id="education-'+entry+'"]')[0]
+  assert school.xpath('.//div[@aria-label="GPA '+value+' of 5.00"]')
+  assert school.xpath('.//p[text()="Science group"]')
+  assert school.xpath('.//span[@class="edu-status" and contains(.,"Completed")]')
+  assert school.xpath('.//details//dt[text()="Group"]/following-sibling::dd[text()="Science"]')
+  assert not school.xpath('.//div[@class="edu-progress"]')
  p=root/'editor/education/01.json';d=json.loads(p.read_text());d.update(title='A future degree',grade='4.20',grade_label='GPA',grade_scale='5.00',institution_logo='assets/loom-spools.jpg',focus='Quality science',location='Example location',coursework=['Materials','Testing'],thesis_title='A sample thesis',transcript_link='https://example.org/public-transcript',student_id='DEMO-ONLY',body='<p><strong>Formatted</strong> description</p><script>alert(1)</script>');save(p,d);a=build();b=a.xpath('//article[@data-entry-id="education-01"]')[0]
  assert b.xpath('.//h3[text()="A future degree"]')
  assert b.xpath('.//div[@aria-label="GPA 4.20 of 5.00"]')

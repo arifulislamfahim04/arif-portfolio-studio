@@ -1793,6 +1793,13 @@
           "type": "string",
           "description": "Defaults to View details.",
           "required": false
+        },
+        {
+          "name": "show_progress",
+          "label": "Show date-progress bar",
+          "type": "boolean",
+          "default": false,
+          "description": "Enable for an ongoing qualification with start and end dates. Leave off for completed HSC, SSC or other qualifications. The GPA ring is separate."
         }
       ]
     },
