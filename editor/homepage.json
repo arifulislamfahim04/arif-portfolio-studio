@@ -22,6 +22,22 @@
   "gallery_mode": "Marquee",
   "updates_heading": "A few threads in progress.",
   "updates_intro": "Small steps, new questions, and what I’m learning along the way.",
-  "card_button_text": "Connect with me",
-  "card_button_link": "contact.html"
+  "card_button_text": "Contact me",
+  "card_button_link": "contact.html",
+  "typewriter_phrases": [
+    "I'm Ariful.",
+    "A textile engineering student.",
+    "Curious about apparel manufacturing."
+  ],
+  "status_chips": [
+    "Open to internships",
+    "Trainee roles",
+    "Apparel Manufacturing"
+  ],
+  "ticker_label": "Highlights",
+  "projects_heading": "Questions, put into practice.",
+  "notes_heading": "Notes from a curious mind.",
+  "about_teaser_heading": "Learning how things come together.",
+  "about_teaser": "<p>I’m Ariful Islam Fahim, a final-year Textile Engineering student at Green University of Bangladesh, specializing in Apparel Manufacturing.</p><p>I’m interested in materials, production and quality—and the practical questions between them.</p>",
+  "closing_heading": "Good work starts with a conversation."
 }
