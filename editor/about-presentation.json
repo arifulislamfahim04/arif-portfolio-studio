@@ -1,0 +1,15 @@
+{
+  "facts_heading": "A little more about me",
+  "intro_animation": true,
+  "cursor_follower": true,
+  "recommendations": [
+    {
+      "sample": true,
+      "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "name": "Sample recommendation",
+      "role": "Layout preview — replace with a real recommendation",
+      "published": true
+    }
+  ],
+  "intro_wordmark": "ARIFUL"
+}

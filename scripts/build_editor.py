@@ -8,6 +8,7 @@ from home_polish import polish
 from editorial import redesign
 from hero_refresh import refresh_hero
 from about_refresh import refresh_about
+from about_finish import finish_about
 from lxml import html
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs'
@@ -256,6 +257,7 @@ def build():
  editorial_site,editorial_ui=redesign(pages,profile,about,read('homepage.json'),root=ROOT,esc=esc,url=url,rich=visible_rich,one=one,select=select,set_html=set_html,entries=entries,story_body=story_body,date_text=date_text)
  refresh_hero(pages['index'],profile,read('homepage.json'),esc=esc,url=url,rich=visible_rich,set_html=set_html)
  refresh_about(pages['about'],pages['index'],read('homepage.json'),root=ROOT,esc=esc,url=url,set_html=set_html)
+ finish_about(pages,root=ROOT,esc=esc,url=url,set_html=set_html)
  # Remove previously generated post pages, so deleted/unpublished entries disappear.
  for pattern in ('posts-*.html','projects-*.html'):
   for p in OUT.glob(pattern):p.unlink()
@@ -312,12 +314,13 @@ def build():
   shutil.copyfile(ROOT/('scripts/editorial.'+extension),OUT/('editorial.'+extension))
   shutil.copyfile(ROOT/('scripts/hero-refresh.'+extension),OUT/('hero-refresh.'+extension))
   shutil.copyfile(ROOT/('scripts/about-refresh.'+extension),OUT/('about-refresh.'+extension))
+  shutil.copyfile(ROOT/('scripts/shared-motion.'+extension),OUT/('shared-motion.'+extension))
  gallery_source=(ROOT/'scripts/home.js').read_text().split('// Gallery filter and photo-story lightbox work independently of the carousel.')[1]
  (OUT/'gallery-runtime.js').write_text("(()=>{'use strict';const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];\n"+gallery_source)
  (OUT/'content.js').write_text((OUT/'content.js').read_text()+'\nwindow.PORTFOLIO_SITE='+json.dumps(editorial_site,ensure_ascii=False)+';\nwindow.PORTFOLIO_UI='+json.dumps(editorial_ui,ensure_ascii=False)+';\nwindow.PORTFOLIO_LABELS='+json.dumps({v:editorial_ui.get(k,v) for k,v in json.loads((ROOT/'scripts/interface-defaults.json').read_text()).items()},ensure_ascii=False)+';')
  for p in OUT.glob('*.html'):
   d=html.parse(str(p))
-  for e in d.xpath('//link[@href="editorial.css" or @href="hero-refresh.css" or @href="about-refresh.css"]|//script[@src="editorial.js" or @src="gallery-runtime.js" or @src="hero-refresh.js" or @src="about-refresh.js"]'):e.set('href' if e.tag=='link' else 'src',e.get('href' if e.tag=='link' else 'src')+'?v='+version)
+  for e in d.xpath('//link[@href="editorial.css" or @href="hero-refresh.css" or @href="about-refresh.css" or @href="shared-motion.css"]|//script[@src="editorial.js" or @src="gallery-runtime.js" or @src="hero-refresh.js" or @src="about-refresh.js" or @src="shared-motion.js"]'):e.set('href' if e.tag=='link' else 'src',e.get('href' if e.tag=='link' else 'src')+'?v='+version)
   p.write_text(html.tostring(d,encoding='unicode',doctype='<!doctype html>'))
  from xml.sax.saxutils import escape as xml_escape
  base=editorial_site['site_url'].rstrip('/')+'/'

@@ -1703,6 +1703,15 @@
           "label": "Institution / organization website",
           "type": "string",
           "description": "Paste the official website URL. The institution name becomes a link in a new tab."
+        },
+        {
+          "name": "institution_logo",
+          "label": "Institution / organisation logo (optional)",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          },
+          "description": "Upload your institution logo. Leave blank for an initial badge."
         }
       ]
     },
@@ -1980,6 +1989,15 @@
           "label": "Institution / organization website",
           "type": "string",
           "description": "Paste the official website URL. The institution name becomes a link in a new tab."
+        },
+        {
+          "name": "institution_logo",
+          "label": "Institution / organisation logo (optional)",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          },
+          "description": "Upload your institution logo. Leave blank for an initial badge."
         }
       ]
     },
@@ -4354,6 +4372,70 @@
           "label": "No projects match your search.",
           "type": "string",
           "description": "Edit this interface label."
+        }
+      ]
+    },
+    {
+      "name": "about_presentation",
+      "label": "About design, motion & recommendations",
+      "type": "file",
+      "path": "editor/about-presentation.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "facts_heading",
+          "label": "Personal facts heading",
+          "type": "string"
+        },
+        {
+          "name": "intro_wordmark",
+          "label": "Opening wordmark text",
+          "type": "string",
+          "description": "Name shown briefly on the first Home/About visit. No artificial loading progress."
+        },
+        {
+          "name": "intro_animation",
+          "label": "Show brief wordmark on first visit",
+          "type": "boolean",
+          "description": "Once per visit on Home/About; skipped for reduced motion."
+        },
+        {
+          "name": "cursor_follower",
+          "label": "Show subtle cursor ring on mouse devices",
+          "type": "boolean"
+        },
+        {
+          "name": "recommendations",
+          "label": "Recommendations",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "quote",
+              "label": "Recommendation text",
+              "type": "text"
+            },
+            {
+              "name": "name",
+              "label": "Person name",
+              "type": "string"
+            },
+            {
+              "name": "role",
+              "label": "Role / organisation",
+              "type": "string"
+            },
+            {
+              "name": "sample",
+              "label": "Mark clearly as a sample",
+              "type": "boolean"
+            },
+            {
+              "name": "published",
+              "label": "Show on website",
+              "type": "boolean"
+            }
+          ]
         }
       ]
     }

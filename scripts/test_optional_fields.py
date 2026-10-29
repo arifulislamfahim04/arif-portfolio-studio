@@ -8,7 +8,7 @@ with tempfile.TemporaryDirectory() as t:
  base=Path(t)/'site';shutil.copytree(ROOT,base,ignore=shutil.ignore_patterns('.git','__pycache__'))
  def build():subprocess.run([sys.executable,str(base/'scripts/build_editor.py')],check=True,capture_output=True)
  def document():return html.parse(str(base/'docs/about.html'))
- def card(title):return document().xpath('//article[./h3[text()="'+title+'"]]')[0]
+ def card(title):return document().xpath('//article[.//h3[text()="'+title+'"]]')[0]
  def data():
   raw=(base/'docs/content.js').read_text()
   return json.loads(raw.split('window.PORTFOLIO_DETAILS=')[1].split(';\nwindow.PORTFOLIO_DOCUMENTS=')[0]),json.loads(raw.split('window.PORTFOLIO_DOCUMENTS=')[1].split(';\nwindow.PORTFOLIO_PROFILE=')[0])
