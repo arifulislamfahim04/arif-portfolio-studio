@@ -160,8 +160,9 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
  for box in select(a,'//div[contains(@class,"bio-fabric")]'):
   src=url(profile.get('secondary_image'))
   if src:
-   one(box,'.//img').set('src',src);one(box,'.//img').set('alt',about.get('image_alt',''))
-   one(box,'.//span').text=about.get('image_caption','')
+   one(box,'.//img').set('src',src)
+   if 'image_alt' in about:one(box,'.//img').set('alt',about['image_alt'])
+   if 'image_caption' in about:one(box,'.//span').text=about['image_caption']
   else:erase(box)
  for folder,section_id in [('education','education'),('experience','experience'),('workshops','certificates')]:
   for v in entries(folder):
@@ -191,7 +192,7 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
  refs=[r for r in about.get('references',[]) if r.get('show_publicly',False)]
  refsection=one(a,'//*[@id="recommendations"]')
  if refs:add(refsection,'<div class="reference-grid">'+''.join('<article class="reference-card glass">'+rich(r.get('body'))+'</article>' for r in refs)+'</div>')
- else:add(refsection,'<p class="privacy-note">'+esc(about['references_notice'])+'</p>')
+ else:add(refsection,'<p class="privacy-note">'+esc(about.get('references_notice') or 'References available on request')+'</p>')
  if not about.get('transcript_public',False):
   for e in select(a,'//div[@class="transcript-action"]'):erase(e)
  # Contact: update every location occurrence and map query from the profile.
@@ -202,7 +203,7 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
   if heading=='phone':target.text=formatted
   if heading=='location':target.text=profile['location'];target.set('href','https://www.google.com/maps/search/?api=1&query='+quote(profile['location']));one(item,'.//button[@data-copy]').set('data-copy',profile['location'])
  if phone:add(direct,f'<article class="direct-contact glass"><span class="icon-badge">{icon("whatsapp")}</span><div><h3>WhatsApp</h3>'+link('https://wa.me/'+phone,formatted,'whatsapp-link','arrow',True)+'</div><button class="copy-control" data-copy="'+esc('+'+phone)+'" aria-label="'+t('Copy WhatsApp number')+'">'+icon('copy')+'</button></article>')
- for old in select(c,'//details[contains(@class,"map-module")]'):erase(old)
+ for old in select(c,'//details[contains(@class,"map-module") or contains(@class,"map-panel")]'):erase(old)
  contact_layout=one(c,'//div[@class="contact-layout"]');add(contact_layout.getparent(),'<details class="map-module"><summary>'+icon('location')+' '+esc(profile['location'])+' · '+t('Explore the map')+'</summary><div class="map-canvas"><iframe title="'+t('Map of')+' '+esc(profile['location'])+'" src="https://maps.google.com/maps?q='+quote(profile['location'])+'&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>'+link('https://www.google.com/maps/search/?api=1&query='+quote(profile['location']),t('Open in Maps'),'map-open','arrow',True)+'</details>')
  form=one(c,'//form');form.set('data-provider',site['form_provider']);form.set('data-endpoint',site.get('formspree_endpoint',''));form.set('data-access-key',site.get('web3forms_access_key',''));add(form,'<label class="honeypot" aria-hidden="true">'+t('Leave this field empty')+'<input name="_gotcha" tabindex="-1" autocomplete="off"></label><p class="form-status" role="status" aria-live="polite"></p>')
  for success in select(form,'.//div[@class="form-success"]'):erase(success)
@@ -230,7 +231,7 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
    labels=site['project_categories'];d=pages[page];filters=one(d,'//div[contains(@class,"filter-bar")]');keys=['all']+list(labels)
    for item in items:
     if item.get('category') and item['category'] not in keys:keys.append(item['category'])
-   set_html(filters,''.join('<button class="filter'+(' active' if k=='all' else '')+'" data-project-filter="'+esc(k)+'" aria-pressed="'+str(k=='all').lower()+'">'+esc('All' if k=='all' else labels.get(k,k))+'</button>' for k in keys))
+   set_html(filters,''.join('<button class="filter'+(' active' if k=='all' else '')+'" data-project-filter="'+esc(k)+'" aria-pressed="'+str(k=='all').lower()+'">'+(t('All') if k=='all' else esc(labels.get(k,k)))+'</button>' for k in keys))
    grid=one(d,'//div[@class="project-grid"]');grid.addnext(html.fragment_fromstring('<p class="search-empty" id="project-empty" hidden>'+t('No projects match your search.')+'</p>'))
    # Search is additive, alongside the existing project filters.
    filters.addprevious(html.fragment_fromstring('<label class="search-box"><span class="sr-only">'+t('Search projects')+'</span><input type="search" id="project-search" placeholder="'+t('Search projects…')+'"></label>'))
@@ -238,14 +239,20 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
    for doc in pages.values():
     for item in select(doc,'//div[@class="blog-meta"]'):item.text=readable_date(item.text_content())
  # Remove redundant destination CTAs only on their target page.
- for e in select(pages['gallery'],'//dialog//a[@href="gallery.html"]'):erase(e)
+ for e in select(pages['gallery'],'//dialog[@id="moment-viewer"]//a[@href="gallery.html"]'):erase(e)
  for page in pages.values():
   for el in select(page,'//a[starts-with(@href,"tel:")]'):el.text=formatted
+  for label in select(page,'//dl//dt'):
+   if label.text_content().strip().lower()=='based in':
+    siblings=label.xpath('following-sibling::dd')
+    if siblings:siblings[0].text=profile['location']
   for el in select(page,'//dl//dd'):
    if re.sub(r'\D','',el.text_content())==phone:el.text=formatted
  # Structured data is built safely and never interpolated into executable JS.
  schema={'@context':'https://schema.org','@type':'Person','name':profile['name'],'url':site['site_url'],'jobTitle':profile.get('role'),'image':urljoin(site['site_url'],profile.get('photo','')),'sameAs':[url(profile[k]) for k in ('linkedin','facebook') if url(profile.get(k))],'address':{'@type':'PostalAddress','addressLocality':profile['location'],'addressCountry':'BD'}}
  add(one(h,'//head'),'<script type="application/ld+json">'+json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')+'</script>')
+ for page in pages.values():
+  for el in select(page,'//section|//article[contains(@class,"gallery-item")]|//div[@class="bio-fabric glass"]'):el.set('data-reveal','')
  return site,ui
 
 def readable_date(raw):

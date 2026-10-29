@@ -251,7 +251,7 @@ def build():
   set_html(one(pages[page],'//div[contains(@class,"filter-bar")]'),markup)
  moments=enhance(pages,profile,entries('gallery'),read('homepage.json'),esc=esc,url=url,rich=rich,image=image,set_html=set_html,one=one,select=select,story_body=story_body,root=ROOT)
  polish(pages,profile,read('homepage.json'),entries('updates'),root=ROOT,esc=esc,url=url,rich=rich,one=one,select=select,set_html=set_html)
- editorial_site,editorial_ui=redesign(pages,profile,about,read('homepage.json'),root=ROOT,esc=esc,url=url,rich=rich,one=one,select=select,set_html=set_html,entries=entries,story_body=story_body,date_text=date_text)
+ editorial_site,editorial_ui=redesign(pages,profile,about,read('homepage.json'),root=ROOT,esc=esc,url=url,rich=visible_rich,one=one,select=select,set_html=set_html,entries=entries,story_body=story_body,date_text=date_text)
  # Remove previously generated post pages, so deleted/unpublished entries disappear.
  for pattern in ('posts-*.html','projects-*.html'):
   for p in OUT.glob(pattern):p.unlink()

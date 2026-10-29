@@ -28,3 +28,8 @@ dialog{background:var(--surface);color:var(--fg);border:1px solid var(--line);bo
 /* Fixed media bounds prevent intrinsic stock-image dimensions widening a grid. */
 img{max-width:100%;height:auto}.bio-layout{grid-template-columns:minmax(0,1fr) 260px}.bio,.bio-fabric,.about-body{min-width:0}.bio-fabric{overflow:hidden;align-self:start}.bio-fabric img{display:block;width:100%;height:300px;object-fit:cover}.fabric-caption{display:block;padding:14px;font-size:11px;color:var(--muted)}.thread-field{opacity:.07}.slim-stat b{font-weight:500;font-variant-numeric:tabular-nums}.project-grid+.search-empty{margin-top:24px}.preview-wall.offscreen .preview-belt,.news-ticker.offscreen .ticker-belt{animation-play-state:paused}
 @media(max-width:1100px){.bio-layout{grid-template-columns:minmax(0,1fr)}.bio-fabric img{height:240px}}
+/* A quiet photographic parallax is limited to desktop and transform only. */
+.compact-photo img{transform:translate3d(0,var(--portrait-y,0px),0) scale(1.025);transform-origin:center}
+@media(prefers-reduced-motion:reduce){.compact-photo img{transform:none}.preview-group{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.section-index a,.direct-contact a,.institution-link{min-height:44px}.project-content h2 a,.blog-content h2 a{display:block;min-height:44px}
+body:has(dialog[open]){overflow:hidden}[data-theme=dark] .theme-toggle .icon{transform:rotate(-18deg)}

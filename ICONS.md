@@ -46,3 +46,5 @@ Phosphor Fill from SVG Repo. All symbols use currentColor and a 0 0 256 256 view
 | gallery | camera-fill.svg | https://www.svgrepo.com/svg/364302/camera-fill | CC0-1.0 |
 
 Inherited message/mail aliases use envelope-simple-fill. Other legacy aliases are resolved in scripts/editorial.py. The old Bootstrap sprite is replaced on every generated page.
+
+| whatsapp · Contact | whatsapp-logo-fill.svg | https://www.svgrepo.com/svg/364988/whatsapp-logo-fill | CC0-1.0 |

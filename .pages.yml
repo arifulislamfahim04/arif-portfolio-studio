@@ -195,7 +195,7 @@
     },
     {
       "name": "homepage",
-      "label": "Homepage design & identity tag",
+      "label": "Homepage · hero, previews & highlights",
       "type": "file",
       "path": "editor/homepage.json",
       "format": "json",
@@ -218,7 +218,8 @@
         {
           "name": "headline",
           "label": "Main headline (line breaks supported)",
-          "type": "text"
+          "type": "text",
+          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
         },
         {
           "name": "description",
@@ -234,13 +235,13 @@
           "name": "tagline",
           "label": "ID card tagline",
           "type": "string",
-          "description": "Short sentence below the small label. Leave empty to hide it."
+          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
         },
         {
           "name": "tag_label",
           "label": "ID card small label",
           "type": "string",
-          "description": "Small text below your name. Example: TEXTILE ENGINEERING / PERSONAL PORTFOLIO"
+          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
         },
         {
           "name": "gallery_heading",
@@ -280,18 +281,21 @@
         {
           "name": "background_image",
           "label": "Hero background (optional, decorative)",
-          "type": "image"
+          "type": "image",
+          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
         },
         {
           "name": "background_image_small",
           "label": "Smaller hero background (optional; same photograph)",
-          "type": "image"
+          "type": "image",
+          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
         },
         {
           "name": "roles",
           "label": "Rotating interests / roles",
           "type": "string",
-          "list": true
+          "list": true,
+          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
         },
         {
           "name": "gallery_mode",
@@ -302,7 +306,8 @@
               "Marquee",
               "Slideshow"
             ]
-          }
+          },
+          "description": "Previous design setting, retained for rollback. The new design uses Typewriter phrases, Status chips and the shared page settings."
         },
         {
           "name": "updates_heading",

@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [homepage-polish-review]
+    branches: [homepage-polish-review, homepage-id-card-review, portfolio-redesign-v2]
 permissions:
   contents: read
 jobs:
@@ -21,4 +21,4 @@ jobs:
       - run: python scripts/test_optional_fields.py
       - run: python scripts/test_home_design.py
       - run: python scripts/test_home_polish.py
-      - run: node --check docs/home-core.js && node --check scripts/home_polish.js
+      - run: node --check docs/editorial.js && node --check docs/gallery-runtime.js
