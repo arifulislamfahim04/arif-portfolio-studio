@@ -59,5 +59,18 @@
     "previous_item": "Previous item",
     "next_item": "Next item",
     "swipe_hint": "Swipe or use the arrow keys"
+  },
+  "learning_labels": {
+    "certificates_heading": "Certificates & short courses",
+    "workshops_heading": "Workshops & seminars",
+    "show_all": "Show all",
+    "show_less": "Show fewer",
+    "view_credential": "View credential",
+    "open_certificate": "Open certificate",
+    "view_file": "View certificate",
+    "issuer_website": "Issuer website",
+    "duration": "Duration",
+    "undated": "Undated",
+    "empty": "Published learning records will appear here."
   }
 }

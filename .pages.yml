@@ -2151,7 +2151,7 @@
         "primary": "title",
         "fields": [
           "title",
-          "date",
+          "year",
           "published",
           "order"
         ],
@@ -2172,7 +2172,7 @@
         },
         {
           "name": "institution",
-          "label": "Institution / organization",
+          "label": "Issuer / institution",
           "type": "string"
         },
         {
@@ -2226,13 +2226,14 @@
         },
         {
           "name": "verification_url",
-          "label": "Verification URL (optional)",
+          "label": "View credential link (optional)",
           "type": "string",
-          "required": false
+          "required": false,
+          "description": "Paste the public credential verification URL. Leave blank to hide the link."
         },
         {
           "name": "skills",
-          "label": "Skills gained (optional)",
+          "label": "Skills learned (optional)",
           "type": "string",
           "required": false,
           "list": true
@@ -2370,34 +2371,40 @@
           "description": "Paste the official website URL. The institution name becomes a link in a new tab."
         },
         {
-          "name": "timeline_state",
-          "label": "Timeline marker state",
-          "type": "select",
-          "default": "completed",
-          "options": {
-            "values": [
-              "completed",
-              "in-progress",
-              "results-pending",
-              "upcoming"
-            ]
-          },
-          "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
-        },
-        {
           "name": "image",
-          "label": "Certificate / leadership photo (optional)",
+          "label": "Certificate thumbnail / photo (optional)",
           "type": "image",
           "options": {
             "media": "uploads"
           },
-          "description": "Appears automatically in the shared image viewer. Awards show a medal placeholder until you upload a photo."
+          "description": "Upload a clear scan or photo. Clicking it opens the same viewer used for awards. You can also upload a PDF in Certificate / supporting document."
         },
         {
           "name": "image_alt",
-          "label": "Photo description (accessibility)",
+          "label": "Certificate image description",
           "type": "string",
           "description": "Describe the certificate or photograph in plain English."
+        },
+        {
+          "name": "year",
+          "label": "Year",
+          "type": "string",
+          "description": "Four-digit year, for example 2026. Newest years appear first; Display order sorts records within each year. Leave blank to use the existing date."
+        },
+        {
+          "name": "institution_logo",
+          "label": "Issuer logo (optional)",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          },
+          "description": "Upload an SVG, PNG or WebP logo. Shown in grayscale until hover or keyboard focus. Hidden on small phone screens."
+        },
+        {
+          "name": "duration",
+          "label": "Course / event duration (optional)",
+          "type": "string",
+          "description": "For example 6 hours or 4 weeks. Leave blank if unknown."
         }
       ]
     },
@@ -2690,7 +2697,7 @@
         "primary": "title",
         "fields": [
           "title",
-          "date",
+          "year",
           "published",
           "order"
         ],
@@ -2746,9 +2753,10 @@
         },
         {
           "name": "duration",
-          "label": "Duration (optional)",
+          "label": "Course / event duration (optional)",
           "type": "string",
-          "required": false
+          "required": false,
+          "description": "For example 6 hours or 4 weeks. Leave blank if unknown."
         },
         {
           "name": "location",
@@ -2906,19 +2914,45 @@
           "description": "Paste the official website URL. The institution name becomes a link in a new tab."
         },
         {
-          "name": "timeline_state",
-          "label": "Timeline marker state",
-          "type": "select",
-          "default": "completed",
+          "name": "year",
+          "label": "Year",
+          "type": "string",
+          "description": "Four-digit year, for example 2026. Newest years appear first; Display order sorts records within each year. Leave blank to use the existing date."
+        },
+        {
+          "name": "institution_logo",
+          "label": "Issuer logo (optional)",
+          "type": "image",
           "options": {
-            "values": [
-              "completed",
-              "in-progress",
-              "results-pending",
-              "upcoming"
-            ]
+            "media": "uploads"
           },
-          "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
+          "description": "Upload an SVG, PNG or WebP logo. Shown in grayscale until hover or keyboard focus. Hidden on small phone screens."
+        },
+        {
+          "name": "image",
+          "label": "Certificate thumbnail / photo (optional)",
+          "type": "image",
+          "options": {
+            "media": "uploads"
+          },
+          "description": "Upload a clear scan or photo. Clicking it opens the same viewer used for awards. You can also upload a PDF in Certificate / supporting document."
+        },
+        {
+          "name": "image_alt",
+          "label": "Certificate image description",
+          "type": "string"
+        },
+        {
+          "name": "verification_url",
+          "label": "View credential link (optional)",
+          "type": "string",
+          "description": "Paste the public credential verification URL. Leave blank to hide the link."
+        },
+        {
+          "name": "skills",
+          "label": "Skills learned (optional)",
+          "type": "string",
+          "list": true
         }
       ]
     },
@@ -4896,6 +4930,68 @@
               "label": "Swipe hint",
               "type": "string",
               "default": "Swipe or use the arrow keys"
+            }
+          ]
+        },
+        {
+          "name": "learning_labels",
+          "label": "Certificates & workshops display text",
+          "type": "object",
+          "fields": [
+            {
+              "name": "certificates_heading",
+              "label": "Certificates heading",
+              "type": "string"
+            },
+            {
+              "name": "workshops_heading",
+              "label": "Workshops heading",
+              "type": "string"
+            },
+            {
+              "name": "show_all",
+              "label": "Show all button",
+              "type": "string"
+            },
+            {
+              "name": "show_less",
+              "label": "Show fewer button",
+              "type": "string"
+            },
+            {
+              "name": "view_credential",
+              "label": "View credential link",
+              "type": "string"
+            },
+            {
+              "name": "open_certificate",
+              "label": "Open certificate label",
+              "type": "string"
+            },
+            {
+              "name": "view_file",
+              "label": "View uploaded file button",
+              "type": "string"
+            },
+            {
+              "name": "issuer_website",
+              "label": "Issuer website fallback",
+              "type": "string"
+            },
+            {
+              "name": "duration",
+              "label": "Duration label",
+              "type": "string"
+            },
+            {
+              "name": "undated",
+              "label": "Missing year label",
+              "type": "string"
+            },
+            {
+              "name": "empty",
+              "label": "Empty list message",
+              "type": "string"
             }
           ]
         }
