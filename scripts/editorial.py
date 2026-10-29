@@ -156,6 +156,13 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
   if e in intro:continue
   container.remove(e)
  layout=html.Element('div',{'class':'about-layout'});layout.append(sidebar);layout.append(content);container.append(layout)
+ # Keep the secondary photo, caption and alt text under CMS control.
+ for box in select(a,'//div[contains(@class,"bio-fabric")]'):
+  src=url(profile.get('secondary_image'))
+  if src:
+   one(box,'.//img').set('src',src);one(box,'.//img').set('alt',about.get('image_alt',''))
+   one(box,'.//span').text=about.get('image_caption','')
+  else:erase(box)
  for folder,section_id in [('education','education'),('experience','experience'),('workshops','certificates')]:
   for v in entries(folder):
    targets=select(a,'//section[@id="'+section_id+'"]//article[./h3[text()="'+v['title'].replace('"','')+'"]]')
@@ -163,11 +170,19 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
     institution=select(card,'./p[@class="institution"]');website=url(v.get('website') or v.get('organization_url'))
     if institution and website:set_html(institution[0],link(website,esc(v.get('institution')),'institution-link','arrow',True))
     for summary in select(card,'.//summary'):summary.text=ui.get(hashlib.sha1(b'View details').hexdigest()[:10],'View details')
+    if not select(card,'.//details') and rich(v.get('body')):
+     detail=html.Element('details',{'class':'entry-extra'});set_html(detail,'<summary>'+t('View details')+'</summary><div class="entry-extra-body">'+rich(v.get('body'))+'</div>');card.append(detail)
+     for old in select(card,'./p[not(@class="institution")]'):erase(old)
     if v.get('file'):add(card,'<button class="text-link" data-document="'+esc(v['_id'])+'">'+t('View certificate')+' '+icon('certificate')+'</button>')
  for folder,section_id in [('achievements','recognition'),('certificates','certificates')]:
   for v in entries(folder):
    for card in select(a,'//section[@id="'+section_id+'"]//article[./h3[text()="'+v['title'].replace('"','')+'"]]'):
-    for button in select(card,'.//button[@data-document]'):button.text=ui.get(hashlib.sha1(('View certificate' if v.get('file') else 'View details').encode()).hexdigest()[:10],('View certificate' if v.get('file') else 'View details'))
+    for button in select(card,'.//button[@data-document]'):erase(button)
+    details_html=story_body(v,folder)
+    if details_html:
+     detail=html.Element('details',{'class':'entry-extra'});set_html(detail,'<summary>'+t('View details')+'</summary><div class="entry-extra-body">'+details_html+'</div>');card.append(detail)
+     for old in select(card,'./p[not(@class="institution")]'):erase(old)
+    if v.get('file'):add(card,'<button class="text-link" data-document="'+esc(v['_id'])+'">'+t('View certificate')+' '+icon('certificate')+'</button>')
     institution=select(card,'./p[@class="institution"]')
     if institution and url(v.get('website')):set_html(institution[0],link(v['website'],esc(v.get('institution')),'institution-link','arrow',True))
  for grid in select(a,'//section[@id="recognition"]/div[@class="certificate-grid"]'):grid.set('class','recognition-shelf');grid.set('tabindex','0');grid.set('aria-label','Awards. Swipe horizontally to explore each separate award.')
@@ -201,6 +216,9 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
    raw=str(v.get('date') or '');plain=html.fragment_fromstring('<div>'+rich(v.get('body'))+'</div>').text_content();minutes=max(1,len(plain.split())//200)
    actions='<div class="story-actions"><span>'+esc(readable_date(raw))+((' · '+str(minutes)+' '+t('min read')) if folder=='posts' else '')+'</span>'+(('<button class="round-control" data-share aria-label="'+t('Share this page')+'">'+icon('arrow')+'</button>') if v.get('share_enabled',True) else '')+'</div>'
    body.addprevious(html.fragment_fromstring(actions))
+   if folder=='projects':
+    facts=[(t('Tools'),', '.join(v.get('tools') or [])),(t('Duration'),v.get('duration') or '')]
+    if any(value for label,value in facts):body.addprevious(html.fragment_fromstring('<dl class="story-facts">'+''.join('<div><dt>'+label+'</dt><dd>'+esc(value)+'</dd></div>' for label,value in facts if value)+'</dl>'))
    if v.get('summary'):body.addprevious(html.fragment_fromstring('<p class="entry-summary">'+esc(v['summary'])+'</p>'))
    if folder=='posts':
     add(article,'<aside class="author-bio"><strong>'+esc(v.get('author') or profile['name'])+'</strong><p>'+esc(site['author_bio'])+'</p></aside>')
@@ -213,12 +231,18 @@ def redesign(pages,profile,about,settings,*,root,esc,url,rich,one,select,set_htm
    for item in items:
     if item.get('category') and item['category'] not in keys:keys.append(item['category'])
    set_html(filters,''.join('<button class="filter'+(' active' if k=='all' else '')+'" data-project-filter="'+esc(k)+'" aria-pressed="'+str(k=='all').lower()+'">'+esc('All' if k=='all' else labels.get(k,k))+'</button>' for k in keys))
+   grid=one(d,'//div[@class="project-grid"]');grid.addnext(html.fragment_fromstring('<p class="search-empty" id="project-empty" hidden>'+t('No projects match your search.')+'</p>'))
    # Search is additive, alongside the existing project filters.
    filters.addprevious(html.fragment_fromstring('<label class="search-box"><span class="sr-only">'+t('Search projects')+'</span><input type="search" id="project-search" placeholder="'+t('Search projects…')+'"></label>'))
   else:
-   for item in select(pages[page],'//div[@class="blog-meta"]'):item.text=readable_date(item.text_content())
+   for doc in pages.values():
+    for item in select(doc,'//div[@class="blog-meta"]'):item.text=readable_date(item.text_content())
  # Remove redundant destination CTAs only on their target page.
  for e in select(pages['gallery'],'//dialog//a[@href="gallery.html"]'):erase(e)
+ for page in pages.values():
+  for el in select(page,'//a[starts-with(@href,"tel:")]'):el.text=formatted
+  for el in select(page,'//dl//dd'):
+   if re.sub(r'\D','',el.text_content())==phone:el.text=formatted
  # Structured data is built safely and never interpolated into executable JS.
  schema={'@context':'https://schema.org','@type':'Person','name':profile['name'],'url':site['site_url'],'jobTitle':profile.get('role'),'image':urljoin(site['site_url'],profile.get('photo','')),'sameAs':[url(profile[k]) for k in ('linkedin','facebook') if url(profile.get(k))],'address':{'@type':'PostalAddress','addressLocality':profile['location'],'addressCountry':'BD'}}
  add(one(h,'//head'),'<script type="application/ld+json">'+json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')+'</script>')

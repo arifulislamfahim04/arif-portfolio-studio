@@ -589,6 +589,18 @@
           "label": "Private references notice",
           "type": "string",
           "description": "Shown when no references are marked public."
+        },
+        {
+          "name": "image_alt",
+          "label": "About photo description",
+          "type": "string",
+          "description": "Describe the secondary photo for visitors who cannot see it."
+        },
+        {
+          "name": "image_caption",
+          "label": "About photo caption",
+          "type": "string",
+          "description": "The secondary photo is selected in Profile → Secondary image."
         }
       ]
     },
@@ -4074,6 +4086,24 @@
           "label": "No entries published yet.",
           "type": "string",
           "description": "Change this interface label. Content entries are edited in their own sections."
+        },
+        {
+          "name": "4fa8cc860c",
+          "label": "Tools",
+          "type": "string",
+          "description": "Edit this interface label."
+        },
+        {
+          "name": "1370004da7",
+          "label": "Duration",
+          "type": "string",
+          "description": "Edit this interface label."
+        },
+        {
+          "name": "01cedd0f0e",
+          "label": "No projects match your search.",
+          "type": "string",
+          "description": "Edit this interface label."
         }
       ]
     }
