@@ -58,7 +58,7 @@ with tempfile.TemporaryDirectory() as t:
    else:assert str(expected) in body,(kind,key,expected)
  edu=html.tostring(card('Full education'),encoding='unicode');exp=html.tostring(card('Full experience'),encoding='unicode')
  assert '2028 – Present' in edu and '2030' not in edu and '3.95 / 4.00' in edu
- assert '2027 – Present' in exp and '2028' not in exp
+ assert 'Since 2027' in exp and '2028' not in exp
  assert '2027-01-01' in html.tostring(card('Full certificates'),encoding='unicode')
  certpath=base/'editor/certificates/optional-full.json';cert=json.loads(certpath.read_text());cert['does_not_expire']=True;dump(certpath,cert);build();_,docs=data();body=next(x['body'] for x in docs if x['id']=='certificates-optional-full')
  assert 'Does not expire' in body and '2029-01-01' not in body

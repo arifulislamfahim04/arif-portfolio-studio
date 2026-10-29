@@ -1825,7 +1825,7 @@
     },
     {
       "name": "experience",
-      "label": "Experience",
+      "label": "Experience, leadership & visits",
       "type": "collection",
       "path": "editor/experience",
       "format": "json",
@@ -1835,7 +1835,7 @@
         "primary": "title",
         "fields": [
           "title",
-          "date",
+          "record_type",
           "published",
           "order"
         ],
@@ -1852,12 +1852,14 @@
         {
           "name": "date",
           "label": "Date / period (or use start and end dates below)",
-          "type": "string"
+          "type": "string",
+          "description": "Fallback display wording, useful for approximate event dates such as Around mid-2025 · One visit."
         },
         {
           "name": "institution",
-          "label": "Institution / organization",
-          "type": "string"
+          "label": "Organization / company",
+          "type": "string",
+          "description": "For example Fariha Knit Tex Ltd. or Green University of Bangladesh."
         },
         {
           "name": "body",
@@ -1917,19 +1919,22 @@
           "name": "start_date",
           "label": "Start date (optional)",
           "type": "string",
-          "required": false
+          "required": false,
+          "description": "Use YYYY-MM for a known month, or YYYY when only the year is known. Do not invent a month."
         },
         {
           "name": "end_date",
           "label": "End date (optional)",
           "type": "string",
-          "required": false
+          "required": false,
+          "description": "Optional. Use YYYY-MM or YYYY. Leave blank if you cannot remember; a past role will still show Completed."
         },
         {
           "name": "currently_working",
-          "label": "Currently working here (optional)",
+          "label": "This role is ongoing",
           "type": "boolean",
-          "required": false
+          "required": false,
+          "description": "Turn off for completed internships or past leadership roles. The end date may stay blank if unknown."
         },
         {
           "name": "organization_url",
@@ -1939,14 +1944,15 @@
         },
         {
           "name": "responsibilities",
-          "label": "Responsibilities (optional)",
+          "label": "Responsibilities (always visible)",
           "type": "rich-text",
           "required": false,
           "options": {
             "format": "html",
             "media": "uploads",
             "switcher": false
-          }
+          },
+          "description": "Use 2–3 short bullet points. These are shown without opening More details."
         },
         {
           "name": "achievements",
@@ -2108,21 +2114,6 @@
           "description": "Upload your institution logo. Leave blank for an initial badge."
         },
         {
-          "name": "timeline_state",
-          "label": "Timeline marker state",
-          "type": "select",
-          "default": "completed",
-          "options": {
-            "values": [
-              "completed",
-              "in-progress",
-              "results-pending",
-              "upcoming"
-            ]
-          },
-          "description": "Completed: filled dot. In progress or results pending: a gentle ring pulse. Upcoming: hollow dot. This controls only the timeline marker, not your dates, status text or result."
-        },
-        {
           "name": "image",
           "label": "Certificate / leadership photo (optional)",
           "type": "image",
@@ -2136,6 +2127,67 @@
           "label": "Photo description (accessibility)",
           "type": "string",
           "description": "Describe the certificate or photograph in plain English."
+        },
+        {
+          "name": "record_type",
+          "label": "Layout: role or event / visit",
+          "type": "select",
+          "default": "role",
+          "options": {
+            "values": [
+              "role",
+              "event"
+            ]
+          },
+          "description": "Role: internship, job, volunteering or leadership, shown as a full-width card. Event: a visit or exhibition, shown in the compact grid. Workshops and seminars have their own CMS collection."
+        },
+        {
+          "name": "event_type",
+          "label": "Event type (events only)",
+          "type": "string",
+          "description": "For example Industry visit or Exhibition. Leave blank to hide the chip."
+        },
+        {
+          "name": "venue",
+          "label": "Venue (events only)",
+          "type": "string"
+        },
+        {
+          "name": "city",
+          "label": "City / location (events only)",
+          "type": "string"
+        },
+        {
+          "name": "years",
+          "label": "Confirmed attendance years (events only)",
+          "type": "string",
+          "list": true,
+          "description": "Add only years you actually attended, one per item. Leave empty to show Date / period instead. A range does not automatically create year pips."
+        },
+        {
+          "name": "impact",
+          "label": "Impact figures (roles, optional)",
+          "type": "object",
+          "list": true,
+          "description": "Only add real figures you can support. Blank values are hidden.",
+          "fields": [
+            {
+              "name": "value",
+              "label": "Figure (for example 40+)",
+              "type": "string"
+            },
+            {
+              "name": "label",
+              "label": "Meaning (for example Students represented)",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "duration_label",
+          "label": "Duration wording (optional)",
+          "type": "string",
+          "description": "Optional wording such as About 3 months. If blank, duration is calculated only when full start/end months are available. No duration is guessed for a completed role with an unknown end date."
         }
       ]
     },
@@ -4991,6 +5043,83 @@
             {
               "name": "empty",
               "label": "Empty list message",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "exposure_labels",
+          "label": "Experience & visits display text",
+          "type": "object",
+          "fields": [
+            {
+              "name": "events_heading",
+              "label": "Event grid heading",
+              "type": "string"
+            },
+            {
+              "name": "ongoing",
+              "label": "Current role badge",
+              "type": "string"
+            },
+            {
+              "name": "completed",
+              "label": "Past role badge",
+              "type": "string"
+            },
+            {
+              "name": "since",
+              "label": "Ongoing start prefix",
+              "type": "string"
+            },
+            {
+              "name": "started",
+              "label": "Completed start prefix",
+              "type": "string"
+            },
+            {
+              "name": "years",
+              "label": "Duration years label",
+              "type": "string"
+            },
+            {
+              "name": "months",
+              "label": "Duration months label",
+              "type": "string"
+            },
+            {
+              "name": "visit_years",
+              "label": "Attendance years accessibility label",
+              "type": "string"
+            },
+            {
+              "name": "more_details",
+              "label": "Extra details button",
+              "type": "string"
+            },
+            {
+              "name": "view_photos",
+              "label": "Open photos label",
+              "type": "string"
+            },
+            {
+              "name": "view_document",
+              "label": "Supporting document button",
+              "type": "string"
+            },
+            {
+              "name": "empty",
+              "label": "Empty section message",
+              "type": "string"
+            },
+            {
+              "name": "year",
+              "label": "Duration singular year label",
+              "type": "string"
+            },
+            {
+              "name": "month",
+              "label": "Duration singular month label",
               "type": "string"
             }
           ]

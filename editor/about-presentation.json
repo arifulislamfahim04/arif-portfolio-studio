@@ -72,5 +72,21 @@
     "duration": "Duration",
     "undated": "Undated",
     "empty": "Published learning records will appear here."
+  },
+  "exposure_labels": {
+    "events_heading": "Industry visits & exhibitions",
+    "ongoing": "Ongoing",
+    "completed": "Completed",
+    "since": "Since",
+    "started": "Started",
+    "years": "yrs",
+    "months": "mos",
+    "visit_years": "Attendance years",
+    "more_details": "More details",
+    "view_photos": "View photos",
+    "view_document": "View supporting document",
+    "empty": "Published roles and visits will appear here.",
+    "year": "yr",
+    "month": "mo"
   }
 }
