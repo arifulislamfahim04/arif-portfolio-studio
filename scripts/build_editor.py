@@ -9,6 +9,7 @@ from editorial import redesign
 from hero_refresh import refresh_hero
 from about_refresh import refresh_about
 from about_finish import finish_about
+from education_v2 import education_v2
 from lxml import html
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs'
@@ -258,6 +259,7 @@ def build():
  refresh_hero(pages['index'],profile,read('homepage.json'),esc=esc,url=url,rich=visible_rich,set_html=set_html)
  refresh_about(pages['about'],pages['index'],read('homepage.json'),root=ROOT,esc=esc,url=url,set_html=set_html)
  finish_about(pages,root=ROOT,esc=esc,url=url,set_html=set_html)
+ education_v2(pages['about'],root=ROOT,esc=esc,url=url,set_html=set_html,rich=rich)
  # Remove previously generated post pages, so deleted/unpublished entries disappear.
  for pattern in ('posts-*.html','projects-*.html'):
   for p in OUT.glob(pattern):p.unlink()

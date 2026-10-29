@@ -40,3 +40,51 @@
 @media(max-width:1000px){[data-about-refresh] .bio-layout{grid-template-columns:1fr}[data-about-refresh] .bio-fabric{max-width:440px}[data-about-refresh] .about-layout{grid-template-columns:1fr}[data-about-refresh] .section-index{position:sticky;top:88px;flex-direction:row;overflow-x:auto;white-space:nowrap;z-index:15;background:var(--bg);padding-block:8px;border-bottom:1px solid var(--line);gap:3px}}
 @media(max-width:600px){[data-about-refresh] .page-content{padding-right:0;padding-top:30px}[data-about-refresh] .section-index{top:110px;margin-bottom:20px}[data-about-refresh] .info-grid{grid-template-columns:1fr}[data-about-refresh] .bio h2{font-size:30px}[data-about-refresh] .bio p{font-size:14px}[data-about-refresh] .timeline-card h3{font-size:22px}[data-about-refresh] .about-body>.section{scroll-margin-top:170px}[data-about-refresh] .certificate-grid{grid-template-columns:1fr}[data-about-refresh] .at-glance dl{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){[data-about-refresh] .text-link:hover{transform:none}}
+/* Education v2: same mint/Poppins system, with a featured academic record. */
+[data-about-refresh] .education-v2{overflow:hidden;isolation:isolate;padding:26px;transition:transform .2s,border-color .2s;border:1px solid var(--line);background:var(--surface)}
+[data-about-refresh] .education-v2:after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;background:radial-gradient(circle 220px at var(--spot-x,50%) var(--spot-y,50%),#78cc6d14,transparent);transition:opacity .2s}
+[data-about-refresh] .education-v2:hover{border-color:#78cc6d66;transform:translateY(-2px)}
+[data-about-refresh] .education-v2:hover:after{opacity:1}
+.edu-heading{display:grid;grid-template-columns:64px minmax(0,1fr) auto;align-items:center;gap:20px}
+[data-about-refresh] .education-v2 h3{font-size:clamp(21px,2vw,26px);line-height:1.28;margin:0;letter-spacing:-.03em}
+.edu-title{min-width:0;overflow-wrap:anywhere}
+[data-about-refresh] .education-v2 .institution-logo,[data-about-refresh] .education-v2 .institution-initial{width:64px;height:64px;margin:0;box-sizing:border-box}
+[data-about-refresh] .education-v2 .institution-logo{filter:grayscale(1);transition:filter .3s}
+[data-about-refresh] .education-v2:hover .institution-logo,[data-about-refresh] .education-v2:focus-within .institution-logo{filter:grayscale(0)}
+[data-about-refresh] .education-v2 .institution{font-size:13px;line-height:1.6;margin:9px 0 0}
+[data-about-refresh] .education-v2 .institution a{display:inline;text-decoration:none;background:linear-gradient(#78cc6d,#78cc6d) left bottom/0 1px no-repeat;padding-bottom:3px;transition:background-size .25s}
+[data-about-refresh] .education-v2 .institution a:is(:hover,:focus-visible){background-size:100% 1px;color:var(--fg)}
+.edu-arrow{display:inline-block;width:16px;height:16px;vertical-align:-2px;margin-left:4px;transition:transform .2s}
+.edu-arrow svg{width:100%;height:100%}
+.institution a:hover .edu-arrow{transform:translate(2px,-2px)}
+[data-about-refresh] .edu-subtitle{font-size:14px;color:var(--muted);margin:7px 0 0;line-height:1.6}
+[data-about-refresh] .edu-date{font-size:13px;color:var(--muted);margin:8px 0 0;line-height:1.6;text-transform:none;letter-spacing:0}
+.edu-grade{align-self:center;text-align:center}.edu-grade-label{font-size:10px;color:var(--muted);letter-spacing:.08em}
+.edu-ring{width:88px;height:88px;position:relative;margin-top:5px}
+.edu-ring svg{display:block;width:100%;height:100%;transform:rotate(-90deg);fill:none;stroke-width:5}
+.edu-ring-track{stroke:var(--line)}.edu-ring-fill{stroke:#78cc6d;stroke-linecap:round}
+.edu-ring>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.edu-ring strong{font-size:23px;font-weight:600;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--fg)}
+.edu-ring small{font-size:10px;color:var(--muted);margin-top:4px}
+.edu-progress{margin-top:24px}.edu-status{display:inline-flex;align-items:center;gap:8px;background:#78cc6d20;color:var(--fg);padding:5px 10px;border-radius:20px;font-size:11px;margin-bottom:12px}
+.edu-status>span{width:6px;height:6px;background:#78cc6d;border-radius:50%;animation:edu-status 2s ease-in-out infinite}
+@keyframes edu-status{50%{opacity:.4}}
+.edu-progress-track{height:6px;border-radius:6px;background:var(--line);overflow:hidden}
+.edu-progress-track>span{display:block;width:100%;height:100%;background:#78cc6d;transform:scaleX(0);transform-origin:left;transition:transform .7s ease-out}
+.edu-progress-dates{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--muted)}
+[data-about-refresh] .education-compact .edu-heading{grid-template-columns:48px minmax(0,1fr) auto;gap:15px}
+[data-about-refresh] .education-compact .institution-logo,[data-about-refresh] .education-compact .institution-initial{width:48px;height:48px}
+[data-about-refresh] .education-compact h3{font-size:20px}
+.edu-grade-chip{font-size:11px;font-weight:500;color:var(--fg);background:#78cc6d20;border:1px solid #78cc6d44;border-radius:20px;padding:7px 10px;white-space:nowrap}
+.edu-description{font-size:14px;margin-top:15px;color:var(--muted)}
+[data-about-refresh] .education-v2 .entry-extra{margin-top:20px;padding-top:0}
+[data-about-refresh] .education-v2 summary{padding:9px 0;font-size:13px;min-height:48px}
+[data-about-refresh] .education-v2 .detail-plus{transition:transform .3s}
+.edu-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:6px 0 20px}
+.edu-detail-grid dt{font-size:11px;color:var(--muted);margin-bottom:7px}
+.edu-detail-grid dd{font-size:13px;line-height:1.65;overflow-wrap:anywhere}
+.edu-course-chips{display:flex;flex-wrap:wrap;gap:6px}.edu-course-chips>span{background:#78cc6d20;padding:4px 9px;border-radius:15px;font-size:11px}
+[data-about-refresh] .education-v2 :is(a,summary):focus-visible{outline:2px solid var(--fg);outline-offset:4px;border-radius:4px}
+@media(max-width:700px){[data-about-refresh] .education-v2{padding:20px}.edu-heading{grid-template-columns:48px minmax(0,1fr);gap:14px}[data-about-refresh] .education-v2 .institution-logo,[data-about-refresh] .education-v2 .institution-initial{width:48px;height:48px}.edu-grade{grid-column:2;justify-self:start;display:flex;align-items:center;gap:14px}.edu-ring{margin:0}.edu-ring>div strong{font-size:21px}[data-about-refresh] .education-compact .edu-heading{grid-template-columns:48px minmax(0,1fr)}.edu-grade-chip{grid-column:2;justify-self:start}.edu-detail-grid{grid-template-columns:1fr}}
+@media(hover:none){[data-about-refresh] .education-v2 .institution-logo{filter:none}}
+@media(prefers-reduced-motion:reduce){[data-about-refresh] .education-v2,[data-about-refresh] .education-v2 *,[data-about-refresh] .education-v2:after{transition:none!important;animation:none!important}[data-about-refresh] .education-v2:hover{transform:none}}

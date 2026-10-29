@@ -26,6 +26,20 @@
       "extensions": [
         "svg"
       ]
+    },
+    {
+      "name": "institution_logos",
+      "label": "Institution logos (SVG or pictures)",
+      "input": "docs/assets/institutions",
+      "output": "assets/institutions",
+      "rename": "safe",
+      "extensions": [
+        "svg",
+        "png",
+        "jpg",
+        "jpeg",
+        "webp"
+      ]
     }
   ],
   "content": [
@@ -1527,25 +1541,29 @@
           "name": "start_date",
           "label": "Start date (optional)",
           "type": "string",
-          "required": false
+          "required": false,
+          "description": "Use YYYY-MM, for example 2022-10. These dates calculate the featured card’s elapsed-period bar. A readable year or date still displays, but cannot calculate progress."
         },
         {
           "name": "end_date",
           "label": "End date (optional)",
           "type": "string",
-          "required": false
+          "required": false,
+          "description": "Use YYYY-MM, for example 2022-10. These dates calculate the featured card’s elapsed-period bar. A readable year or date still displays, but cannot calculate progress."
         },
         {
           "name": "currently_studying",
           "label": "Currently studying (optional)",
           "type": "boolean",
-          "required": false
+          "required": false,
+          "description": "Enable only while studying. Leave off while waiting for results; set the status text below instead."
         },
         {
           "name": "grade",
-          "label": "CGPA / GPA / classification (optional)",
+          "label": "Result value (CGPA or GPA)",
           "type": "string",
-          "required": false
+          "required": false,
+          "description": "Your actual result, for example 3.90 or 4.92. The label and maximum scale are separate fields."
         },
         {
           "name": "grade_scale",
@@ -1709,9 +1727,72 @@
           "label": "Institution / organisation logo (optional)",
           "type": "image",
           "options": {
-            "media": "uploads"
+            "media": "institution_logos"
           },
-          "description": "Upload your institution logo. Leave blank for an initial badge."
+          "description": "Upload an official SVG, PNG, JPG or WebP logo. Leave blank for an initial badge. SVG files display as images, not executable page markup."
+        },
+        {
+          "name": "featured",
+          "label": "Featured education card",
+          "type": "boolean",
+          "description": "Enable for your main degree. Other cards use the compact layout.",
+          "required": false
+        },
+        {
+          "name": "subtitle",
+          "label": "Subtitle",
+          "type": "string",
+          "description": "For example: Major in Apparel Manufacturing. Leave blank to hide.",
+          "required": false
+        },
+        {
+          "name": "grade_label",
+          "label": "Result label",
+          "type": "string",
+          "description": "Use CGPA for university, GPA for school or college. The maximum comes from Grade scale.",
+          "required": false
+        },
+        {
+          "name": "expected_completion",
+          "label": "Expected completion date",
+          "type": "boolean",
+          "description": "Adds Expected after the dates. Leave off after completion is confirmed.",
+          "required": false
+        },
+        {
+          "name": "status",
+          "label": "Current status",
+          "type": "string",
+          "description": "For example Results pending, In progress or Completed. Leave blank to hide the badge.",
+          "required": false
+        },
+        {
+          "name": "focus",
+          "label": "Focus (optional)",
+          "type": "string",
+          "description": "Optional study focus shown inside View details.",
+          "required": false
+        },
+        {
+          "name": "student_id",
+          "label": "Student ID (optional, public)",
+          "type": "string",
+          "description": "Only enter this if you want it visible to everyone. Leaving it blank hides the field.",
+          "required": false
+        },
+        {
+          "name": "transcript_link",
+          "label": "Transcript link (optional, public)",
+          "type": "string",
+          "description": "Link only a document you want visitors to view. Leave blank to hide. This does not use your private profile transcript.",
+          "required": false
+        },
+        {
+          "name": "details_label",
+          "label": "Details button text",
+          "type": "string",
+          "description": "Defaults to View details.",
+          "required": false
         }
       ]
     },

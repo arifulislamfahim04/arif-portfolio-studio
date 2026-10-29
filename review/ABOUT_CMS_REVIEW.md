@@ -23,3 +23,15 @@ Other pages retain their existing presentation until their individual reviews. I
 - Not verified: actual Android/iOS hardware, screen reader audit, complete contrast/Lighthouse audit, live Pages CMS upload clicks and real certificate/PDF transfer.
 
 No new photography or icon pack. Existing images, icon sources and licences are retained. Main and the original GitHub Pages deployment remain unchanged.
+
+## Education card v2 — 29 October 2026
+
+- BSc: featured three-zone layout, 88px CGPA ring, date-based elapsed-period bar, Results pending, expected December 2026. Start retained October 2022; existing 3.90/4.00 unchanged.
+- HSC and SSC: compact GPA chips, existing 4.92/5.00 and 4.67/5.00 retained.
+- CMS → Education → choose entry: featured switch, subtitle, result label/value/scale, dates, expected date switch, current status, institution website/logo, major, focus, location, courses, thesis, transcript link, optional public student ID and additional details. Add/reorder/remove via the collection.
+- Logos: SVG/PNG/JPG/WebP media folder `assets/institutions`; initials until an official logo is supplied. No new third-party asset.
+- Empty optional facts disappear. All existing extra facts, supporting documents, media and safe rich text remain supported. Transcript only comes from the entry’s explicit public link; no private profile transcript is automatically exposed.
+- Institution arrow reuses the bundled SVG Repo filled-arrow asset and respects the existing Arrow icon override. Institution links open independently from the full-width disclosure row.
+- Animation: ring stroke reveal, status-dot opacity, date bar transform, 300ms disclosure height and plus rotation; reduced motion bypasses these. Logo grayscale and card spotlight are limited decorative effects.
+- Checked: content lifecycle/schema/optional field tests, safe rich text, local references, JS syntax. Chromium desktop light/dark and 375/768px iframe layouts; no page horizontal overflow. Mouse and keyboard disclosure checked. Actual phone hardware, OS reduced-motion switch and live CMS upload UI remain unverified.
+- The review Site remains a built snapshot; CMS edits to the review GitHub branch need a rebuild to appear there. Main is unchanged.
